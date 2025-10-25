@@ -1,0 +1,33 @@
+{
+    "schemaVersion": 1,
+    "id": "mod_id",
+    "version": "${version}",
+    "name": "${mod_name}",
+    "description": "${description}",
+    "authors": [
+        "${mod_author}"
+    ],
+    "contact": {
+        "issues": "${issue_tracker_url}",
+        "sources": "${github_repo_url}"
+    },
+    "license": "${license}",
+    "icon": "logo.png",
+    "environment": "*",
+    "entrypoints": {
+        "main": [
+            "com.hexagram2021.chromosomelib.fabric.ChromosomeLibFabric"
+        ]
+    },
+    "mixins": [
+        "${mod_id}.mixins.json",
+        "${mod_id}.fabric.mixins.json"
+    ],
+    "depends": {
+        "fabricloader": ">=0.14",
+        "fabric": "*",
+        "minecraft": "${minecraft_version}",
+        "java": ">=17"
+    }
+}
+  
