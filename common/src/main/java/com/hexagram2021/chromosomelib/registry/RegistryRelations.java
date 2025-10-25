@@ -162,6 +162,7 @@ public final class RegistryRelations {
 		Registry<EntityType<?>> entityTypeRegistry = BuiltInRegistries.ENTITY_TYPE;
 		Registry<Chromosome> chromosomeRegistry = (Registry<Chromosome>) Objects.requireNonNull(BuiltInRegistries.REGISTRY.get(CLRegistries.CHROMOSOMES.location()));
 		Registry<GeneLocus> geneLocusRegistry = (Registry<GeneLocus>) Objects.requireNonNull(BuiltInRegistries.REGISTRY.get(CLRegistries.GENE_LOCI.location()));
+		Registry<Gene> geneRegistry = (Registry<Gene>) Objects.requireNonNull(BuiltInRegistries.REGISTRY.get(CLRegistries.GENES.location()));
 		CLLogger.info("Extracting {} EntityType tags for EntityType to Chromosome relations...", entityTypeTag2ChromosomeMap.size());
 		entityTypeTag2ChromosomeMap.forEach((tag, builder) -> {
 			ImmutableList<Holder<Chromosome>> chromosomes = builder.build();
@@ -230,15 +231,17 @@ public final class RegistryRelations {
 		});
 		CLLogger.info("Registered {} EntityType to Trait relations from {} EntityTypes.", countEntityType2Trait, entityType2TraitMap.size());
 
-		buildGeneTopologicalOrder();
+		buildGeneTopologicalOrder(geneRegistry);
 
 		isFrozen = true;
 		CLLogger.info("Register successfully. Relations registry is frozen.");
 	}
 
-	private static void buildGeneTopologicalOrder() {
+	private static void buildGeneTopologicalOrder(Registry<Gene> geneRegistry) {
+		geneRegistry.asHolderIdMap().forEach(disableRelations::addNode);
+
 		ImmutableGraph<Holder<Gene>> geneGraph = disableRelations.build();
-		Object2IntMap<Holder<Gene>> degrees = new Object2IntRBTreeMap<>();
+		Object2IntMap<Holder<Gene>> degrees = new Object2IntRBTreeMap<>(Comparator.comparingInt(Holder::hashCode));
 		Queue<Holder<Gene>> queue = Queues.newArrayDeque();
 		for(Holder<Gene> gene : geneGraph.nodes()) {
 			int degree = geneGraph.inDegree(gene);

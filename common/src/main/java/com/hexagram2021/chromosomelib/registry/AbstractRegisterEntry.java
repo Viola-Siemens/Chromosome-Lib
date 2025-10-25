@@ -14,7 +14,7 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "java:S3038"})
 public abstract class AbstractRegisterEntry<T> implements Holder<T>, Supplier<T> {
 	protected final ResourceKey<T> key;
 

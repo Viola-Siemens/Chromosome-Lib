@@ -1,14 +1,23 @@
 package com.hexagram2021.chromosomelib.test.fabric;
 
 import com.hexagram2021.chromosomelib.registry.RegistryRelations;
+import net.minecraft.SharedConstants;
+import net.minecraft.server.Bootstrap;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class RegistryRelationsTest {
-	@Test
-	void testTopologicalSort() {
+	@BeforeAll
+	static void bootstrap() {
+		SharedConstants.tryDetectVersion();
+		Bootstrap.bootStrap();
 		SheepColorDesigner.init();
 		RegistryRelations.freezeAndBuild();
+	}
+
+	@Test
+	void testTopologicalSort() {
 		Assertions.assertEquals(0, SheepColorDesigner.MELANIN_D.value().topologicalOrder);
 		Assertions.assertEquals(1, SheepColorDesigner.MELANIN_R.value().topologicalOrder);
 		Assertions.assertEquals(0, SheepColorDesigner.URANIDIN_D.value().topologicalOrder);
