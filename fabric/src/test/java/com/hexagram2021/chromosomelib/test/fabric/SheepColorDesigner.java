@@ -162,7 +162,9 @@ public class SheepColorDesigner {
 		private Traits() {
 		}
 
+		@SuppressWarnings("Convert2Lambda")
 		private static Holder<Trait> registerColorTrait(String code) {
+			// DO NOT "OPTIMIZE" IT TO "() -> () -> TraitTypes.COLOR" because now it will create a new object each time you call it, but after "optimizing" it will be a lazy-constant.
 			return Services.PLATFORM.registerTrait(new ResourceLocation(MODID, code), () -> new Trait() {
 				@Override
 				public Holder<TraitType> getType() {
