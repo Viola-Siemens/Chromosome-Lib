@@ -9,11 +9,11 @@ public class Services {
 	public static final IPlatformHelper PLATFORM = load(IPlatformHelper.class);
 
 	public static <T> T load(Class<T> clazz) {
-        final T loadedService = ServiceLoader.load(clazz, clazz.getClassLoader())
-                .findFirst()
-                .orElseThrow(() -> new NullPointerException("Failed to load service for " + clazz.getName()));
-        CLLogger.info("Loaded {} for service {}", loadedService, clazz);
-        return loadedService;
+		final T loadedService = ServiceLoader.load(clazz, clazz.getClassLoader())
+				.findFirst()
+				.orElseThrow(() -> new NullPointerException("Failed to load service for " + clazz.getName()));
+		CLLogger.info("Loaded {} for service {}", loadedService, clazz);
+		return loadedService;
 	}
 
 	private Services() {

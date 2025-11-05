@@ -7,9 +7,9 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
 import net.minecraftforge.registries.RegistryObject;
 
-import javax.annotation.Nullable;
 import java.util.stream.Stream;
 
+@SuppressWarnings("java:S2160")
 public class ForgeRegisterEntry<T> extends AbstractRegisterEntry<T> {
 	private final RegistryObject<T> registryObject;
 
@@ -43,8 +43,8 @@ public class ForgeRegisterEntry<T> extends AbstractRegisterEntry<T> {
 		return this.registryObject.get();
 	}
 
-	@Override @Nullable
+	@Override
 	public Holder<T> asHolder() {
-		return this.registryObject.getHolder().orElse(null);
+		return this.registryObject.getHolder().orElseThrow();
 	}
 }

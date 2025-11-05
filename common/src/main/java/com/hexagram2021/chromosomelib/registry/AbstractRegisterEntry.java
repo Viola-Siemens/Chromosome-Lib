@@ -1,15 +1,15 @@
 package com.hexagram2021.chromosomelib.registry;
 
 import com.mojang.datafixers.util.Either;
+import it.unimi.dsi.fastutil.objects.Object2IntMap;
+import it.unimi.dsi.fastutil.objects.Object2IntRBTreeMap;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderOwner;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 
-import javax.annotation.Nullable;
-import java.util.Locale;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
@@ -120,10 +120,9 @@ public abstract class AbstractRegisterEntry<T> implements Holder<T>, Supplier<T>
 
 	@Override
 	public String toString() {
-		return String.format(Locale.ENGLISH, "RegisterEntry{%s}", this.key);
+		return "RegisterEntry{" + this.key + "}";
 	}
 
-	@Nullable
 	public abstract Holder<T> asHolder();
 
 	public Optional<T> asOptional() {
@@ -136,5 +135,73 @@ public abstract class AbstractRegisterEntry<T> implements Holder<T>, Supplier<T>
 
 	public ResourceKey<T> key() {
 		return this.key;
+	}
+
+	private static Comparator<ResourceKey<?>> resourceKeyComparator = (a, b) -> {
+		int regDiff = a.registry().compareTo(b.registry());
+		if(regDiff == 0) {
+			return a.location().compareTo(b.location());
+		}
+		return regDiff;
+	};
+
+	public static boolean equals(Holder<?> a, Holder<?> b) {
+		if (a == b) {
+			return true;
+		}
+		if(a instanceof AbstractRegisterEntry<?> registerEntryA) {
+			if(b instanceof AbstractRegisterEntry<?> registerEntryB) {
+				return registerEntryA.key() == registerEntryB.key();
+			}
+			return registerEntryA.asHolder() == b;
+		}
+		if(b instanceof AbstractRegisterEntry<?> registerEntryB) {
+			return registerEntryB.asHolder() == a;
+		}
+		return false;
+	}
+
+	public static int hashCode(Holder<?> holder) {
+		if(holder instanceof AbstractRegisterEntry<?> registerEntry) {
+			return registerEntry.key().hashCode();
+		}
+		return holder.hashCode();
+	}
+
+	public static <T> int compare(Holder<T> a, Holder<T> b) {
+		if(a instanceof AbstractRegisterEntry<T> registerEntryA) {
+			if(b instanceof AbstractRegisterEntry<T> registerEntryB) {
+				return resourceKeyComparator.compare(registerEntryA.key(), registerEntryB.key());
+			}
+			if(b instanceof Holder.Reference<T> referenceB) {
+				return resourceKeyComparator.compare(registerEntryA.key(), referenceB.key());
+			}
+			return 1;
+		}
+		if(a instanceof Holder.Reference<T> referenceA) {
+			if(b instanceof AbstractRegisterEntry<T> registerEntryB) {
+				return resourceKeyComparator.compare(referenceA.key(), registerEntryB.key());
+			}
+			if(b instanceof Holder.Reference<T> referenceB) {
+				return resourceKeyComparator.compare(referenceA.key(), referenceB.key());
+			}
+			return 1;
+		}
+		if(b instanceof AbstractRegisterEntry<T> || b instanceof Holder.Reference<T>) {
+			return -1;
+		}
+		return Integer.compare(a.hashCode(), b.hashCode());
+	}
+
+	public static <T, V> Map<Holder<T>, V> newHolderTreeMap() {
+		return new TreeMap<>(AbstractRegisterEntry::compare);
+	}
+
+	public static <T> Set<Holder<T>> newHolderTreeSet() {
+		return new TreeSet<>(AbstractRegisterEntry::compare);
+	}
+
+	public static <T> Object2IntMap<Holder<T>> newHolderObject2IntTreeMap() {
+		return new Object2IntRBTreeMap<>(AbstractRegisterEntry::compare);
 	}
 }

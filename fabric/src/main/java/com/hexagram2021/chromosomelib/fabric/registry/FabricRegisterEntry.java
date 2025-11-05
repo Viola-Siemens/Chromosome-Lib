@@ -8,6 +8,7 @@ import net.minecraft.tags.TagKey;
 
 import java.util.stream.Stream;
 
+@SuppressWarnings("java:S2160")
 public class FabricRegisterEntry<T> extends AbstractRegisterEntry<T> {
 	private final Holder<T> holder;
 

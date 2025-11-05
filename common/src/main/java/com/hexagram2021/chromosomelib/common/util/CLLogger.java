@@ -8,7 +8,6 @@ import static com.hexagram2021.chromosomelib.ChromosomeLib.MODID;
 
 @SuppressWarnings("unused")
 public class CLLogger {
-	public static boolean debugMode = true;
 	public static final Logger logger = LogManager.getLogger(MODID);
 
 	public static void log(Level logLevel, Object object) {

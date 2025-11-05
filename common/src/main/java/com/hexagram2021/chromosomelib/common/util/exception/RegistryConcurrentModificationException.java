@@ -1,4 +1,4 @@
-package com.hexagram2021.chromosomelib.util;
+package com.hexagram2021.chromosomelib.common.util.exception;
 
 public class RegistryConcurrentModificationException extends RuntimeException {
 	public RegistryConcurrentModificationException(String className, String containerName, String typeName, Throwable t) {
