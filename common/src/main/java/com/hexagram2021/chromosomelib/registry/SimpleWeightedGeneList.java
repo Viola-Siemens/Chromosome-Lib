@@ -8,6 +8,9 @@ import net.minecraft.core.Holder;
 
 import java.util.stream.Stream;
 
+/**
+ * Simple implementation of weighted gene list.
+ */
 public class SimpleWeightedGeneList implements IWeightedGeneList {
 	protected final ImmutableList<Entry> entries;
 	protected final IntList weightPrefixSums;

@@ -22,6 +22,9 @@ import javax.annotation.Nullable;
 import java.util.Iterator;
 import java.util.stream.Stream;
 
+/**
+ * Weighted gene list.
+ */
 public interface IWeightedGeneList {
 	SimpleWeightedGeneList EMPTY = new SimpleWeightedGeneList(ImmutableList.of());
 
@@ -204,6 +207,10 @@ public interface IWeightedGeneList {
 			return this;
 		}
 
+		/**
+		 * Build the weighted gene list.
+		 * @return the weighted gene list
+		 */
 		abstract IWeightedGeneList build();
 	}
 

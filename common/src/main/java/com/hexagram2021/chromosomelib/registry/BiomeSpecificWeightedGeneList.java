@@ -13,15 +13,34 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.stream.Stream;
 
+/**
+ * Biome-specific weighted gene list.
+ */
 public class BiomeSpecificWeightedGeneList implements IWeightedGeneList {
+	/**
+	 * Common gene list - all biomes share the same gene list.
+	 */
 	protected final IWeightedGeneList commonList;
+	/**
+	 * Biome-specific gene lists - each biome has its own gene list.
+	 */
 	protected final Map<Holder<Biome>, IWeightedGeneList> biomeSpecificLists;
 
+	/**
+	 * Create a BiomeSpecificWeightedGeneList.
+	 * @param commonList			the common gene list
+	 * @param biomeSpecificLists	the biome-specific gene lists
+	 */
 	protected BiomeSpecificWeightedGeneList(IWeightedGeneList commonList, Map<Holder<Biome>, IWeightedGeneList> biomeSpecificLists) {
 		this.commonList = commonList;
 		this.biomeSpecificLists = biomeSpecificLists;
 	}
 
+	/**
+	 * Get a random gene from this BiomeSpecificWeightedGeneList.
+	 * @param context	the context, where biome is passed.
+	 * @return a random gene
+	 */
 	@Override
 	public Holder<Gene> getRandomGene(Context context) {
 		IWeightedGeneList biomeSpecificList = this.get(context.biome());
@@ -33,11 +52,20 @@ public class BiomeSpecificWeightedGeneList implements IWeightedGeneList {
 		return biomeSpecificList.getRandomGene(context);
 	}
 
+	/**
+	 * Get the total weight of this list.
+	 * @param context	the context
+	 * @return the total weight
+	 */
 	@Override
 	public int totalWeight(Context context) {
 		return this.commonList.totalWeight(context) + this.get(context.biome()).totalWeight(context);
 	}
 
+	/**
+	 * Get all possible genes in this list.
+	 * @return all possible genes
+	 */
 	@Override
 	public Stream<Holder<Gene>> allGenes() {
 		return Stream.concat(this.commonList.allGenes(), this.biomeSpecificLists.values().stream().flatMap(IWeightedGeneList::allGenes)).distinct();
@@ -59,54 +87,121 @@ public class BiomeSpecificWeightedGeneList implements IWeightedGeneList {
 	 * Create a builder for BiomeSpecificWeightedGeneList. StableWeightedGeneList is applied to all biomes.
 	 * @param possibilityOfStable	Possibility for stable weighted gene list
 	 * @see StableWeightedGeneList#getRandomGene
+	 * @return a builder
 	 */
 	public static Builder stableBuilder(double possibilityOfStable) {
 		return new Builder(entries -> new StableWeightedGeneList(possibilityOfStable, entries));
 	}
 
+	/**
+	 * Builder for BiomeSpecificWeightedGeneList.
+	 */
 	public static class Builder extends IWeightedGeneList.Builder {
+		/**
+		 * Biome-specific gene lists.
+		 */
 		protected final Map<Holder<Biome>, ImmutableList.Builder<Entry>> biomeSpecificShadowed = new Object2ObjectOpenHashMap<>();
+		/**
+		 * Factory for creating a weighted gene list.
+		 */
 		private final WeightedGeneListFactory factory;
 
+		/**
+		 * @param factory	factory for creating a weighted gene list
+		 */
 		public Builder(WeightedGeneListFactory factory) {
 			super();
 			this.factory = factory;
 		}
 
+		/**
+		 * Add a gene to a biome to the builder.
+		 * @param biome		the biome
+		 * @param gene		the gene
+		 * @param weight	the weight
+		 * @return this builder
+		 */
 		public Builder add(Holder<Biome> biome, Holder<Gene> gene, int weight) {
 			this.biomeSpecificShadowed.computeIfAbsent(biome, ignored -> ImmutableList.builder()).add(Entry.of(gene, weight));
 			return this;
 		}
+		/**
+		 * Add some genes to a biome to the builder.
+		 * @param biome		the biome
+		 * @param elements	elements
+		 * @return this builder
+		 */
 		public Builder add(Holder<Biome> biome, Entry... elements) {
 			this.biomeSpecificShadowed.computeIfAbsent(biome, ignored -> ImmutableList.builder()).add(elements);
 			return this;
 		}
+		/**
+		 * Add all genes from a collection to a biome to the builder.
+		 * @param biome		the biome
+		 * @param elements	a collection
+		 * @return this builder
+		 */
 		public Builder addAll(Holder<Biome> biome, Iterable<Entry> elements) {
 			this.biomeSpecificShadowed.computeIfAbsent(biome, ignored -> ImmutableList.builder()).addAll(elements);
 			return this;
 		}
+		/**
+		 * Add all genes from a collection to a biome to the builder.
+		 * @param biome		the biome
+		 * @param elements	a collection
+		 * @return this builder
+		 */
 		public Builder addAll(Holder<Biome> biome, Iterator<Entry> elements) {
 			this.biomeSpecificShadowed.computeIfAbsent(biome, ignored -> ImmutableList.builder()).addAll(elements);
 			return this;
 		}
 
+		/**
+		 * Add a gene to some biomes to the builder.
+		 * @param biomes	a set of biomes
+		 * @param gene		the gene
+		 * @param weight	the weight
+		 * @return this builder
+		 */
 		public Builder add(HolderSet<Biome> biomes, Holder<Gene> gene, int weight) {
 			biomes.forEach(biome -> this.biomeSpecificShadowed.computeIfAbsent(biome, ignored -> ImmutableList.builder()).add(Entry.of(gene, weight)));
 			return this;
 		}
+		/**
+		 * Add some genes to some biomes to the builder.
+		 * @param biomes	a set of biomes
+		 * @param elements	elements
+		 * @return this builder
+		 */
 		public Builder add(HolderSet<Biome> biomes, Entry... elements) {
 			biomes.forEach(biome -> this.biomeSpecificShadowed.computeIfAbsent(biome, ignored -> ImmutableList.builder()).add(elements));
 			return this;
 		}
+		/**
+		 * Add all genes from a collection to some biomes to the builder.
+		 * @param biomes	a set of biomes
+		 * @param elements	a collection
+		 * @return this builder
+		 */
 		public Builder addAll(HolderSet<Biome> biomes, Iterable<Entry> elements) {
 			biomes.forEach(biome -> this.biomeSpecificShadowed.computeIfAbsent(biome, ignored -> ImmutableList.builder()).addAll(elements));
 			return this;
 		}
+		/**
+		 * Add all genes from a collection to some biomes to the builder.
+		 * @param biomes	a set of biomes
+		 * @param elements	a collection
+		 * @return this builder
+		 */
 		public Builder addAll(HolderSet<Biome> biomes, Iterator<Entry> elements) {
 			biomes.forEach(biome -> this.biomeSpecificShadowed.computeIfAbsent(biome, ignored -> ImmutableList.builder()).addAll(elements));
 			return this;
 		}
 
+		/**
+		 * Build the BiomeSpecificWeightedGeneList.
+		 * @return the BiomeSpecificWeightedGeneList
+		 */
 		@Override
 		BiomeSpecificWeightedGeneList build() {
 			ImmutableMap.Builder<Holder<Biome>, IWeightedGeneList> biomeSpecificShadowedBuilder = ImmutableMap.builder();

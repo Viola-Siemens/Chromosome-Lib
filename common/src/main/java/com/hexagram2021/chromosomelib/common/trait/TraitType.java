@@ -6,7 +6,13 @@ import org.jetbrains.annotations.ApiStatus;
 
 import java.util.Comparator;
 
+/**
+ * Trait type.
+ */
 public interface TraitType {
+	/**
+	 * Comparator for trait types.
+	 */
 	Comparator<TraitType> COMPARATOR = Comparator.comparing(TraitType::toString);
 
 	/**
@@ -21,6 +27,10 @@ public interface TraitType {
 	 */
 	HolderSet<Trait> values();
 
+	/**
+	 * Set the traits bound to this type.
+	 * @param values	a collection of traits
+	 */
 	@ApiStatus.Internal
 	void setValues(HolderSet<Trait> values);
 

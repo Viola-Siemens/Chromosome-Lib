@@ -11,7 +11,13 @@ import java.util.Locale;
 
 import static com.hexagram2021.chromosomelib.ChromosomeLib.MODID;
 
+/**
+ * Built-in Chromosomes for vanilla entities.
+ */
 public final class BuiltInChromosomes {
+	/**
+	 * Built-in Chromosomes for cows.
+	 */
 	public static final class Cow {
 		public static final Holder<Chromosome> COW_1 = register("cow_1", 1);
 		public static final Holder<Chromosome> COW_2 = register("cow_2", 2);
@@ -85,6 +91,9 @@ public final class BuiltInChromosomes {
 		}
 	}
 
+	/**
+	 * Built-in Chromosomes for donkeys.
+	 */
 	public static final class Donkey {
 		public static final Holder<Chromosome> DONKEY_1 = register("donkey_1", 1);
 		public static final Holder<Chromosome> DONKEY_2 = register("donkey_2", 2);
@@ -160,6 +169,9 @@ public final class BuiltInChromosomes {
 		}
 	}
 
+	/**
+	 * Built-in Chromosomes for Horse.
+	 */
 	public static final class Horse {
 		public static final Holder<Chromosome> HORSE_1 = register("horse_1", 1);
 		public static final Holder<Chromosome> HORSE_2 = register("horse_2", 2);
@@ -237,6 +249,9 @@ public final class BuiltInChromosomes {
 		}
 	}
 
+	/**
+	 * Built-in Chromosomes for Human.
+	 */
 	public static final class Human {
 		public static final Holder<Chromosome> HUMAN_1 = register("human_1", 1);
 		public static final Holder<Chromosome> HUMAN_2 = register("human_2", 2);
@@ -296,6 +311,88 @@ public final class BuiltInChromosomes {
 		}
 	}
 
+	/**
+	 * Built-in Chromosomes for Mule. Notice that a mule is a hybrid of a horse and a donkey.
+	 */
+	public static final class Mule {
+		private Mule() {
+		}
+
+		public static void init() {
+			// Lazy init
+		}
+
+		static {
+			RegistryRelations.registerEntityType2Chromosome(EntityType.MULE, Donkey.DONKEY_1);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.MULE, Donkey.DONKEY_2);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.MULE, Donkey.DONKEY_3);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.MULE, Donkey.DONKEY_4);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.MULE, Donkey.DONKEY_5);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.MULE, Donkey.DONKEY_6);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.MULE, Donkey.DONKEY_7);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.MULE, Donkey.DONKEY_8);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.MULE, Donkey.DONKEY_9);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.MULE, Donkey.DONKEY_10);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.MULE, Donkey.DONKEY_11);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.MULE, Donkey.DONKEY_12);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.MULE, Donkey.DONKEY_13);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.MULE, Donkey.DONKEY_14);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.MULE, Donkey.DONKEY_15);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.MULE, Donkey.DONKEY_16);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.MULE, Donkey.DONKEY_17);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.MULE, Donkey.DONKEY_18);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.MULE, Donkey.DONKEY_19);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.MULE, Donkey.DONKEY_20);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.MULE, Donkey.DONKEY_21);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.MULE, Donkey.DONKEY_22);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.MULE, Donkey.DONKEY_23);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.MULE, Donkey.DONKEY_24);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.MULE, Donkey.DONKEY_25);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.MULE, Donkey.DONKEY_26);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.MULE, Donkey.DONKEY_27);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.MULE, Donkey.DONKEY_28);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.MULE, Donkey.DONKEY_29);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.MULE, Donkey.DONKEY_30);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.MULE, Donkey.DONKEY_XY);
+
+			RegistryRelations.registerEntityType2Chromosome(EntityType.MULE, Horse.HORSE_1);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.MULE, Horse.HORSE_2);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.MULE, Horse.HORSE_3);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.MULE, Horse.HORSE_4);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.MULE, Horse.HORSE_5);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.MULE, Horse.HORSE_6);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.MULE, Horse.HORSE_7);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.MULE, Horse.HORSE_8);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.MULE, Horse.HORSE_9);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.MULE, Horse.HORSE_10);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.MULE, Horse.HORSE_11);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.MULE, Horse.HORSE_12);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.MULE, Horse.HORSE_13);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.MULE, Horse.HORSE_14);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.MULE, Horse.HORSE_15);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.MULE, Horse.HORSE_16);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.MULE, Horse.HORSE_17);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.MULE, Horse.HORSE_18);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.MULE, Horse.HORSE_19);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.MULE, Horse.HORSE_20);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.MULE, Horse.HORSE_21);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.MULE, Horse.HORSE_22);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.MULE, Horse.HORSE_23);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.MULE, Horse.HORSE_24);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.MULE, Horse.HORSE_25);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.MULE, Horse.HORSE_26);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.MULE, Horse.HORSE_27);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.MULE, Horse.HORSE_28);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.MULE, Horse.HORSE_29);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.MULE, Horse.HORSE_30);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.MULE, Horse.HORSE_31);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.MULE, Horse.HORSE_XY);
+		}
+	}
+
+	/**
+	 * Built-in Chromosomes for Pig.
+	 */
 	public static final class Pig {
 		public static final Holder<Chromosome> PIG_1 = register("pig_1", 1);
 		public static final Holder<Chromosome> PIG_2 = register("pig_2", 2);
@@ -347,6 +444,9 @@ public final class BuiltInChromosomes {
 		}
 	}
 
+	/**
+	 * Built-in Chromosomes for Rabbit (Hares).
+	 */
 	public static final class Rabbit {
 		public static final Holder<Chromosome> RABBIT_1 = register("rabbit_1", 1);
 		public static final Holder<Chromosome> RABBIT_2 = register("rabbit_2", 2);
@@ -408,6 +508,9 @@ public final class BuiltInChromosomes {
 		}
 	}
 
+	/**
+	 * Built-in Chromosomes for Sheep.
+	 */
 	public static final class Sheep {
 		public static final Holder<Chromosome> SHEEP_1 = register("sheep_1", 1);
 		public static final Holder<Chromosome> SHEEP_2 = register("sheep_2", 2);
@@ -484,6 +587,7 @@ public final class BuiltInChromosomes {
 		Donkey.init();
 		Horse.init();
 		Human.init();
+		Mule.init();
 		Pig.init();
 		Rabbit.init();
 		Sheep.init();

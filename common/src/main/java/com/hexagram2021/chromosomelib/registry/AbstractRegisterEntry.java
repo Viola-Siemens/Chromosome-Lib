@@ -14,10 +14,21 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
+/**
+ * Abstract register entry.
+ * @param <T>	the type of the entry
+ */
 @SuppressWarnings({"unused", "java:S3038"})
 public abstract class AbstractRegisterEntry<T> implements Holder<T>, Supplier<T> {
+	/**
+	 * resource key of the entry
+	 */
 	protected final ResourceKey<T> key;
 
+	/**
+	 * Constructor.
+	 * @param key	resource key of the entry
+	 */
 	protected AbstractRegisterEntry(ResourceKey<T> key) {
 		this.key = key;
 	}
@@ -86,22 +97,43 @@ public abstract class AbstractRegisterEntry<T> implements Holder<T>, Supplier<T>
 		return Optional.of(this.key);
 	}
 
+	/**
+	 * @see Holder.Reference#kind
+	 * @return kind of the entry.
+	 */
 	@Override
 	public Kind kind() {
 		return Kind.REFERENCE;
 	}
 
+	/**
+	 * @see Holder.Reference#canSerializeIn
+	 * @param owner	owner of the entry
+	 * @return true if the entry can be serialized in the owner.
+	 */
 	@Override
 	public abstract boolean canSerializeIn(HolderOwner<T> owner);
 
+	/**
+	 * @see Holder#value
+	 * @return value of the entry.
+	 */
 	@Override
 	public abstract T value();
 
+	/**
+	 * @see AbstractRegisterEntry#value
+	 * @return value of the entry.
+	 */
 	@Override
 	public T get() {
 		return this.value();
 	}
 
+	/**
+	 * @param obj	another object
+	 * @return true if the object is equal to this object.
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -113,26 +145,47 @@ public abstract class AbstractRegisterEntry<T> implements Holder<T>, Supplier<T>
 		return obj instanceof Holder<?> h && this.key.equals(h.unwrapKey().orElse(null));
 	}
 
+	/**
+	 * @return hash code of the entry.
+	 */
 	@Override
 	public int hashCode() {
 		return this.key.hashCode();
 	}
 
+	/**
+	 * @return string representation of the entry.
+	 */
 	@Override
 	public String toString() {
 		return "RegisterEntry{" + this.key + "}";
 	}
 
+	/**
+	 * Get the vanilla holder of the entry.
+	 * @return vanilla holder of the entry.
+	 */
 	public abstract Holder<T> asHolder();
 
+	/**
+	 * @return optional of the entry. null if the entry is not bound.
+	 */
 	public Optional<T> asOptional() {
 		return this.isBound() ? Optional.of(this.value()) : Optional.empty();
 	}
 
+	/**
+	 * Get the id of the entry.
+	 * @return id of the entry.
+	 */
 	public ResourceLocation id() {
 		return this.key.location();
 	}
 
+	/**
+	 * Get the key of the entry.
+	 * @return key of the entry.
+	 */
 	public ResourceKey<T> key() {
 		return this.key;
 	}
@@ -145,6 +198,12 @@ public abstract class AbstractRegisterEntry<T> implements Holder<T>, Supplier<T>
 		return regDiff;
 	};
 
+	/**
+	 * Compare two holders.
+	 * @param a	first holder
+	 * @param b	second holder
+	 * @return true if the holders are equal. false otherwise.
+	 */
 	public static boolean equals(Holder<?> a, Holder<?> b) {
 		if (a == b) {
 			return true;
@@ -161,6 +220,11 @@ public abstract class AbstractRegisterEntry<T> implements Holder<T>, Supplier<T>
 		return false;
 	}
 
+	/**
+	 * Get the hash code of the holder.
+	 * @param holder	to get the hash code
+	 * @return hash code of the holder.
+	 */
 	public static int hashCode(Holder<?> holder) {
 		if(holder instanceof AbstractRegisterEntry<?> registerEntry) {
 			return registerEntry.key().hashCode();
@@ -168,6 +232,13 @@ public abstract class AbstractRegisterEntry<T> implements Holder<T>, Supplier<T>
 		return holder.hashCode();
 	}
 
+	/**
+	 * Compare two holders.
+	 * @param a	first holder
+	 * @param b	second holder
+	 * @return the result of the comparison.
+	 * @param <T>	the type of the entry
+	 */
 	public static <T> int compare(Holder<T> a, Holder<T> b) {
 		if(a instanceof AbstractRegisterEntry<T> registerEntryA) {
 			if(b instanceof AbstractRegisterEntry<T> registerEntryB) {
@@ -193,14 +264,30 @@ public abstract class AbstractRegisterEntry<T> implements Holder<T>, Supplier<T>
 		return Integer.compare(a.hashCode(), b.hashCode());
 	}
 
+	/**
+	 * Create a tree map with the comparator. Users should use this instead of {@link com.google.common.collect.Maps#newIdentityHashMap()}.
+	 * @return a tree map with the comparator.
+	 * @param <T>	the type of the entry
+	 * @param <V>	the type of the value
+	 */
 	public static <T, V> Map<Holder<T>, V> newHolderTreeMap() {
 		return new TreeMap<>(AbstractRegisterEntry::compare);
 	}
 
+	/**
+	 * Create a tree set with the comparator. Users should use this instead of {@link com.google.common.collect.Sets#newIdentityHashSet()}.
+	 * @return a tree set with the comparator.
+	 * @param <T>	the type of the entry
+	 */
 	public static <T> Set<Holder<T>> newHolderTreeSet() {
 		return new TreeSet<>(AbstractRegisterEntry::compare);
 	}
 
+	/**
+	 * Create a tree map with the comparator. Users should use this instead of {@link com.google.common.collect.Maps#newIdentityHashMap()}.
+	 * @return a tree map with the comparator.
+	 * @param <T>	the type of the entry
+	 */
 	public static <T> Object2IntMap<Holder<T>> newHolderObject2IntTreeMap() {
 		return new Object2IntRBTreeMap<>(AbstractRegisterEntry::compare);
 	}

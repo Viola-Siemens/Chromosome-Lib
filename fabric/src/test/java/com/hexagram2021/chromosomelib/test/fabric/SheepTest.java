@@ -256,8 +256,12 @@ class SheepTest {
 		builder.add(ChromosomeInstance.of(BuiltInChromosomes.Sheep.SHEEP_18, ChromosomeType.RIGHT));
 		builder.add(ChromosomeInstance.of(BuiltInChromosomes.Sheep.SHEEP_19, ChromosomeType.LEFT));
 		builder.add(ChromosomeInstance.of(BuiltInChromosomes.Sheep.SHEEP_19, ChromosomeType.RIGHT));
-		builder.add(ChromosomeInstance.of(BuiltInChromosomes.Sheep.SHEEP_20, ChromosomeType.LEFT));
-		builder.add(ChromosomeInstance.of(BuiltInChromosomes.Sheep.SHEEP_20, ChromosomeType.RIGHT));
+		builder.add(ChromosomeInstance.of(BuiltInChromosomes.Sheep.SHEEP_20, ChromosomeType.LEFT, List.of(
+				new GeneLocusInstance(SheepColorDesigner.Genes.NORMAL_COLOR_R)
+		)));
+		builder.add(ChromosomeInstance.of(BuiltInChromosomes.Sheep.SHEEP_20, ChromosomeType.RIGHT, List.of(
+				new GeneLocusInstance(SheepColorDesigner.Genes.NORMAL_COLOR_R)
+		)));
 		builder.add(ChromosomeInstance.of(BuiltInChromosomes.Sheep.SHEEP_21, ChromosomeType.LEFT));
 		builder.add(ChromosomeInstance.of(BuiltInChromosomes.Sheep.SHEEP_21, ChromosomeType.RIGHT));
 		builder.add(ChromosomeInstance.of(BuiltInChromosomes.Sheep.SHEEP_22, ChromosomeType.LEFT));
@@ -337,8 +341,12 @@ class SheepTest {
 		builder.add(ChromosomeInstance.of(BuiltInChromosomes.Sheep.SHEEP_18, ChromosomeType.RIGHT));
 		builder.add(ChromosomeInstance.of(BuiltInChromosomes.Sheep.SHEEP_19, ChromosomeType.LEFT));
 		builder.add(ChromosomeInstance.of(BuiltInChromosomes.Sheep.SHEEP_19, ChromosomeType.RIGHT));
-		builder.add(ChromosomeInstance.of(BuiltInChromosomes.Sheep.SHEEP_20, ChromosomeType.LEFT));
-		builder.add(ChromosomeInstance.of(BuiltInChromosomes.Sheep.SHEEP_20, ChromosomeType.RIGHT));
+		builder.add(ChromosomeInstance.of(BuiltInChromosomes.Sheep.SHEEP_20, ChromosomeType.LEFT, List.of(
+				new GeneLocusInstance(SheepColorDesigner.Genes.NORMAL_COLOR_R)
+		)));
+		builder.add(ChromosomeInstance.of(BuiltInChromosomes.Sheep.SHEEP_20, ChromosomeType.RIGHT, List.of(
+				new GeneLocusInstance(SheepColorDesigner.Genes.NORMAL_COLOR_R)
+		)));
 		builder.add(ChromosomeInstance.of(BuiltInChromosomes.Sheep.SHEEP_21, ChromosomeType.LEFT));
 		builder.add(ChromosomeInstance.of(BuiltInChromosomes.Sheep.SHEEP_21, ChromosomeType.RIGHT));
 		builder.add(ChromosomeInstance.of(BuiltInChromosomes.Sheep.SHEEP_22, ChromosomeType.LEFT));

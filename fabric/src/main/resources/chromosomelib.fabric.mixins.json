@@ -1,17 +1,19 @@
 {
-    "required": true,
-    "minVersion": "0.8",
-    "package": "com.hexagram2021.chromosomelib.fabric.mixin",
-    "refmap": "${mod_id}.refmap.json",
-    "compatibilityLevel": "JAVA_17",
-    "mixins": [
-    ],
-    "client": [
-    ],
-    "server": [
-    ],
-    "injectors": {
-      "defaultRequire": 1
-    }
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.hexagram2021.chromosomelib.fabric.mixin",
+  "refmap": "${mod_id}.refmap.json",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "AnimalEntityMixin",
+    "FoxBreedGoalMixin"
+  ],
+  "client": [
+  ],
+  "server": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
   }
   

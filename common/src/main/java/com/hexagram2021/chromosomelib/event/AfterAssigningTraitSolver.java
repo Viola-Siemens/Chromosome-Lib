@@ -8,6 +8,9 @@ import net.minecraft.world.entity.LivingEntity;
 import java.util.Map;
 import java.util.function.Predicate;
 
+/**
+ * Called after assigning traits to a living entity.
+ */
 public interface AfterAssigningTraitSolver {
 	/**
 	 * @param livingEntity	the living entity

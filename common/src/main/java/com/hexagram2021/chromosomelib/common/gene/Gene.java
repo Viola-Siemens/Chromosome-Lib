@@ -10,7 +10,6 @@ import net.minecraft.core.Holder;
 import org.jetbrains.annotations.ApiStatus;
 
 import javax.annotation.Nullable;
-import java.util.Collection;
 import java.util.Comparator;
 import java.util.Queue;
 import java.util.Set;
@@ -60,8 +59,8 @@ public class Gene {
 	/**
 	 * Use Breadth-First Search to check whether two genes are connected or not.
 	 *
-	 * @see com.hexagram2021.chromosomelib.common.util.Mappers#convertChromosomeInstancesToExpressingGenes(Collection)
-	 * @see Gene#doDisable(Set)
+	 * @see com.hexagram2021.chromosomelib.common.util.Mappers#convertChromosomeInstancesToExpressingGenes
+	 * @see Gene#doDisable
 	 * @deprecated I don't think you need this lol.
 	 * @param gene1	the first gene, probably the dominant gene
 	 * @param gene2	the second gene, probably the recessive gene

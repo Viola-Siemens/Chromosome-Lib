@@ -18,6 +18,9 @@ import net.minecraft.world.entity.EntityType;
 import java.util.Collection;
 import java.util.Map;
 
+/**
+ * Utility class for entity breeding.
+ */
 public final class Breeders {
 	/**
 	 * Cross over.
@@ -70,6 +73,15 @@ public final class Breeders {
 		});
 	}
 
+	/**
+	 * Breed.
+	 * @param parentAType	type of parent A
+	 * @param parentBType	type of parent B
+	 * @param parentA		chromosome instances of parent A
+	 * @param parentB		chromosome instances of parent B
+	 * @param random		random source
+	 * @return the chromosome instances of the child
+	 */
 	public static Collection<ChromosomeInstance> breed(EntityType<?> parentAType, EntityType<?> parentBType,
 													   Collection<ChromosomeInstance> parentA, Collection<ChromosomeInstance> parentB,
 													   RandomSource random) {
