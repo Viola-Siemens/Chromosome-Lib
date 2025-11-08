@@ -23,7 +23,7 @@ public interface TraitHandler {
 	 *
 	 * @param activeGeneWeight	returns a weight of the given gene.
 	 *                          <p>For diploids, 0 is for inactive gene, 1 or 2 means the count of the given gene.
-	 *                          <p>Notice that completely recessive genes will always return 0 or 2. For incompletely dominant genes, you can code different logics based on whether the return value is 1 or 2
+	 *                          <p>Notice that autosomal, completely recessive genes will always return 0 or 2. For incompletely dominant genes, you can code different logics based on whether the return value is 1 or 2
 	 * @return a trait of given trait type, determined by active genes
 	 */
 	@Contract(pure = true)

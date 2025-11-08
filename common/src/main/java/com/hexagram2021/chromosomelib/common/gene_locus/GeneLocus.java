@@ -3,10 +3,9 @@ package com.hexagram2021.chromosomelib.common.gene_locus;
 import com.hexagram2021.chromosomelib.common.chromosome.Chromosome;
 import com.hexagram2021.chromosomelib.common.chromosome.ChromosomeType;
 import com.hexagram2021.chromosomelib.common.gene.Gene;
-import com.hexagram2021.chromosomelib.registry.WeightedGeneList;
+import com.hexagram2021.chromosomelib.registry.IWeightedGeneList;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
-import net.minecraft.util.RandomSource;
 import org.jetbrains.annotations.ApiStatus;
 
 import javax.annotation.Nullable;
@@ -16,7 +15,7 @@ public abstract class GeneLocus {
 	/**
 	 * The gene frequency of each locus.
 	 */
-	private static Map<Holder<GeneLocus>, WeightedGeneList> geneFrequency = Map.of();
+	private static Map<Holder<GeneLocus>, IWeightedGeneList> geneFrequency = Map.of();
 
 	/**
 	 * The chromosome that this locus belongs to.
@@ -95,7 +94,7 @@ public abstract class GeneLocus {
 	}
 
 	@ApiStatus.Internal
-	public static void setGeneFrequency(Map<Holder<GeneLocus>, WeightedGeneList> geneFrequency) {
+	public static void setGeneFrequency(Map<Holder<GeneLocus>, IWeightedGeneList> geneFrequency) {
 		GeneLocus.geneFrequency = geneFrequency;
 	}
 
@@ -104,8 +103,8 @@ public abstract class GeneLocus {
 	 * @param geneLocus	the gene locus.
 	 * @return a random gene from the gene locus.
 	 */
-	public static Holder<Gene> getRandomGene(Holder<GeneLocus> geneLocus, RandomSource random) {
-		return geneFrequency.get(geneLocus).getRandomGene(random);
+	public static Holder<Gene> getRandomGene(Holder<GeneLocus> geneLocus, IWeightedGeneList.Context context) {
+		return geneFrequency.get(geneLocus).getRandomGene(context);
 	}
 
 	public static class LeftGeneLocus extends GeneLocus {

@@ -18,6 +18,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.ToIntFunction;
 
+/**
+ * Stub class for testing purposes.
+ */
 public class DummyChromosomeCarrier implements IChromosomeCarrier {
 	private final EntityType<?> entityType;
 	private final List<ChromosomeInstance> chromosomes = Lists.newArrayList();

@@ -1,5 +1,6 @@
 package com.hexagram2021.chromosomelib.fabric.event;
 
+import com.hexagram2021.chromosomelib.event.AfterAssigningTraitSolver;
 import com.hexagram2021.chromosomelib.event.UnpairedChromosomesToBreedSolver;
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
@@ -19,6 +20,20 @@ public final class CLFabricEvents {
 					}
 				}
 				return false;
+			}
+	);
+
+	/**
+	 * Called when a trait is assigned to an entity.
+	 * @see com.hexagram2021.chromosomelib.mixin.LivingEntityMixin#chromosomelib$setChromosomes
+	 * @see AfterAssigningTraitSolver
+	 */
+	public static final Event<AfterAssigningTraitSolver> AFTER_ASSIGNING_TRAIT_SOLVER = EventFactory.createArrayBacked(
+			AfterAssigningTraitSolver.class,
+			callbacks -> (entity, map, trait) -> {
+				for(AfterAssigningTraitSolver callback : callbacks) {
+					callback.solveAfterAssigningTrait(entity, map, trait);
+				}
 			}
 	);
 

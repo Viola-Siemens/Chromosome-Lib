@@ -1,34 +1,70 @@
 package com.hexagram2021.chromosomelib.mixin;
 
-import com.google.common.collect.Lists;
 import com.hexagram2021.chromosomelib.common.chromosome.ChromosomeInstance;
 import com.hexagram2021.chromosomelib.common.entity.IChromosomeCarrier;
 import com.hexagram2021.chromosomelib.common.entity.type.IChromosomeLibEntityType;
 import com.hexagram2021.chromosomelib.common.gene.Gene;
 import com.hexagram2021.chromosomelib.common.trait.Trait;
 import com.hexagram2021.chromosomelib.common.trait.TraitHandler;
+import com.hexagram2021.chromosomelib.common.trait.TraitType;
+import com.hexagram2021.chromosomelib.common.util.CLLogger;
 import com.hexagram2021.chromosomelib.common.util.Mappers;
+import com.hexagram2021.chromosomelib.platform.Services;
 import com.hexagram2021.chromosomelib.registry.AbstractRegisterEntry;
+import com.hexagram2021.chromosomelib.registry.IWeightedGeneList;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import net.minecraft.core.Holder;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtOps;
+import net.minecraft.nbt.Tag;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 import java.util.function.ToIntFunction;
 
-@SuppressWarnings("java:S116")
+@SuppressWarnings({"java:S100", "java:S116"})
 @Mixin(LivingEntity.class)
-public class LivingEntityMixin implements IChromosomeCarrier {
+public abstract class LivingEntityMixin implements IChromosomeCarrier {
+	@Shadow
+	public abstract RandomSource getRandom();
+
 	@Unique
-	private final List<ChromosomeInstance> chromosomelib$chromosomes = Lists.newArrayList();
+	private final List<ChromosomeInstance> chromosomelib$chromosomes = this.chromosomelib$buildDefaultChromosomes(
+			(IChromosomeLibEntityType)((LivingEntity)(Object)this).getType(),
+			IWeightedGeneList.Context.of(this.getRandom())
+	);
 	@Unique
 	private final Object2IntMap<Holder<Gene>> chromosomelib$activeGenes = AbstractRegisterEntry.newHolderObject2IntTreeMap();
 	@Unique
-	private final Set<Holder<Trait>> chromosomelib$activeTraits = AbstractRegisterEntry.newHolderTreeSet();
+	private final Map<Holder<TraitType>, Holder<Trait>> chromosomelib$activeTraits = AbstractRegisterEntry.newHolderTreeMap();
+
+	@Unique
+	private static final String CHROMOSOMELIB_CHROMOSOMES = "ChromosomeLibChromosomes";
+
+	@Inject(method = "addAdditionalSaveData", at = @At(value = "HEAD"))
+	private void chromosomelib$saveChromosomes(CompoundTag nbt, CallbackInfo ci) {
+		nbt.put(CHROMOSOMELIB_CHROMOSOMES, ChromosomeInstance.LIST_CODEC.encodeStart(NbtOps.INSTANCE, this.chromosomelib$chromosomes).getOrThrow(false, CLLogger::error));
+	}
+
+	@Inject(method = "readAdditionalSaveData", at = @At(value = "HEAD"))
+	private void chromosomelib$loadChromosomes(CompoundTag nbt, CallbackInfo ci) {
+		if(nbt.contains(CHROMOSOMELIB_CHROMOSOMES, Tag.TAG_LIST)) {
+			this.chromosomelib$setChromosomes(
+					ChromosomeInstance.LIST_CODEC
+							.parse(NbtOps.INSTANCE, nbt.getList(CHROMOSOMELIB_CHROMOSOMES, Tag.TAG_COMPOUND))
+							.getOrThrow(false, CLLogger::error)
+			);
+		}
+	}
 
 	@Override
 	public Collection<ChromosomeInstance> chromosomelib$getChromosomes() {
@@ -37,6 +73,7 @@ public class LivingEntityMixin implements IChromosomeCarrier {
 
 	@Override
 	public void chromosomelib$setChromosomes(Collection<ChromosomeInstance> chromosomes) {
+		LivingEntity current = (LivingEntity)(Object)this;
 		// setting the collection
 		this.chromosomelib$chromosomes.clear();
 		this.chromosomelib$chromosomes.addAll(chromosomes);
@@ -47,8 +84,9 @@ public class LivingEntityMixin implements IChromosomeCarrier {
 		Gene.doDisable(this.chromosomelib$activeGenes);
 
 		this.chromosomelib$activeTraits.clear();
-		((IChromosomeLibEntityType)((LivingEntity)(Object)this).getType()).chromosomelib$getTraitTypes()
-				.forEach(traitType -> this.chromosomelib$activeTraits.add(TraitHandler.getHandler(traitType).handle(this.chromosomelib$activeGenes)));
+		((IChromosomeLibEntityType)(current).getType()).chromosomelib$getTraitTypes()
+				.forEach(traitType -> this.chromosomelib$activeTraits.put(traitType, TraitHandler.getHandler(traitType).handle(this.chromosomelib$activeGenes)));
+		Services.PLATFORM.solveAfterAssigningTrait(current, this.chromosomelib$activeTraits, this.chromosomelib$activeTraits.values()::contains);
 	}
 
 	@Override
@@ -58,6 +96,6 @@ public class LivingEntityMixin implements IChromosomeCarrier {
 
 	@Override
 	public Collection<Holder<Trait>> chromosomelib$getActiveTraits() {
-		return this.chromosomelib$activeTraits;
+		return this.chromosomelib$activeTraits.values();
 	}
 }

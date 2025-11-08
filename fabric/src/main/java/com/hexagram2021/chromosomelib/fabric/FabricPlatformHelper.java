@@ -12,14 +12,18 @@ import com.hexagram2021.chromosomelib.fabric.registry.FabricRegisterEntry;
 import com.hexagram2021.chromosomelib.platform.services.IPlatformHelper;
 import com.hexagram2021.chromosomelib.registry.AbstractRegisterEntry;
 import com.hexagram2021.chromosomelib.registry.CLRegistries;
+import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import org.jetbrains.annotations.ApiStatus;
 
 import java.util.Collection;
+import java.util.Map;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 @ApiStatus.Internal
@@ -57,5 +61,10 @@ public class FabricPlatformHelper implements IPlatformHelper {
 	@Override
 	public boolean solveUnpairedChromosomesToBreed(EntityType<?> entityType, Collection<ChromosomeInstance> chromosomeInstances, RandomSource random, ImmutableCollection.Builder<ChromosomeInstance> builder) {
 		return CLFabricEvents.UNPAIRED_CHROMOSOMES_TO_BREED_SOLVER.invoker().solveUnpairedChromosomesToBreed(entityType, chromosomeInstances, random, builder);
+	}
+
+	@Override
+	public void solveAfterAssigningTrait(LivingEntity livingEntity, Map<Holder<TraitType>, Holder<Trait>> map, Predicate<Holder<Trait>> hasTrait) {
+		CLFabricEvents.AFTER_ASSIGNING_TRAIT_SOLVER.invoker().solveAfterAssigningTrait(livingEntity, map, hasTrait);
 	}
 }

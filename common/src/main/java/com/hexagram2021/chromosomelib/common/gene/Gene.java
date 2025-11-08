@@ -10,7 +10,6 @@ import net.minecraft.core.Holder;
 import org.jetbrains.annotations.ApiStatus;
 
 import javax.annotation.Nullable;
-
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Queue;

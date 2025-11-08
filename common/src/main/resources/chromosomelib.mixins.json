@@ -7,6 +7,8 @@
   "mixins": [
     "EntityTypeMixin",
     "LivingEntityMixin",
+    "MobEntityMixin",
+    "MuleEntityMixin",
     "VillagerMakeLoveMixin"
   ],
   "client": [

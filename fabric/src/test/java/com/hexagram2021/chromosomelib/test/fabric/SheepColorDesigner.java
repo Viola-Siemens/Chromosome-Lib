@@ -1,6 +1,5 @@
 package com.hexagram2021.chromosomelib.test.fabric;
 
-import com.google.common.collect.ImmutableList;
 import com.hexagram2021.chromosomelib.common.chromosome.BuiltInChromosomes;
 import com.hexagram2021.chromosomelib.common.gene.Gene;
 import com.hexagram2021.chromosomelib.common.gene_locus.GeneLocus;
@@ -10,7 +9,7 @@ import com.hexagram2021.chromosomelib.common.trait.TraitHandler;
 import com.hexagram2021.chromosomelib.common.trait.TraitType;
 import com.hexagram2021.chromosomelib.platform.Services;
 import com.hexagram2021.chromosomelib.registry.RegistryRelations;
-import com.hexagram2021.chromosomelib.registry.WeightedGeneList;
+import com.hexagram2021.chromosomelib.registry.StableWeightedGeneList;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
@@ -38,7 +37,7 @@ public class SheepColorDesigner {
 		 */
 		public static final Holder<Gene> URANIDIN_R = register("URANIDIN_R");
 		/**
-		 * 黑色素代谢酶基因，使得毛色被淡化时，品红色和绿色色素更容易附着，显性；位于 6 号染色体上
+		 * 黑色素代谢酶基因，使得黑色素被淡化时，品红色和绿色色素更容易附着，显性；位于 6 号染色体上
 		 */
 		public static final Holder<Gene> MELANIN_METABOLIC_D = register("MELANIN_METABOLIC_D");
 		/**
@@ -62,7 +61,7 @@ public class SheepColorDesigner {
 		 */
 		public static final Holder<Gene> PINK_R = register("PINK_R");
 		/**
-		 * 品红色素基因，仅在黑色素可被代谢或无黑色素时生效，共显性；位于 20 号染色体上
+		 * 品红色素基因，仅在黑色素淡化且可被代谢或无黑色素时生效，共显性；位于 20 号染色体上
 		 * <p>品红+绿=黄绿</p>
 		 * <p>品红+灰/淡灰/红/黄=品红</p>
 		 * <p>品红+蓝=紫</p>
@@ -70,7 +69,7 @@ public class SheepColorDesigner {
 		 */
 		public static final Holder<Gene> MAGENTA_D = register("MAGENTA_D");
 		/**
-		 * 绿色素基因，仅在黑色素可被代谢或无黑色素时生效，共显性；位于 20 号染色体上
+		 * 绿色素基因，仅在黑色素淡化且可被代谢或无黑色素时生效，共显性；位于 20 号染色体上
 		 * <p>绿+品红/黄=黄绿</p>
 		 * <p>绿+红=黄</p>
 		 * <p>绿+灰/淡灰=绿</p>
@@ -225,44 +224,44 @@ public class SheepColorDesigner {
 		// ---- Start: Register Gene Frequencies ----
 		RegistryRelations.registerGeneFrequency(
 				GeneLoci.MELANIN_ENZYME,
-				ImmutableList.<WeightedGeneList.Entry>builder()
-						.add(WeightedGeneList.Entry.of(Genes.MELANIN_D, 1))
-						.add(WeightedGeneList.Entry.of(Genes.MELANIN_R, 9))
+				StableWeightedGeneList.builder()
+						.add(Genes.MELANIN_D, 1)
+						.add(Genes.MELANIN_R, 9)
 		);
 		RegistryRelations.registerGeneFrequency(
 				GeneLoci.URANIDIN_ENZYME,
-				ImmutableList.<WeightedGeneList.Entry>builder()
-						.add(WeightedGeneList.Entry.of(Genes.URANIDIN_D, 1))
-						.add(WeightedGeneList.Entry.of(Genes.URANIDIN_R, 19))
+				StableWeightedGeneList.builder()
+						.add(Genes.URANIDIN_D, 1)
+						.add(Genes.URANIDIN_R, 19)
 		);
 		RegistryRelations.registerGeneFrequency(
 				GeneLoci.MELANIN_METABOLIC_ENZYME,
-				ImmutableList.<WeightedGeneList.Entry>builder()
-						.add(WeightedGeneList.Entry.of(Genes.MELANIN_METABOLIC_D, 1))
-						.add(WeightedGeneList.Entry.of(Genes.MELANIN_METABOLIC_R, 15))
+				StableWeightedGeneList.builder()
+						.add(Genes.MELANIN_METABOLIC_D, 1)
+						.add(Genes.MELANIN_METABOLIC_R, 15)
 		);
 		RegistryRelations.registerGeneFrequency(
 				GeneLoci.DILUTION,
-				ImmutableList.<WeightedGeneList.Entry>builder()
-						.add(WeightedGeneList.Entry.of(Genes.DILUTION_ID, 1))
-						.add(WeightedGeneList.Entry.of(Genes.DILUTION_R, 3))
+				StableWeightedGeneList.builder()
+						.add(Genes.DILUTION_ID, 1)
+						.add(Genes.DILUTION_R, 3)
 		);
 		RegistryRelations.registerGeneFrequency(
 				GeneLoci.PINK,
-				ImmutableList.<WeightedGeneList.Entry>builder()
-						.add(WeightedGeneList.Entry.of(Genes.NONE_PINK_D, 59))
-						.add(WeightedGeneList.Entry.of(Genes.PINK_R, 1))
+				StableWeightedGeneList.builder()
+						.add(Genes.NONE_PINK_D, 59)
+						.add(Genes.PINK_R, 1)
 		);
 		RegistryRelations.registerGeneFrequency(
 				GeneLoci.ABNORMAL,
-				ImmutableList.<WeightedGeneList.Entry>builder()
-						.add(WeightedGeneList.Entry.of(Genes.MAGENTA_D, 3))
-						.add(WeightedGeneList.Entry.of(Genes.GREEN_D, 2))
-						.add(WeightedGeneList.Entry.of(Genes.NORMAL_COLOR_R, 95))
+				StableWeightedGeneList.builder()
+						.add(Genes.MAGENTA_D, 3)
+						.add(Genes.GREEN_D, 2)
+						.add(Genes.NORMAL_COLOR_R, 95)
 		);
 		RegistryRelations.registerGeneFrequency(
 				GeneLoci.SRY,
-				ImmutableList.<WeightedGeneList.Entry>builder().add(WeightedGeneList.Entry.of(Genes.SRY, 1))
+				StableWeightedGeneList.builder().add(Genes.SRY, 1)
 		);
 		// ---- End: Register Gene Frequencies ----
 
@@ -335,12 +334,6 @@ public class SheepColorDesigner {
 				// 橙色底色
 				if(dilution == 0) {
 					return Traits.ORANGE;
-				}
-				if(melaninMetabolic == 0) {
-					if(dilution == 1) {
-						return Traits.BLUE;
-					}
-					return Traits.CYAN;
 				}
 				if(magenta > 0) {
 					if(green > 0) {

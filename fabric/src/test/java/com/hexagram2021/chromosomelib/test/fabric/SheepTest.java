@@ -57,7 +57,7 @@ class SheepTest {
 	static final double BOUND_3_1 = Z_9875 * Math.sqrt(P_3_1 * (1.0D - P_3_1) / N);
 
 	/**
-	 * Test segregation ratio 3:1 in monogenic inheritance circumstance.
+	 * <b>Integration Testing</b>. Test segregation ratio 3:1 in monogenic inheritance circumstance.
 	 * <p>Cheer up! If everything goes right, there is still a 1.25% chance of failing :)
 	 */
 	@Test

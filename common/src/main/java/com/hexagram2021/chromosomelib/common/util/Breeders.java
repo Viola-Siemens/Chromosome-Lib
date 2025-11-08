@@ -21,7 +21,8 @@ import java.util.Map;
 public final class Breeders {
 	/**
 	 * Cross over.
-	 * @param chromosomes	Chromosomes to cross over.
+	 * @param chromosomes	chromosomes to cross over.
+	 * @param random		random source
 	 */
 	public static void crossOver(Collection<ChromosomeInstance> chromosomes, RandomSource random) {
 		Map<Holder<Chromosome>, ChromosomeInstance> temporary = Maps.newIdentityHashMap();

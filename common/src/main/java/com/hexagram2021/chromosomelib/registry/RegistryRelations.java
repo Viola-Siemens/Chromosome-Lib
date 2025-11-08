@@ -47,7 +47,7 @@ public final class RegistryRelations {
 
 	private static final ImmutableGraph.Builder<Holder<Gene>> disableRelations = GraphBuilder.directed().immutable();
 
-	private static final ImmutableMap.Builder<Holder<GeneLocus>, WeightedGeneList> geneFrequency = ImmutableMap.builder();
+	private static final ImmutableMap.Builder<Holder<GeneLocus>, IWeightedGeneList> geneFrequency = ImmutableMap.builder();
 
 	private static int countEntityType2Chromosome = 0;
 	private static int countChromosome2GeneLocus = 0;
@@ -171,11 +171,11 @@ public final class RegistryRelations {
 	 * @param geneLocus	the gene locus
 	 * @param entries	genes and their weights
 	 */
-	public static void registerGeneFrequency(Holder<GeneLocus> geneLocus, ImmutableList.Builder<WeightedGeneList.Entry> entries) {
+	public static void registerGeneFrequency(Holder<GeneLocus> geneLocus, IWeightedGeneList.Builder entries) {
 		if(isFrozen) {
 			throw new IllegalStateException("Relations registry is already frozen!");
 		}
-		geneFrequency.put(geneLocus, WeightedGeneList.of(entries));
+		geneFrequency.put(geneLocus, entries.build());
 	}
 
 	@ApiStatus.Internal
@@ -203,15 +203,14 @@ public final class RegistryRelations {
 
 	private static void checkGeneFrequencyLists(Registry<GeneLocus> geneLocusRegistry) {
 		Set<Holder<GeneLocus>> baseline = geneLocusRegistry.holders().collect(Collectors.toCollection(AbstractRegisterEntry::newHolderTreeSet));
-		Map<Holder<GeneLocus>, WeightedGeneList> geneFrequencyLists = geneFrequency.build();
+		Map<Holder<GeneLocus>, IWeightedGeneList> geneFrequencyLists = geneFrequency.build();
 		geneFrequencyLists.forEach((geneLocus, list) -> {
-			Set<Holder<Gene>> set = Objects.requireNonNull(geneLocus.value().genes).stream().collect(Collectors.toCollection(Sets::newIdentityHashSet));
-			for(WeightedGeneList.Entry entry: list) {
-				Holder<Gene> gene = entry.gene();
+			Set<Holder<Gene>> set = Objects.requireNonNull(geneLocus.value().genes).stream().collect(Collectors.toCollection(AbstractRegisterEntry::newHolderTreeSet));
+			list.allGenes().forEach(gene -> {
 				if(!set.remove(gene)) {
 					throw new InvalidGeneFromGeneLocusException(gene, geneLocus);
 				}
-			}
+			});
 			if(!set.isEmpty()) {
 				throw new GeneFrequencyNotPresentException(set, geneLocus);
 			}
