@@ -12,11 +12,251 @@ import java.util.Locale;
 import static com.hexagram2021.chromosomelib.ChromosomeLib.MODID;
 
 /**
- * Built-in Chromosomes for vanilla entities.
+ * Built-in chromosomes for vanilla entities.
  */
 public final class BuiltInChromosomes {
 	/**
-	 * Built-in Chromosomes for cows.
+	 * Built-in chromosomes for axolotls.
+	 */
+	public static final class Axolotl {
+		public static final Holder<Chromosome> AXOLOTL_1 = register("axolotl_1", 1);
+		public static final Holder<Chromosome> AXOLOTL_2 = register("axolotl_2", 2);
+		public static final Holder<Chromosome> AXOLOTL_3 = register("axolotl_3", 3);
+		public static final Holder<Chromosome> AXOLOTL_4 = register("axolotl_4", 4);
+		public static final Holder<Chromosome> AXOLOTL_5 = register("axolotl_5", 5);
+		public static final Holder<Chromosome> AXOLOTL_6 = register("axolotl_6", 6);
+		public static final Holder<Chromosome> AXOLOTL_7 = register("axolotl_7", 7);
+		public static final Holder<Chromosome> AXOLOTL_8 = register("axolotl_8", 8);
+		public static final Holder<Chromosome> AXOLOTL_9 = register("axolotl_9", 9);
+		public static final Holder<Chromosome> AXOLOTL_10 = register("axolotl_10", 10);
+		public static final Holder<Chromosome> AXOLOTL_11 = register("axolotl_11", 11);
+		public static final Holder<Chromosome> AXOLOTL_12 = register("axolotl_12", 12);
+		public static final Holder<Chromosome> AXOLOTL_13 = register("axolotl_13", 13);
+		public static final Holder<Chromosome> AXOLOTL_XY = register("axolotl_xy", 14);
+
+		private Axolotl() {
+		}
+
+		public static void init() {
+			// Lazy init
+		}
+
+		static {
+			RegistryRelations.registerEntityType2Chromosome(EntityType.AXOLOTL, AXOLOTL_1);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.AXOLOTL, AXOLOTL_2);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.AXOLOTL, AXOLOTL_3);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.AXOLOTL, AXOLOTL_4);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.AXOLOTL, AXOLOTL_5);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.AXOLOTL, AXOLOTL_6);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.AXOLOTL, AXOLOTL_7);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.AXOLOTL, AXOLOTL_8);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.AXOLOTL, AXOLOTL_9);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.AXOLOTL, AXOLOTL_10);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.AXOLOTL, AXOLOTL_11);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.AXOLOTL, AXOLOTL_12);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.AXOLOTL, AXOLOTL_13);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.AXOLOTL, AXOLOTL_XY);
+		}
+	}
+
+	/**
+	 * Built-in chromosomes for bees.
+	 */
+	public static final class Bee {
+		public static final Holder<Chromosome> BEE_1 = register("bee_1", 1);
+		public static final Holder<Chromosome> BEE_2 = register("bee_2", 2);
+		public static final Holder<Chromosome> BEE_3 = register("bee_3", 3);
+		public static final Holder<Chromosome> BEE_4 = register("bee_4", 4);
+		public static final Holder<Chromosome> BEE_5 = register("bee_5", 5);
+		public static final Holder<Chromosome> BEE_6 = register("bee_6", 6);
+		public static final Holder<Chromosome> BEE_7 = register("bee_7", 7);
+		public static final Holder<Chromosome> BEE_8 = register("bee_8", 8);
+		public static final Holder<Chromosome> BEE_9 = register("bee_9", 9);
+		public static final Holder<Chromosome> BEE_10 = register("bee_10", 10);
+		public static final Holder<Chromosome> BEE_11 = register("bee_11", 11);
+		public static final Holder<Chromosome> BEE_12 = register("bee_12", 12);
+		public static final Holder<Chromosome> BEE_13 = register("bee_13", 13);
+		public static final Holder<Chromosome> BEE_14 = register("bee_14", 14);
+		public static final Holder<Chromosome> BEE_15 = register("bee_15", 15);
+		public static final Holder<Chromosome> BEE_16 = register("bee_16", 16);
+
+		private Bee() {
+		}
+
+		public static void init() {
+			// Lazy init
+		}
+
+		static {
+			RegistryRelations.registerEntityType2Chromosome(EntityType.BEE, BEE_1);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.BEE, BEE_2);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.BEE, BEE_3);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.BEE, BEE_4);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.BEE, BEE_5);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.BEE, BEE_6);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.BEE, BEE_7);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.BEE, BEE_8);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.BEE, BEE_9);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.BEE, BEE_10);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.BEE, BEE_11);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.BEE, BEE_12);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.BEE, BEE_13);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.BEE, BEE_14);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.BEE, BEE_15);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.BEE, BEE_16);
+		}
+	}
+
+	/**
+	 * Built-in chromosomes for cats.
+	 */
+	public static final class Cat {
+		public static final Holder<Chromosome> CAT_1 = register("cat_1", 1);
+		public static final Holder<Chromosome> CAT_2 = register("cat_2", 2);
+		public static final Holder<Chromosome> CAT_3 = register("cat_3", 3);
+		public static final Holder<Chromosome> CAT_4 = register("cat_4", 4);
+		public static final Holder<Chromosome> CAT_5 = register("cat_5", 5);
+		public static final Holder<Chromosome> CAT_6 = register("cat_6", 6);
+		public static final Holder<Chromosome> CAT_7 = register("cat_7", 7);
+		public static final Holder<Chromosome> CAT_8 = register("cat_8", 8);
+		public static final Holder<Chromosome> CAT_9 = register("cat_9", 9);
+		public static final Holder<Chromosome> CAT_10 = register("cat_10", 10);
+		public static final Holder<Chromosome> CAT_11 = register("cat_11", 11);
+		public static final Holder<Chromosome> CAT_12 = register("cat_12", 12);
+		public static final Holder<Chromosome> CAT_13 = register("cat_13", 13);
+		public static final Holder<Chromosome> CAT_14 = register("cat_14", 14);
+		public static final Holder<Chromosome> CAT_15 = register("cat_15", 15);
+		public static final Holder<Chromosome> CAT_16 = register("cat_16", 16);
+		public static final Holder<Chromosome> CAT_17 = register("cat_17", 17);
+		public static final Holder<Chromosome> CAT_18 = register("cat_18", 18);
+		public static final Holder<Chromosome> CAT_XY = register("cat_xy", 19);
+
+		private Cat() {
+		}
+
+		public static void init() {
+			// Lazy init
+		}
+
+		static {
+			RegistryRelations.registerEntityType2Chromosome(EntityType.CAT, CAT_1);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.CAT, CAT_2);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.CAT, CAT_3);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.CAT, CAT_4);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.CAT, CAT_5);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.CAT, CAT_6);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.CAT, CAT_7);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.CAT, CAT_8);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.CAT, CAT_9);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.CAT, CAT_10);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.CAT, CAT_11);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.CAT, CAT_12);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.CAT, CAT_13);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.CAT, CAT_14);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.CAT, CAT_15);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.CAT, CAT_16);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.CAT, CAT_17);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.CAT, CAT_18);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.CAT, CAT_XY);
+		}
+	}
+
+	/**
+	 * Built-in chromosomes for chickens.
+	 */
+	public static final class Chicken {
+		public static final Holder<Chromosome> CHICKEN_1 = register("chicken_1", 1);
+		public static final Holder<Chromosome> CHICKEN_2 = register("chicken_2", 2);
+		public static final Holder<Chromosome> CHICKEN_3 = register("chicken_3", 3);
+		public static final Holder<Chromosome> CHICKEN_4 = register("chicken_4", 4);
+		public static final Holder<Chromosome> CHICKEN_5 = register("chicken_5", 5);
+		public static final Holder<Chromosome> CHICKEN_6 = register("chicken_6", 6);
+		public static final Holder<Chromosome> CHICKEN_7 = register("chicken_7", 7);
+		public static final Holder<Chromosome> CHICKEN_8 = register("chicken_8", 8);
+		public static final Holder<Chromosome> CHICKEN_9 = register("chicken_9", 9);
+		public static final Holder<Chromosome> CHICKEN_10 = register("chicken_10", 10);
+		public static final Holder<Chromosome> CHICKEN_11 = register("chicken_11", 11);
+		public static final Holder<Chromosome> CHICKEN_12 = register("chicken_12", 12);
+		public static final Holder<Chromosome> CHICKEN_13 = register("chicken_13", 13);
+		public static final Holder<Chromosome> CHICKEN_14 = register("chicken_14", 14);
+		public static final Holder<Chromosome> CHICKEN_15 = register("chicken_15", 15);
+		public static final Holder<Chromosome> CHICKEN_16 = register("chicken_16", 16);
+		public static final Holder<Chromosome> CHICKEN_17 = register("chicken_17", 17);
+		public static final Holder<Chromosome> CHICKEN_18 = register("chicken_18", 18);
+		public static final Holder<Chromosome> CHICKEN_19 = register("chicken_19", 19);
+		public static final Holder<Chromosome> CHICKEN_20 = register("chicken_20", 20);
+		public static final Holder<Chromosome> CHICKEN_21 = register("chicken_21", 21);
+		public static final Holder<Chromosome> CHICKEN_22 = register("chicken_22", 22);
+		public static final Holder<Chromosome> CHICKEN_23 = register("chicken_23", 23);
+		public static final Holder<Chromosome> CHICKEN_24 = register("chicken_24", 24);
+		public static final Holder<Chromosome> CHICKEN_25 = register("chicken_25", 25);
+		public static final Holder<Chromosome> CHICKEN_26 = register("chicken_26", 26);
+		public static final Holder<Chromosome> CHICKEN_27 = register("chicken_27", 27);
+		public static final Holder<Chromosome> CHICKEN_28 = register("chicken_28", 28);
+		public static final Holder<Chromosome> CHICKEN_29 = register("chicken_29", 29);
+		public static final Holder<Chromosome> CHICKEN_30 = register("chicken_30", 30);
+		public static final Holder<Chromosome> CHICKEN_31 = register("chicken_31", 31);
+		public static final Holder<Chromosome> CHICKEN_32 = register("chicken_32", 32);
+		public static final Holder<Chromosome> CHICKEN_33 = register("chicken_33", 33);
+		public static final Holder<Chromosome> CHICKEN_34 = register("chicken_34", 34);
+		public static final Holder<Chromosome> CHICKEN_35 = register("chicken_35", 35);
+		public static final Holder<Chromosome> CHICKEN_36 = register("chicken_36", 36);
+		public static final Holder<Chromosome> CHICKEN_37 = register("chicken_37", 37);
+		public static final Holder<Chromosome> CHICKEN_38 = register("chicken_38", 38);
+		public static final Holder<Chromosome> CHICKEN_ZW = register("chicken_zw", 39);
+
+		private Chicken() {
+		}
+
+		public static void init() {
+			// Lazy init
+		}
+
+		static {
+			RegistryRelations.registerEntityType2Chromosome(EntityType.CHICKEN, Chicken.CHICKEN_1);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.CHICKEN, Chicken.CHICKEN_2);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.CHICKEN, Chicken.CHICKEN_3);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.CHICKEN, Chicken.CHICKEN_4);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.CHICKEN, Chicken.CHICKEN_5);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.CHICKEN, Chicken.CHICKEN_6);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.CHICKEN, Chicken.CHICKEN_7);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.CHICKEN, Chicken.CHICKEN_8);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.CHICKEN, Chicken.CHICKEN_9);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.CHICKEN, Chicken.CHICKEN_10);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.CHICKEN, Chicken.CHICKEN_11);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.CHICKEN, Chicken.CHICKEN_12);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.CHICKEN, Chicken.CHICKEN_13);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.CHICKEN, Chicken.CHICKEN_14);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.CHICKEN, Chicken.CHICKEN_15);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.CHICKEN, Chicken.CHICKEN_16);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.CHICKEN, Chicken.CHICKEN_17);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.CHICKEN, Chicken.CHICKEN_18);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.CHICKEN, Chicken.CHICKEN_19);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.CHICKEN, Chicken.CHICKEN_20);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.CHICKEN, Chicken.CHICKEN_21);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.CHICKEN, Chicken.CHICKEN_22);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.CHICKEN, Chicken.CHICKEN_23);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.CHICKEN, Chicken.CHICKEN_24);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.CHICKEN, Chicken.CHICKEN_25);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.CHICKEN, Chicken.CHICKEN_26);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.CHICKEN, Chicken.CHICKEN_27);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.CHICKEN, Chicken.CHICKEN_28);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.CHICKEN, Chicken.CHICKEN_29);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.CHICKEN, Chicken.CHICKEN_30);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.CHICKEN, Chicken.CHICKEN_31);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.CHICKEN, Chicken.CHICKEN_32);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.CHICKEN, Chicken.CHICKEN_33);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.CHICKEN, Chicken.CHICKEN_34);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.CHICKEN, Chicken.CHICKEN_35);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.CHICKEN, Chicken.CHICKEN_36);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.CHICKEN, Chicken.CHICKEN_37);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.CHICKEN, Chicken.CHICKEN_38);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.CHICKEN, Chicken.CHICKEN_ZW);
+		}
+	}
+
+	/**
+	 * Built-in chromosomes for cows.
 	 */
 	public static final class Cow {
 		public static final Holder<Chromosome> COW_1 = register("cow_1", 1);
@@ -92,7 +332,7 @@ public final class BuiltInChromosomes {
 	}
 
 	/**
-	 * Built-in Chromosomes for donkeys.
+	 * Built-in chromosomes for donkeys.
 	 */
 	public static final class Donkey {
 		public static final Holder<Chromosome> DONKEY_1 = register("donkey_1", 1);
@@ -170,7 +410,175 @@ public final class BuiltInChromosomes {
 	}
 
 	/**
-	 * Built-in Chromosomes for Horse.
+	 * Built-in chromosomes for foxes.
+	 */
+	public static final class Fox {
+		public static final Holder<Chromosome> FOX_1 = register("fox_1", 1);
+		public static final Holder<Chromosome> FOX_2 = register("fox_2", 2);
+		public static final Holder<Chromosome> FOX_3 = register("fox_3", 3);
+		public static final Holder<Chromosome> FOX_4 = register("fox_4", 4);
+		public static final Holder<Chromosome> FOX_5 = register("fox_5", 5);
+		public static final Holder<Chromosome> FOX_6 = register("fox_6", 6);
+		public static final Holder<Chromosome> FOX_7 = register("fox_7", 7);
+		public static final Holder<Chromosome> FOX_8 = register("fox_8", 8);
+		public static final Holder<Chromosome> FOX_9 = register("fox_9", 9);
+		public static final Holder<Chromosome> FOX_10 = register("fox_10", 10);
+		public static final Holder<Chromosome> FOX_11 = register("fox_11", 11);
+		public static final Holder<Chromosome> FOX_12 = register("fox_12", 12);
+		public static final Holder<Chromosome> FOX_13 = register("fox_13", 13);
+		public static final Holder<Chromosome> FOX_14 = register("fox_14", 14);
+		public static final Holder<Chromosome> FOX_15 = register("fox_15", 15);
+		public static final Holder<Chromosome> FOX_16 = register("fox_16", 16);
+		public static final Holder<Chromosome> FOX_XY = register("fox_xy", 17);
+
+		private Fox() {
+		}
+
+		public static void init() {
+			// Lazy init
+		}
+
+		static {
+			RegistryRelations.registerEntityType2Chromosome(EntityType.FOX, FOX_1);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.FOX, FOX_2);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.FOX, FOX_3);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.FOX, FOX_4);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.FOX, FOX_5);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.FOX, FOX_6);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.FOX, FOX_7);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.FOX, FOX_8);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.FOX, FOX_9);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.FOX, FOX_10);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.FOX, FOX_11);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.FOX, FOX_12);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.FOX, FOX_13);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.FOX, FOX_14);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.FOX, FOX_15);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.FOX, FOX_16);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.FOX, FOX_XY);
+		}
+	}
+
+	/**
+	 * Built-in chromosomes for frogs.
+	 */
+	public static final class Frog {
+		public static final Holder<Chromosome> FROG_1 = register("frog_1", 1);
+		public static final Holder<Chromosome> FROG_2 = register("frog_2", 2);
+		public static final Holder<Chromosome> FROG_3 = register("frog_3", 3);
+		public static final Holder<Chromosome> FROG_4 = register("frog_4", 4);
+		public static final Holder<Chromosome> FROG_5 = register("frog_5", 5);
+		public static final Holder<Chromosome> FROG_6 = register("frog_6", 6);
+		public static final Holder<Chromosome> FROG_7 = register("frog_7", 7);
+		public static final Holder<Chromosome> FROG_8 = register("frog_8", 8);
+		public static final Holder<Chromosome> FROG_9 = register("frog_9", 9);
+		public static final Holder<Chromosome> FROG_10 = register("frog_10", 10);
+		public static final Holder<Chromosome> FROG_11 = register("frog_11", 11);
+		public static final Holder<Chromosome> FROG_12 = register("frog_12", 12);
+		public static final Holder<Chromosome> FROG_XY = register("frog_xy", 13);
+
+		private Frog() {
+		}
+
+		public static void init() {
+			// Lazy init
+		}
+
+		static {
+			RegistryRelations.registerEntityType2Chromosome(EntityType.FROG, FROG_1);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.FROG, FROG_2);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.FROG, FROG_3);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.FROG, FROG_4);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.FROG, FROG_5);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.FROG, FROG_6);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.FROG, FROG_7);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.FROG, FROG_8);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.FROG, FROG_9);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.FROG, FROG_10);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.FROG, FROG_11);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.FROG, FROG_12);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.FROG, FROG_XY);
+		}
+	}
+
+	/**
+	 * Built-in chromosomes for goats.
+	 */
+	public static final class Goat {
+		public static final Holder<Chromosome> GOAT_1 = register("goat_1", 1);
+		public static final Holder<Chromosome> GOAT_2 = register("goat_2", 2);
+		public static final Holder<Chromosome> GOAT_3 = register("goat_3", 3);
+		public static final Holder<Chromosome> GOAT_4 = register("goat_4", 4);
+		public static final Holder<Chromosome> GOAT_5 = register("goat_5", 5);
+		public static final Holder<Chromosome> GOAT_6 = register("goat_6", 6);
+		public static final Holder<Chromosome> GOAT_7 = register("goat_7", 7);
+		public static final Holder<Chromosome> GOAT_8 = register("goat_8", 8);
+		public static final Holder<Chromosome> GOAT_9 = register("goat_9", 9);
+		public static final Holder<Chromosome> GOAT_10 = register("goat_10", 10);
+		public static final Holder<Chromosome> GOAT_11 = register("goat_11", 11);
+		public static final Holder<Chromosome> GOAT_12 = register("goat_12", 12);
+		public static final Holder<Chromosome> GOAT_13 = register("goat_13", 13);
+		public static final Holder<Chromosome> GOAT_14 = register("goat_14", 14);
+		public static final Holder<Chromosome> GOAT_15 = register("goat_15", 15);
+		public static final Holder<Chromosome> GOAT_16 = register("goat_16", 16);
+		public static final Holder<Chromosome> GOAT_17 = register("goat_17", 17);
+		public static final Holder<Chromosome> GOAT_18 = register("goat_18", 18);
+		public static final Holder<Chromosome> GOAT_19 = register("goat_19", 19);
+		public static final Holder<Chromosome> GOAT_20 = register("goat_20", 20);
+		public static final Holder<Chromosome> GOAT_21 = register("goat_21", 21);
+		public static final Holder<Chromosome> GOAT_22 = register("goat_22", 22);
+		public static final Holder<Chromosome> GOAT_23 = register("goat_23", 23);
+		public static final Holder<Chromosome> GOAT_24 = register("goat_24", 24);
+		public static final Holder<Chromosome> GOAT_25 = register("goat_25", 25);
+		public static final Holder<Chromosome> GOAT_26 = register("goat_26", 26);
+		public static final Holder<Chromosome> GOAT_27 = register("goat_27", 27);
+		public static final Holder<Chromosome> GOAT_28 = register("goat_28", 28);
+		public static final Holder<Chromosome> GOAT_29 = register("goat_29", 29);
+		public static final Holder<Chromosome> GOAT_XY = register("goat_xy", 30);
+
+		private Goat() {
+		}
+
+		public static void init() {
+			// Lazy init
+		}
+
+		static {
+			RegistryRelations.registerEntityType2Chromosome(EntityType.GOAT, GOAT_1);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.GOAT, GOAT_2);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.GOAT, GOAT_3);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.GOAT, GOAT_4);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.GOAT, GOAT_5);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.GOAT, GOAT_6);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.GOAT, GOAT_7);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.GOAT, GOAT_8);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.GOAT, GOAT_9);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.GOAT, GOAT_10);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.GOAT, GOAT_11);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.GOAT, GOAT_12);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.GOAT, GOAT_13);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.GOAT, GOAT_14);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.GOAT, GOAT_15);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.GOAT, GOAT_16);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.GOAT, GOAT_17);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.GOAT, GOAT_18);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.GOAT, GOAT_19);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.GOAT, GOAT_20);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.GOAT, GOAT_21);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.GOAT, GOAT_22);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.GOAT, GOAT_23);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.GOAT, GOAT_24);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.GOAT, GOAT_25);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.GOAT, GOAT_26);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.GOAT, GOAT_27);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.GOAT, GOAT_28);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.GOAT, GOAT_29);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.GOAT, GOAT_XY);
+		}
+	}
+
+	/**
+	 * Built-in chromosomes for horses.
 	 */
 	public static final class Horse {
 		public static final Holder<Chromosome> HORSE_1 = register("horse_1", 1);
@@ -250,7 +658,7 @@ public final class BuiltInChromosomes {
 	}
 
 	/**
-	 * Built-in Chromosomes for Human.
+	 * Built-in chromosomes for humans.
 	 */
 	public static final class Human {
 		public static final Holder<Chromosome> HUMAN_1 = register("human_1", 1);
@@ -312,7 +720,7 @@ public final class BuiltInChromosomes {
 	}
 
 	/**
-	 * Built-in Chromosomes for Mule. Notice that a mule is a hybrid of a horse and a donkey.
+	 * Built-in chromosomes for mules. Notice that a mule is a hybrid of a horse and a donkey.
 	 */
 	public static final class Mule {
 		private Mule() {
@@ -391,7 +799,195 @@ public final class BuiltInChromosomes {
 	}
 
 	/**
-	 * Built-in Chromosomes for Pig.
+	 * Built-in chromosomes for ocelots.
+	 */
+	public static final class Ocelot {
+		public static final Holder<Chromosome> OCELOT_1 = register("ocelot_1", 1);
+		public static final Holder<Chromosome> OCELOT_2 = register("ocelot_2", 2);
+		public static final Holder<Chromosome> OCELOT_3 = register("ocelot_3", 3);
+		public static final Holder<Chromosome> OCELOT_4 = register("ocelot_4", 4);
+		public static final Holder<Chromosome> OCELOT_5 = register("ocelot_5", 5);
+		public static final Holder<Chromosome> OCELOT_6 = register("ocelot_6", 6);
+		public static final Holder<Chromosome> OCELOT_7 = register("ocelot_7", 7);
+		public static final Holder<Chromosome> OCELOT_8 = register("ocelot_8", 8);
+		public static final Holder<Chromosome> OCELOT_9 = register("ocelot_9", 9);
+		public static final Holder<Chromosome> OCELOT_10 = register("ocelot_10", 10);
+		public static final Holder<Chromosome> OCELOT_11 = register("ocelot_11", 11);
+		public static final Holder<Chromosome> OCELOT_12 = register("ocelot_12", 12);
+		public static final Holder<Chromosome> OCELOT_13 = register("ocelot_13", 13);
+		public static final Holder<Chromosome> OCELOT_14 = register("ocelot_14", 14);
+		public static final Holder<Chromosome> OCELOT_15 = register("ocelot_15", 15);
+		public static final Holder<Chromosome> OCELOT_16 = register("ocelot_16", 16);
+		public static final Holder<Chromosome> OCELOT_17 = register("ocelot_17", 17);
+		public static final Holder<Chromosome> OCELOT_XY = register("ocelot_xy", 18);
+
+		private Ocelot() {
+		}
+
+		public static void init() {
+			// Lazy init
+		}
+
+		static {
+			RegistryRelations.registerEntityType2Chromosome(EntityType.OCELOT, OCELOT_1);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.OCELOT, OCELOT_2);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.OCELOT, OCELOT_3);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.OCELOT, OCELOT_4);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.OCELOT, OCELOT_5);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.OCELOT, OCELOT_6);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.OCELOT, OCELOT_7);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.OCELOT, OCELOT_8);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.OCELOT, OCELOT_9);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.OCELOT, OCELOT_10);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.OCELOT, OCELOT_11);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.OCELOT, OCELOT_12);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.OCELOT, OCELOT_13);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.OCELOT, OCELOT_14);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.OCELOT, OCELOT_15);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.OCELOT, OCELOT_16);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.OCELOT, OCELOT_17);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.OCELOT, OCELOT_XY);
+		}
+	}
+
+	/**
+	 * Built-in chromosomes for pandas.
+	 */
+	public static final class Panda {
+		public static final Holder<Chromosome> PANDA_1 = register("panda_1", 1);
+		public static final Holder<Chromosome> PANDA_2 = register("panda_2", 2);
+		public static final Holder<Chromosome> PANDA_3 = register("panda_3", 3);
+		public static final Holder<Chromosome> PANDA_4 = register("panda_4", 4);
+		public static final Holder<Chromosome> PANDA_5 = register("panda_5", 5);
+		public static final Holder<Chromosome> PANDA_6 = register("panda_6", 6);
+		public static final Holder<Chromosome> PANDA_7 = register("panda_7", 7);
+		public static final Holder<Chromosome> PANDA_8 = register("panda_8", 8);
+		public static final Holder<Chromosome> PANDA_9 = register("panda_9", 9);
+		public static final Holder<Chromosome> PANDA_10 = register("panda_10", 10);
+		public static final Holder<Chromosome> PANDA_11 = register("panda_11", 11);
+		public static final Holder<Chromosome> PANDA_12 = register("panda_12", 12);
+		public static final Holder<Chromosome> PANDA_13 = register("panda_13", 13);
+		public static final Holder<Chromosome> PANDA_14 = register("panda_14", 14);
+		public static final Holder<Chromosome> PANDA_15 = register("panda_15", 15);
+		public static final Holder<Chromosome> PANDA_16 = register("panda_16", 16);
+		public static final Holder<Chromosome> PANDA_17 = register("panda_17", 17);
+		public static final Holder<Chromosome> PANDA_18 = register("panda_18", 18);
+		public static final Holder<Chromosome> PANDA_19 = register("panda_19", 19);
+		public static final Holder<Chromosome> PANDA_20 = register("panda_20", 20);
+		public static final Holder<Chromosome> PANDA_XY = register("panda_xy", 21);
+
+		private Panda() {
+		}
+
+		public static void init() {
+			// Lazy init
+		}
+
+		static {
+			RegistryRelations.registerEntityType2Chromosome(EntityType.PANDA, PANDA_1);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.PANDA, PANDA_2);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.PANDA, PANDA_3);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.PANDA, PANDA_4);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.PANDA, PANDA_5);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.PANDA, PANDA_6);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.PANDA, PANDA_7);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.PANDA, PANDA_8);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.PANDA, PANDA_9);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.PANDA, PANDA_10);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.PANDA, PANDA_11);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.PANDA, PANDA_12);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.PANDA, PANDA_13);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.PANDA, PANDA_14);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.PANDA, PANDA_15);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.PANDA, PANDA_16);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.PANDA, PANDA_17);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.PANDA, PANDA_18);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.PANDA, PANDA_19);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.PANDA, PANDA_20);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.PANDA, PANDA_XY);
+		}
+	}
+
+	/**
+	 * Built-in chromosomes for parrots.
+	 */
+	public static final class Parrot {
+		public static final Holder<Chromosome> PARROT_1 = register("parrot_1", 1);
+		public static final Holder<Chromosome> PARROT_2 = register("parrot_2", 2);
+		public static final Holder<Chromosome> PARROT_3 = register("parrot_3", 3);
+		public static final Holder<Chromosome> PARROT_4 = register("parrot_4", 4);
+		public static final Holder<Chromosome> PARROT_5 = register("parrot_5", 5);
+		public static final Holder<Chromosome> PARROT_6 = register("parrot_6", 6);
+		public static final Holder<Chromosome> PARROT_7 = register("parrot_7", 7);
+		public static final Holder<Chromosome> PARROT_8 = register("parrot_8", 8);
+		public static final Holder<Chromosome> PARROT_9 = register("parrot_9", 9);
+		public static final Holder<Chromosome> PARROT_10 = register("parrot_10", 10);
+		public static final Holder<Chromosome> PARROT_11 = register("parrot_11", 11);
+		public static final Holder<Chromosome> PARROT_12 = register("parrot_12", 12);
+		public static final Holder<Chromosome> PARROT_13 = register("parrot_13", 13);
+		public static final Holder<Chromosome> PARROT_14 = register("parrot_14", 14);
+		public static final Holder<Chromosome> PARROT_15 = register("parrot_15", 15);
+		public static final Holder<Chromosome> PARROT_16 = register("parrot_16", 16);
+		public static final Holder<Chromosome> PARROT_17 = register("parrot_17", 17);
+		public static final Holder<Chromosome> PARROT_18 = register("parrot_18", 18);
+		public static final Holder<Chromosome> PARROT_19 = register("parrot_19", 19);
+		public static final Holder<Chromosome> PARROT_20 = register("parrot_20", 20);
+		public static final Holder<Chromosome> PARROT_21 = register("parrot_21", 21);
+		public static final Holder<Chromosome> PARROT_22 = register("parrot_22", 22);
+		public static final Holder<Chromosome> PARROT_23 = register("parrot_23", 23);
+		public static final Holder<Chromosome> PARROT_24 = register("parrot_24", 24);
+		public static final Holder<Chromosome> PARROT_25 = register("parrot_25", 25);
+		public static final Holder<Chromosome> PARROT_26 = register("parrot_26", 26);
+		public static final Holder<Chromosome> PARROT_27 = register("parrot_27", 27);
+		public static final Holder<Chromosome> PARROT_28 = register("parrot_28", 28);
+		public static final Holder<Chromosome> PARROT_29 = register("parrot_29", 29);
+		public static final Holder<Chromosome> PARROT_30 = register("parrot_30", 30);
+		public static final Holder<Chromosome> PARROT_ZW = register("parrot_zw", 31);
+
+		private Parrot() {
+		}
+
+		public static void init() {
+			// Lazy init
+		}
+
+		static {
+			RegistryRelations.registerEntityType2Chromosome(EntityType.PARROT, PARROT_1);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.PARROT, PARROT_2);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.PARROT, PARROT_3);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.PARROT, PARROT_4);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.PARROT, PARROT_5);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.PARROT, PARROT_6);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.PARROT, PARROT_7);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.PARROT, PARROT_8);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.PARROT, PARROT_9);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.PARROT, PARROT_10);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.PARROT, PARROT_11);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.PARROT, PARROT_12);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.PARROT, PARROT_13);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.PARROT, PARROT_14);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.PARROT, PARROT_15);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.PARROT, PARROT_16);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.PARROT, PARROT_17);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.PARROT, PARROT_18);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.PARROT, PARROT_19);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.PARROT, PARROT_20);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.PARROT, PARROT_21);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.PARROT, PARROT_22);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.PARROT, PARROT_23);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.PARROT, PARROT_24);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.PARROT, PARROT_25);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.PARROT, PARROT_26);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.PARROT, PARROT_27);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.PARROT, PARROT_28);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.PARROT, PARROT_29);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.PARROT, PARROT_30);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.PARROT, PARROT_ZW);
+		}
+	}
+
+	/**
+	 * Built-in chromosomes for pigs.
 	 */
 	public static final class Pig {
 		public static final Holder<Chromosome> PIG_1 = register("pig_1", 1);
@@ -445,7 +1041,97 @@ public final class BuiltInChromosomes {
 	}
 
 	/**
-	 * Built-in Chromosomes for Rabbit (Hares).
+	 * Built-in chromosomes for polar bears.
+	 */
+	public static final class PolarBear {
+		public static final Holder<Chromosome> POLAR_BEAR_1 = register("polar_bear_1", 1);
+		public static final Holder<Chromosome> POLAR_BEAR_2 = register("polar_bear_2", 2);
+		public static final Holder<Chromosome> POLAR_BEAR_3 = register("polar_bear_3", 3);
+		public static final Holder<Chromosome> POLAR_BEAR_4 = register("polar_bear_4", 4);
+		public static final Holder<Chromosome> POLAR_BEAR_5 = register("polar_bear_5", 5);
+		public static final Holder<Chromosome> POLAR_BEAR_6 = register("polar_bear_6", 6);
+		public static final Holder<Chromosome> POLAR_BEAR_7 = register("polar_bear_7", 7);
+		public static final Holder<Chromosome> POLAR_BEAR_8 = register("polar_bear_8", 8);
+		public static final Holder<Chromosome> POLAR_BEAR_9 = register("polar_bear_9", 9);
+		public static final Holder<Chromosome> POLAR_BEAR_10 = register("polar_bear_10", 10);
+		public static final Holder<Chromosome> POLAR_BEAR_11 = register("polar_bear_11", 11);
+		public static final Holder<Chromosome> POLAR_BEAR_12 = register("polar_bear_12", 12);
+		public static final Holder<Chromosome> POLAR_BEAR_13 = register("polar_bear_13", 13);
+		public static final Holder<Chromosome> POLAR_BEAR_14 = register("polar_bear_14", 14);
+		public static final Holder<Chromosome> POLAR_BEAR_15 = register("polar_bear_15", 15);
+		public static final Holder<Chromosome> POLAR_BEAR_16 = register("polar_bear_16", 16);
+		public static final Holder<Chromosome> POLAR_BEAR_17 = register("polar_bear_17", 17);
+		public static final Holder<Chromosome> POLAR_BEAR_18 = register("polar_bear_18", 18);
+		public static final Holder<Chromosome> POLAR_BEAR_19 = register("polar_bear_19", 19);
+		public static final Holder<Chromosome> POLAR_BEAR_20 = register("polar_bear_20", 20);
+		public static final Holder<Chromosome> POLAR_BEAR_21 = register("polar_bear_21", 21);
+		public static final Holder<Chromosome> POLAR_BEAR_22 = register("polar_bear_22", 22);
+		public static final Holder<Chromosome> POLAR_BEAR_23 = register("polar_bear_23", 23);
+		public static final Holder<Chromosome> POLAR_BEAR_24 = register("polar_bear_24", 24);
+		public static final Holder<Chromosome> POLAR_BEAR_25 = register("polar_bear_25", 25);
+		public static final Holder<Chromosome> POLAR_BEAR_26 = register("polar_bear_26", 26);
+		public static final Holder<Chromosome> POLAR_BEAR_27 = register("polar_bear_27", 27);
+		public static final Holder<Chromosome> POLAR_BEAR_28 = register("polar_bear_28", 28);
+		public static final Holder<Chromosome> POLAR_BEAR_29 = register("polar_bear_29", 29);
+		public static final Holder<Chromosome> POLAR_BEAR_30 = register("polar_bear_30", 30);
+		public static final Holder<Chromosome> POLAR_BEAR_31 = register("polar_bear_31", 31);
+		public static final Holder<Chromosome> POLAR_BEAR_32 = register("polar_bear_32", 32);
+		public static final Holder<Chromosome> POLAR_BEAR_33 = register("polar_bear_33", 33);
+		public static final Holder<Chromosome> POLAR_BEAR_34 = register("polar_bear_34", 34);
+		public static final Holder<Chromosome> POLAR_BEAR_35 = register("polar_bear_35", 35);
+		public static final Holder<Chromosome> POLAR_BEAR_36 = register("polar_bear_36", 36);
+		public static final Holder<Chromosome> POLAR_BEAR_XY = register("polar_bear_xy", 37);
+
+		private PolarBear() {
+		}
+
+		public static void init() {
+			// Lazy init
+		}
+
+		static {
+			RegistryRelations.registerEntityType2Chromosome(EntityType.POLAR_BEAR, POLAR_BEAR_1);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.POLAR_BEAR, POLAR_BEAR_2);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.POLAR_BEAR, POLAR_BEAR_3);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.POLAR_BEAR, POLAR_BEAR_4);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.POLAR_BEAR, POLAR_BEAR_5);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.POLAR_BEAR, POLAR_BEAR_6);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.POLAR_BEAR, POLAR_BEAR_7);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.POLAR_BEAR, POLAR_BEAR_8);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.POLAR_BEAR, POLAR_BEAR_9);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.POLAR_BEAR, POLAR_BEAR_10);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.POLAR_BEAR, POLAR_BEAR_11);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.POLAR_BEAR, POLAR_BEAR_12);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.POLAR_BEAR, POLAR_BEAR_13);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.POLAR_BEAR, POLAR_BEAR_14);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.POLAR_BEAR, POLAR_BEAR_15);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.POLAR_BEAR, POLAR_BEAR_16);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.POLAR_BEAR, POLAR_BEAR_17);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.POLAR_BEAR, POLAR_BEAR_18);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.POLAR_BEAR, POLAR_BEAR_19);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.POLAR_BEAR, POLAR_BEAR_20);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.POLAR_BEAR, POLAR_BEAR_21);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.POLAR_BEAR, POLAR_BEAR_22);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.POLAR_BEAR, POLAR_BEAR_23);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.POLAR_BEAR, POLAR_BEAR_24);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.POLAR_BEAR, POLAR_BEAR_25);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.POLAR_BEAR, POLAR_BEAR_26);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.POLAR_BEAR, POLAR_BEAR_27);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.POLAR_BEAR, POLAR_BEAR_28);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.POLAR_BEAR, POLAR_BEAR_29);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.POLAR_BEAR, POLAR_BEAR_30);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.POLAR_BEAR, POLAR_BEAR_31);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.POLAR_BEAR, POLAR_BEAR_32);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.POLAR_BEAR, POLAR_BEAR_33);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.POLAR_BEAR, POLAR_BEAR_34);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.POLAR_BEAR, POLAR_BEAR_35);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.POLAR_BEAR, POLAR_BEAR_36);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.POLAR_BEAR, POLAR_BEAR_XY);
+		}
+	}
+
+	/**
+	 * Built-in chromosomes for rabbits (hares).
 	 */
 	public static final class Rabbit {
 		public static final Holder<Chromosome> RABBIT_1 = register("rabbit_1", 1);
@@ -509,7 +1195,7 @@ public final class BuiltInChromosomes {
 	}
 
 	/**
-	 * Built-in Chromosomes for Sheep.
+	 * Built-in chromosomes for sheeps.
 	 */
 	public static final class Sheep {
 		public static final Holder<Chromosome> SHEEP_1 = register("sheep_1", 1);
@@ -578,19 +1264,105 @@ public final class BuiltInChromosomes {
 		}
 	}
 
+	/**
+	 * Built-in chromosomes for turtles.
+	 */
+	public static final class Turtle {
+		public static final Holder<Chromosome> TURTLE_1 = register("turtle_1", 1);
+		public static final Holder<Chromosome> TURTLE_2 = register("turtle_2", 2);
+		public static final Holder<Chromosome> TURTLE_3 = register("turtle_3", 3);
+		public static final Holder<Chromosome> TURTLE_4 = register("turtle_4", 4);
+		public static final Holder<Chromosome> TURTLE_5 = register("turtle_5", 5);
+		public static final Holder<Chromosome> TURTLE_6 = register("turtle_6", 6);
+		public static final Holder<Chromosome> TURTLE_7 = register("turtle_7", 7);
+		public static final Holder<Chromosome> TURTLE_8 = register("turtle_8", 8);
+		public static final Holder<Chromosome> TURTLE_9 = register("turtle_9", 9);
+		public static final Holder<Chromosome> TURTLE_10 = register("turtle_10", 10);
+		public static final Holder<Chromosome> TURTLE_11 = register("turtle_11", 11);
+		public static final Holder<Chromosome> TURTLE_12 = register("turtle_12", 12);
+		public static final Holder<Chromosome> TURTLE_13 = register("turtle_13", 13);
+		public static final Holder<Chromosome> TURTLE_14 = register("turtle_14", 14);
+		public static final Holder<Chromosome> TURTLE_15 = register("turtle_15", 15);
+		public static final Holder<Chromosome> TURTLE_16 = register("turtle_16", 16);
+		public static final Holder<Chromosome> TURTLE_17 = register("turtle_17", 17);
+		public static final Holder<Chromosome> TURTLE_18 = register("turtle_18", 18);
+		public static final Holder<Chromosome> TURTLE_19 = register("turtle_19", 19);
+		public static final Holder<Chromosome> TURTLE_20 = register("turtle_20", 20);
+		public static final Holder<Chromosome> TURTLE_21 = register("turtle_21", 21);
+		public static final Holder<Chromosome> TURTLE_22 = register("turtle_22", 22);
+		public static final Holder<Chromosome> TURTLE_23 = register("turtle_23", 23);
+		public static final Holder<Chromosome> TURTLE_24 = register("turtle_24", 24);
+		public static final Holder<Chromosome> TURTLE_25 = register("turtle_25", 25);
+		public static final Holder<Chromosome> TURTLE_26 = register("turtle_26", 26);
+		public static final Holder<Chromosome> TURTLE_27 = register("turtle_27", 27);
+		public static final Holder<Chromosome> TURTLE_XY = register("turtle_xy", 28);
+
+		private Turtle() {
+		}
+
+		public static void init() {
+			// Lazy init
+		}
+
+		static {
+			RegistryRelations.registerEntityType2Chromosome(EntityType.TURTLE, TURTLE_1);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.TURTLE, TURTLE_2);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.TURTLE, TURTLE_3);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.TURTLE, TURTLE_4);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.TURTLE, TURTLE_5);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.TURTLE, TURTLE_6);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.TURTLE, TURTLE_7);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.TURTLE, TURTLE_8);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.TURTLE, TURTLE_9);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.TURTLE, TURTLE_10);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.TURTLE, TURTLE_11);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.TURTLE, TURTLE_12);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.TURTLE, TURTLE_13);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.TURTLE, TURTLE_14);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.TURTLE, TURTLE_15);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.TURTLE, TURTLE_16);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.TURTLE, TURTLE_17);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.TURTLE, TURTLE_18);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.TURTLE, TURTLE_19);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.TURTLE, TURTLE_20);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.TURTLE, TURTLE_21);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.TURTLE, TURTLE_22);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.TURTLE, TURTLE_23);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.TURTLE, TURTLE_24);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.TURTLE, TURTLE_25);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.TURTLE, TURTLE_26);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.TURTLE, TURTLE_27);
+			RegistryRelations.registerEntityType2Chromosome(EntityType.TURTLE, TURTLE_XY);
+		}
+	}
+
 	private BuiltInChromosomes() {
 	}
 
+	/**
+	 * Lazy init
+	 */
 	public static void init() {
-		// Lazy init
+		Axolotl.init();
+		Bee.init();
+		Cat.init();
+		Chicken.init();
 		Cow.init();
 		Donkey.init();
+		Fox.init();
+		Frog.init();
+		Goat.init();
 		Horse.init();
 		Human.init();
 		Mule.init();
+		Ocelot.init();
+		Panda.init();
+		Parrot.init();
 		Pig.init();
+		PolarBear.init();
 		Rabbit.init();
 		Sheep.init();
+		Turtle.init();
 	}
 
 	private static Holder<Chromosome> register(String name, int index) {

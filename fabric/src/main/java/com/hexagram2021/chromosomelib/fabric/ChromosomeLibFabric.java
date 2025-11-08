@@ -1,5 +1,6 @@
 package com.hexagram2021.chromosomelib.fabric;
 
+import com.hexagram2021.chromosomelib.common.chromosome.BuiltInChromosomes;
 import com.hexagram2021.chromosomelib.common.chromosome.Chromosome;
 import com.hexagram2021.chromosomelib.common.gene.Gene;
 import com.hexagram2021.chromosomelib.common.gene_locus.GeneLocus;
@@ -21,5 +22,6 @@ public class ChromosomeLibFabric implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		// mod initialization
+		BuiltInChromosomes.init();
 	}
 }

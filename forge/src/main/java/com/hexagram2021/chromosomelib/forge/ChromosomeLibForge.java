@@ -2,6 +2,7 @@ package com.hexagram2021.chromosomelib.forge;
 
 import com.hexagram2021.chromosomelib.ChromosomeLib;
 import com.hexagram2021.chromosomelib.common.CLCommonEvents;
+import com.hexagram2021.chromosomelib.common.chromosome.BuiltInChromosomes;
 import com.hexagram2021.chromosomelib.registry.CLRegistries;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.BabyEntitySpawnEvent;
@@ -15,8 +16,9 @@ import net.minecraftforge.registries.RegistryBuilder;
 @Mod(ChromosomeLib.MODID)
 public class ChromosomeLibForge {
 	public ChromosomeLibForge() {
-		IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
+		BuiltInChromosomes.init();
 
+		IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
 		modBus.addListener(this::onRegistryCreate);
 
 		MinecraftForge.EVENT_BUS.register(this);
