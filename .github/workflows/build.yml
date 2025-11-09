@@ -47,53 +47,53 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: chromosomelib-common-${{steps.version.outputs.value}}-${{github.sha}}.jar
-          path: build/libs/chromosomelib-common-${{steps.version.outputs.value}}.jar
+          path: common/build/libs/chromosomelib-common-${{steps.version.outputs.value}}.jar
           repo-token:  ${{ secrets.ACTION_TOKEN }}
       - name: Upload common sources to release
         uses: actions/upload-artifact@v4
         with:
           name: chromosomelib-common-${{steps.version.outputs.value}}-${{github.sha}}-sources.jar
-          path: build/libs/chromosomelib-common-${{steps.version.outputs.value}}-sources.jar
+          path: common/build/libs/chromosomelib-common-${{steps.version.outputs.value}}-sources.jar
           repo-token:  ${{ secrets.ACTION_TOKEN }}
       - name: Upload common javadoc to release
         uses: actions/upload-artifact@v4
         with:
           name: chromosomelib-common-${{steps.version.outputs.value}}-${{github.sha}}-javadoc.jar
-          path: build/libs/chromosomelib-common-${{steps.version.outputs.value}}-javadoc.jar
+          path: common/build/libs/chromosomelib-common-${{steps.version.outputs.value}}-javadoc.jar
           repo-token:  ${{ secrets.ACTION_TOKEN }}
       - name: Upload fabric binaries to release
         uses: actions/upload-artifact@v4
         with:
           name: chromosomelib-fabric-${{steps.version.outputs.value}}-${{github.sha}}.jar
-          path: build/libs/chromosomelib-fabric-${{steps.version.outputs.value}}.jar
+          path: fabric/build/libs/chromosomelib-fabric-${{steps.version.outputs.value}}.jar
           repo-token:  ${{ secrets.ACTION_TOKEN }}
       - name: Upload fabric sources to release
         uses: actions/upload-artifact@v4
         with:
           name: chromosomelib-fabric-${{steps.version.outputs.value}}-${{github.sha}}-sources.jar
-          path: build/libs/chromosomelib-fabric-${{steps.version.outputs.value}}-sources.jar
+          path: fabric/build/libs/chromosomelib-fabric-${{steps.version.outputs.value}}-sources.jar
           repo-token:  ${{ secrets.ACTION_TOKEN }}
       - name: Upload fabric javadoc to release
         uses: actions/upload-artifact@v4
         with:
           name: chromosomelib-fabric-${{steps.version.outputs.value}}-${{github.sha}}-javadoc.jar
-          path: build/libs/chromosomelib-fabric-${{steps.version.outputs.value}}-javadoc.jar
+          path: fabric/build/libs/chromosomelib-fabric-${{steps.version.outputs.value}}-javadoc.jar
           repo-token:  ${{ secrets.ACTION_TOKEN }}
       - name: Upload forge binaries to release
         uses: actions/upload-artifact@v4
         with:
           name: chromosomelib-forge-${{steps.version.outputs.value}}-${{github.sha}}.jar
-          path: build/libs/chromosomelib-forge-${{steps.version.outputs.value}}.jar
+          path: forge/build/libs/chromosomelib-forge-${{steps.version.outputs.value}}.jar
           repo-token:  ${{ secrets.ACTION_TOKEN }}
       - name: Upload forge sources to release
         uses: actions/upload-artifact@v4
         with:
           name: chromosomelib-forge-${{steps.version.outputs.value}}-${{github.sha}}-sources.jar
-          path: build/libs/chromosomelib-forge-${{steps.version.outputs.value}}-sources.jar
+          path: forge/build/libs/chromosomelib-forge-${{steps.version.outputs.value}}-sources.jar
           repo-token:  ${{ secrets.ACTION_TOKEN }}
       - name: Upload forge javadoc to release
         uses: actions/upload-artifact@v4
         with:
           name: chromosomelib-forge-${{steps.version.outputs.value}}-${{github.sha}}-javadoc.jar
-          path: build/libs/chromosomelib-forge-${{steps.version.outputs.value}}-javadoc.jar
+          path: forge/build/libs/chromosomelib-forge-${{steps.version.outputs.value}}-javadoc.jar
           repo-token:  ${{ secrets.ACTION_TOKEN }}
