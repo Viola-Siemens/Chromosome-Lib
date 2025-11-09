@@ -63,8 +63,8 @@ public class SheepColorDesigner {
 		/**
 		 * 品红色素基因，仅在黑色素淡化且可被代谢或无黑色素时生效，共显性；位于 20 号染色体上
 		 * <p>品红+绿=黄绿</p>
-		 * <p>品红+灰/淡灰/红/黄=品红</p>
-		 * <p>品红+蓝=紫</p>
+		 * <p>品红+灰/淡灰/红=品红</p>
+		 * <p>品红+蓝/黄=紫</p>
 		 * <p>品红+青=淡蓝</p>
 		 */
 		public static final Holder<Gene> MAGENTA_D = register("MAGENTA_D");
@@ -290,7 +290,10 @@ public class SheepColorDesigner {
 						if(green > 0) {
 							return Traits.LIME;
 						}
-						return Traits.MAGENTA;
+						if(dilution == 1) {
+							return Traits.MAGENTA;
+						}
+						return Traits.PURPLE;
 					}
 					if(green > 0) {
 						if(dilution == 1) {
