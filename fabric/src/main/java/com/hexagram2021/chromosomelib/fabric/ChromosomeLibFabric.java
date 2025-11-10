@@ -7,7 +7,9 @@ import com.hexagram2021.chromosomelib.common.gene_locus.GeneLocus;
 import com.hexagram2021.chromosomelib.common.trait.Trait;
 import com.hexagram2021.chromosomelib.common.trait.TraitType;
 import com.hexagram2021.chromosomelib.registry.CLRegistries;
+import com.hexagram2021.chromosomelib.registry.RegistryRelations;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.event.lifecycle.v1.CommonLifecycleEvents;
 import net.fabricmc.fabric.api.event.registry.FabricRegistryBuilder;
 import net.fabricmc.fabric.api.event.registry.RegistryAttribute;
 import net.minecraft.core.MappedRegistry;
@@ -23,5 +25,7 @@ public class ChromosomeLibFabric implements ModInitializer {
 	public void onInitialize() {
 		// mod initialization
 		BuiltInChromosomes.init();
+
+		CommonLifecycleEvents.TAGS_LOADED.register((registries, client) -> RegistryRelations.freezeAndBuild());
 	}
 }

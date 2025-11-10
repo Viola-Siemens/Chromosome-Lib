@@ -181,6 +181,10 @@ public final class RegistryRelations {
 	@ApiStatus.Internal
 	@SuppressWarnings("unchecked")
 	public static void freezeAndBuild() {
+		if(isFrozen) {
+			return;
+		}
+
 		Registry<EntityType<?>> entityTypeRegistry = BuiltInRegistries.ENTITY_TYPE;
 		Registry<Gene> geneRegistry = (Registry<Gene>) Objects.requireNonNull(BuiltInRegistries.REGISTRY.get(CLRegistries.GENES.location()));
 		Registry<GeneLocus> geneLocusRegistry = (Registry<GeneLocus>) Objects.requireNonNull(BuiltInRegistries.REGISTRY.get(CLRegistries.GENE_LOCI.location()));
@@ -237,6 +241,7 @@ public final class RegistryRelations {
 				}
 			})));
 		});
+		entityTypeTag2TraitTypeMap.clear();
 		entityType2TraitTypeMap.forEach((entityType, builder) -> {
 			ImmutableList<Holder<TraitType>> traitTypes = builder.build();
 			if(entityType instanceof IChromosomeLibEntityType clEntityType) {
@@ -298,6 +303,7 @@ public final class RegistryRelations {
 				}
 			})));
 		});
+		entityTypeTag2ChromosomeMap.clear();
 		entityType2ChromosomeMap.forEach((entityType, builder) -> {
 			ImmutableList<Holder<Chromosome>> chromosomes = builder.build();
 			Int2ObjectMap<Holder<Chromosome>> chromosomeMap = new Int2ObjectArrayMap<>();

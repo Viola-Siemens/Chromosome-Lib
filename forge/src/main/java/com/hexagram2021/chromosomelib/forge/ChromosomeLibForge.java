@@ -4,7 +4,9 @@ import com.hexagram2021.chromosomelib.ChromosomeLib;
 import com.hexagram2021.chromosomelib.common.CLCommonEvents;
 import com.hexagram2021.chromosomelib.common.chromosome.BuiltInChromosomes;
 import com.hexagram2021.chromosomelib.registry.CLRegistries;
+import com.hexagram2021.chromosomelib.registry.RegistryRelations;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.TagsUpdatedEvent;
 import net.minecraftforge.event.entity.living.BabyEntitySpawnEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -30,6 +32,11 @@ public class ChromosomeLibForge {
 		event.create(new RegistryBuilder<>().setMaxID(0x000FFFFF).setName(CLRegistries.GENES.location()).disableSync().hasTags());
 		event.create(new RegistryBuilder<>().setMaxID(0x000FFFFF).setName(CLRegistries.TRAITS.location()).hasTags());
 		event.create(new RegistryBuilder<>().setMaxID(0x000FFFFF).setName(CLRegistries.TRAIT_TYPES.location()).hasTags());
+	}
+
+	@SubscribeEvent
+	public void onFMLCommonSetup(TagsUpdatedEvent event) {
+		RegistryRelations.freezeAndBuild();
 	}
 
 	@SubscribeEvent
