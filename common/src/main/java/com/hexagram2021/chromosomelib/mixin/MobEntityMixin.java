@@ -1,5 +1,6 @@
 package com.hexagram2021.chromosomelib.mixin;
 
+import com.hexagram2021.chromosomelib.common.chromosome.ChromosomeInstance;
 import com.hexagram2021.chromosomelib.common.entity.IChromosomeCarrier;
 import com.hexagram2021.chromosomelib.common.entity.type.IChromosomeLibEntityType;
 import com.hexagram2021.chromosomelib.registry.IWeightedGeneList;
@@ -14,6 +15,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import java.util.Collection;
+
 @SuppressWarnings("java:S100")
 @Mixin(Mob.class)
 public abstract class MobEntityMixin implements IChromosomeCarrier {
@@ -21,9 +24,12 @@ public abstract class MobEntityMixin implements IChromosomeCarrier {
 	private void chromosomelib$finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType reason, SpawnGroupData spawnData,
 											 CompoundTag dataTag, CallbackInfoReturnable<SpawnGroupData> cir) {
 		Mob current = (Mob)(Object)this;
-		this.chromosomelib$setChromosomes(this.chromosomelib$buildDefaultChromosomes(
-				(IChromosomeLibEntityType)current.getType(),
-				IWeightedGeneList.Context.of(level, current.blockPosition(), current.getRandom())
-		));
+		Collection<ChromosomeInstance> chromosomes = this.chromosomelib$getChromosomes();
+		if(chromosomes.isEmpty()) {
+			this.chromosomelib$setChromosomes(this.chromosomelib$buildDefaultChromosomes(
+					(IChromosomeLibEntityType) current.getType(),
+					IWeightedGeneList.Context.of(level, current.blockPosition(), current.getRandom())
+			));
+		}
 	}
 }

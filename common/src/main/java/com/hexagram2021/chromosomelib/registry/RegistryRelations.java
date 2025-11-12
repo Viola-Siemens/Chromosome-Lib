@@ -18,6 +18,7 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectArrayMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMaps;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
+import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2IntRBTreeMap;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
@@ -49,6 +50,9 @@ public final class RegistryRelations {
 
 	private static final ImmutableMap.Builder<Holder<GeneLocus>, IWeightedGeneList> geneFrequency = ImmutableMap.builder();
 
+	private static final Object2IntMap<RemapKey> chromosomeIndexRemapper = new Object2IntOpenHashMap<>();
+	private static final Object2IntMap<RemapTagKey> taggedChromosomeIndexRemapper = new Object2IntOpenHashMap<>();
+
 	private static int countEntityType2Chromosome = 0;
 	private static int countChromosome2GeneLocus = 0;
 	private static int countGeneLocus2Gene = 0;
@@ -67,6 +71,25 @@ public final class RegistryRelations {
 			getBuilder(entityType2ChromosomeMap, entityType).add(chromosome);
 		} catch (ConcurrentModificationException | IndexOutOfBoundsException e) {
 			throw new RegistryConcurrentModificationException(RegistryRelations.class.getName(), "entityType2ChromosomeMap", "Map", e);
+		}
+		countEntityType2Chromosome += 1;
+	}
+	/**
+	 * Register the chromosome of an entity type and remap the index of chromosome.
+	 * @param entityType	the entity type
+	 * @param chromosome	the chromosome
+	 * @param remappedIndex	the remapped index of the chromosome
+	 */
+	public static void registerEntityType2Chromosome(EntityType<?> entityType, Holder<Chromosome> chromosome, int remappedIndex) {
+		try {
+			getBuilder(entityType2ChromosomeMap, entityType).add(chromosome);
+		} catch (ConcurrentModificationException | IndexOutOfBoundsException e) {
+			throw new RegistryConcurrentModificationException(RegistryRelations.class.getName(), "entityType2ChromosomeMap", "Map", e);
+		}
+		try {
+			chromosomeIndexRemapper.put(new RemapKey(entityType, chromosome), remappedIndex);
+		} catch (ConcurrentModificationException | IndexOutOfBoundsException e) {
+			throw new RegistryConcurrentModificationException(RegistryRelations.class.getName(), "chromosomeIndexRemapper", "Object2IntMap", e);
 		}
 		countEntityType2Chromosome += 1;
 	}
@@ -120,6 +143,25 @@ public final class RegistryRelations {
 			getBuilder(entityTypeTag2ChromosomeMap, entityTypeTag).add(chromosome);
 		} catch (ConcurrentModificationException | IndexOutOfBoundsException e) {
 			throw new RegistryConcurrentModificationException(RegistryRelations.class.getName(), "entityTypeTag2ChromosomeMap", "Map", e);
+		}
+	}
+	/**
+	 * Sometimes some different mobs are the same species (e.g. Villager, Wandering Trader, Pillager, etc.), so they share same chromosomes.
+	 * <p>The index of chromosome is also remapped.
+	 * @param entityTypeTag	the tag of entity types
+	 * @param chromosome	the chromosome
+	 * @param remappedIndex	the remapped index of the chromosome
+	 */
+	public static void registerEntityTypeTag2Chromosome(TagKey<EntityType<?>> entityTypeTag, Holder<Chromosome> chromosome, int remappedIndex) {
+		try {
+			getBuilder(entityTypeTag2ChromosomeMap, entityTypeTag).add(chromosome);
+		} catch (ConcurrentModificationException | IndexOutOfBoundsException e) {
+			throw new RegistryConcurrentModificationException(RegistryRelations.class.getName(), "entityTypeTag2ChromosomeMap", "Map", e);
+		}
+		try {
+			taggedChromosomeIndexRemapper.put(new RemapTagKey(entityTypeTag, chromosome), remappedIndex);
+		} catch (ConcurrentModificationException | IndexOutOfBoundsException e) {
+			throw new RegistryConcurrentModificationException(RegistryRelations.class.getName(), "taggedChromosomeIndexRemapper", "Object2IntMap", e);
 		}
 	}
 
@@ -292,6 +334,15 @@ public final class RegistryRelations {
 	}
 
 	private static void buildEntityType2ChromosomeRelations(Registry<EntityType<?>> entityTypeRegistry) {
+		CLLogger.info("Extracting {} EntityType tags for Chromosome index remapper...", taggedChromosomeIndexRemapper.size());
+		taggedChromosomeIndexRemapper.forEach((remapTagKey, remappedIndex) -> BuiltInRegistries.ENTITY_TYPE.getTag(remapTagKey.entityTypeTag()).ifPresent(entries -> entries.forEach(holder -> holder.unwrapKey().ifPresent(entityTypeKey -> {
+			EntityType<?> entityType = entityTypeRegistry.get(entityTypeKey);
+			if(entityType != null) {
+				chromosomeIndexRemapper.put(new RemapKey(entityType, remapTagKey.chromosome()), remappedIndex.intValue());
+			}
+		}))));
+		taggedChromosomeIndexRemapper.clear();
+
 		CLLogger.info("Extracting {} EntityType tags for EntityType to Chromosome relations...", entityTypeTag2ChromosomeMap.size());
 		entityTypeTag2ChromosomeMap.forEach((tag, builder) -> {
 			ImmutableList<Holder<Chromosome>> chromosomes = builder.build();
@@ -309,9 +360,13 @@ public final class RegistryRelations {
 			Int2ObjectMap<Holder<Chromosome>> chromosomeMap = new Int2ObjectArrayMap<>();
 			for(Holder<Chromosome> chromosomeHolder : chromosomes) {
 				Chromosome chromosome = chromosomeHolder.value();
-				Holder<Chromosome> old = chromosomeMap.put(chromosome.index(), chromosomeHolder);
+				int index = chromosomeIndexRemapper.getInt(new RemapKey(entityType, chromosomeHolder));
+				if(index < 0) {
+					index = chromosome.index();
+				}
+				Holder<Chromosome> old = chromosomeMap.put(index, chromosomeHolder);
 				if(old != null) {
-					throw new IllegalStateException("Chromosome conflict at index " + chromosome.index() + "for entity type " + entityType +
+					throw new IllegalStateException("Chromosome conflict at index " + chromosome.index() + " for entity type " + entityType +
 							". Registered " + old.unwrapKey().orElse(null) + " and " + chromosomeHolder.unwrapKey().orElse(null) + ".");
 				}
 			}
@@ -368,5 +423,45 @@ public final class RegistryRelations {
 			throw new IllegalStateException("Cyclic gene relations detected: " + cyclicGenes);
 		}
 		Gene.setDisableRelationship(geneGraph);
+	}
+
+	private record RemapKey(EntityType<?> entityType, Holder<Chromosome> chromosome) {
+		@Override
+		public boolean equals(Object obj) {
+			if(this == obj) {
+				return true;
+			}
+			if(obj instanceof RemapKey other) {
+				return this.entityType == other.entityType && AbstractRegisterEntry.equals(this.chromosome, other.chromosome);
+			}
+			return false;
+		}
+
+		@Override
+		public int hashCode() {
+			return this.entityType.hashCode() + AbstractRegisterEntry.hashCode(this.chromosome);
+		}
+	}
+
+	private record RemapTagKey(TagKey<EntityType<?>> entityTypeTag, Holder<Chromosome> chromosome) {
+		@Override
+		public boolean equals(Object obj) {
+			if(this == obj) {
+				return true;
+			}
+			if(obj instanceof RemapTagKey other) {
+				return this.entityTypeTag.equals(other.entityTypeTag) && AbstractRegisterEntry.equals(this.chromosome, other.chromosome);
+			}
+			return false;
+		}
+
+		@Override
+		public int hashCode() {
+			return this.entityTypeTag.hashCode() + AbstractRegisterEntry.hashCode(this.chromosome);
+		}
+	}
+
+	static {
+		chromosomeIndexRemapper.defaultReturnValue(-1);
 	}
 }

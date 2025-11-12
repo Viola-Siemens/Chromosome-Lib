@@ -17,8 +17,10 @@ import net.minecraft.core.Holder;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.nbt.Tag;
+import net.minecraft.resources.RegistryOps;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
+import org.apache.commons.compress.utils.Lists;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -31,36 +33,46 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.ToIntFunction;
 
-@SuppressWarnings({"java:S100", "java:S116"})
+@SuppressWarnings({"java:S100", "java:S116", "NotNullFieldNotInitialized"})
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin implements IChromosomeCarrier {
 	@Shadow
 	public abstract RandomSource getRandom();
 
 	@Unique
-	private final List<ChromosomeInstance> chromosomelib$chromosomes = this.chromosomelib$buildDefaultChromosomes(
-			(IChromosomeLibEntityType)((LivingEntity)(Object)this).getType(),
-			IWeightedGeneList.Context.of(this.getRandom())
-	);
+	private List<ChromosomeInstance> chromosomelib$chromosomes;
 	@Unique
-	private final Object2IntMap<Holder<Gene>> chromosomelib$activeGenes = AbstractRegisterEntry.newHolderObject2IntTreeMap();
+	private Object2IntMap<Holder<Gene>> chromosomelib$activeGenes;
 	@Unique
-	private final Map<Holder<TraitType>, Holder<Trait>> chromosomelib$activeTraits = AbstractRegisterEntry.newHolderTreeMap();
+	private Map<Holder<TraitType>, Holder<Trait>> chromosomelib$activeTraits;
 
 	@Unique
 	private static final String CHROMOSOMELIB_CHROMOSOMES = "ChromosomeLibChromosomes";
 
+	@Inject(method = "<init>", at = @At(value = "TAIL"))
+	private void chromosomelib$initChromosomes(CallbackInfo ci) {
+		this.chromosomelib$chromosomes = Lists.newArrayList();
+		this.chromosomelib$activeGenes = AbstractRegisterEntry.newHolderObject2IntTreeMap();
+		this.chromosomelib$activeTraits = AbstractRegisterEntry.newHolderTreeMap();
+		this.chromosomelib$setChromosomes(this.chromosomelib$buildDefaultChromosomes(
+				(IChromosomeLibEntityType)((LivingEntity)(Object)this).getType(),
+				IWeightedGeneList.Context.of(this.getRandom())
+		));
+	}
+
 	@Inject(method = "addAdditionalSaveData", at = @At(value = "HEAD"))
 	private void chromosomelib$saveChromosomes(CompoundTag nbt, CallbackInfo ci) {
-		nbt.put(CHROMOSOMELIB_CHROMOSOMES, ChromosomeInstance.LIST_CODEC.encodeStart(NbtOps.INSTANCE, this.chromosomelib$chromosomes).getOrThrow(false, CLLogger::error));
+		RegistryOps<Tag> ops = RegistryOps.create(NbtOps.INSTANCE, ((LivingEntity)(Object)this).level().registryAccess());
+		nbt.put(CHROMOSOMELIB_CHROMOSOMES, ChromosomeInstance.LIST_CODEC.encodeStart(ops, this.chromosomelib$chromosomes).getOrThrow(false, CLLogger::error));
 	}
 
 	@Inject(method = "readAdditionalSaveData", at = @At(value = "HEAD"))
 	private void chromosomelib$loadChromosomes(CompoundTag nbt, CallbackInfo ci) {
 		if(nbt.contains(CHROMOSOMELIB_CHROMOSOMES, Tag.TAG_LIST)) {
+			RegistryOps<Tag> ops = RegistryOps.create(NbtOps.INSTANCE, ((LivingEntity)(Object)this).level().registryAccess());
 			this.chromosomelib$setChromosomes(
 					ChromosomeInstance.LIST_CODEC
-							.parse(NbtOps.INSTANCE, nbt.getList(CHROMOSOMELIB_CHROMOSOMES, Tag.TAG_COMPOUND))
+							.parse(ops, nbt.getList(CHROMOSOMELIB_CHROMOSOMES, Tag.TAG_COMPOUND))
 							.getOrThrow(false, CLLogger::error)
 			);
 		}
