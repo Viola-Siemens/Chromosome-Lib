@@ -2,6 +2,7 @@ package com.hexagram2021.chromosomelib.fabric;
 
 import com.hexagram2021.chromosomelib.common.chromosome.BuiltInChromosomes;
 import com.hexagram2021.chromosomelib.common.chromosome.Chromosome;
+import com.hexagram2021.chromosomelib.common.command.ChromosomeLibCommand;
 import com.hexagram2021.chromosomelib.common.gene.Gene;
 import com.hexagram2021.chromosomelib.common.gene_locus.GeneLocus;
 import com.hexagram2021.chromosomelib.common.trait.Trait;
@@ -9,6 +10,7 @@ import com.hexagram2021.chromosomelib.common.trait.TraitType;
 import com.hexagram2021.chromosomelib.registry.CLRegistries;
 import com.hexagram2021.chromosomelib.registry.RegistryRelations;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.CommonLifecycleEvents;
 import net.fabricmc.fabric.api.event.registry.FabricRegistryBuilder;
 import net.fabricmc.fabric.api.event.registry.RegistryAttribute;
@@ -27,5 +29,7 @@ public class ChromosomeLibFabric implements ModInitializer {
 		BuiltInChromosomes.init();
 
 		CommonLifecycleEvents.TAGS_LOADED.register((registries, client) -> RegistryRelations.freezeAndBuild());
+
+		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> dispatcher.register(ChromosomeLibCommand.register()));
 	}
 }
