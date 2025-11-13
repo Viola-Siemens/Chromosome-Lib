@@ -90,12 +90,15 @@ public final class ChromosomeLibCommand {
 			});
 			StringBuilder builder = new StringBuilder();
 			toShow.keySet().stream().sorted(Comparator.comparing(ChromosomeLibCommand::chromosome2Loc)).forEach(chromosome -> {
-				builder.append(chromosome2Loc(chromosome)).append(":\n");
-				toShow.get(chromosome).keySet().forEach(gene -> builder.append("  - ")
-						.append(gene2Loc(gene))
-						.append(": ")
-						.append(activeGenes.applyAsInt(gene))
-						.append('\n'));
+				Object2IntMap<Holder<Gene>> chromosomeGenes = toShow.get(chromosome);
+				if(!chromosomeGenes.isEmpty()) {
+					builder.append(chromosome2Loc(chromosome)).append(":\n");
+					chromosomeGenes.keySet().forEach(gene -> builder.append("  - ")
+							.append(gene2Loc(gene))
+							.append(": ")
+							.append(activeGenes.applyAsInt(gene))
+							.append('\n'));
+				}
 			});
 
 			player.sendSystemMessage(Component.literal(builder.toString()));
