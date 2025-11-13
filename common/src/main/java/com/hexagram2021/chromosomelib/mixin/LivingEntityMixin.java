@@ -101,7 +101,7 @@ public abstract class LivingEntityMixin implements IChromosomeCarrier {
 		this.chromosomelib$activeTraits.clear();
 		((IChromosomeLibEntityType)(current).getType()).chromosomelib$getTraitTypes()
 				.forEach(traitType -> this.chromosomelib$activeTraits.put(traitType, TraitHandler.getHandler(traitType).handle(this.chromosomelib$activeGenes)));
-		if(!this.chromosomelib$isTraitsSolved) {
+		if(!current.level().isClientSide && !this.chromosomelib$isTraitsSolved) {
 			Services.PLATFORM.solveAfterAssigningTrait(current, this.chromosomelib$activeTraits, this.chromosomelib$activeTraits.values()::contains);
 			this.chromosomelib$isTraitsSolved = true;
 		}
