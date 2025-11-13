@@ -26,6 +26,7 @@ public abstract class MobEntityMixin implements IChromosomeCarrier {
 		Mob current = (Mob)(Object)this;
 		Collection<ChromosomeInstance> chromosomes = this.chromosomelib$getChromosomes();
 		if(chromosomes.isEmpty()) {
+			this.chromosomelib$resetTraits();
 			this.chromosomelib$setChromosomes(this.chromosomelib$buildDefaultChromosomes(
 					(IChromosomeLibEntityType) current.getType(),
 					IWeightedGeneList.Context.of(level, current.blockPosition(), current.getRandom())

@@ -47,7 +47,7 @@ public abstract class LivingEntityMixin implements IChromosomeCarrier {
 	private Map<Holder<TraitType>, Holder<Trait>> chromosomelib$activeTraits;
 
 	@Unique
-	private static final String CHROMOSOMELIB_CHROMOSOMES = "ChromosomeLibChromosomes";
+	private boolean chromosomelib$isTraitsSolved;
 
 	@Inject(method = "<init>", at = @At(value = "TAIL"))
 	private void chromosomelib$initChromosomes(CallbackInfo ci) {
@@ -58,21 +58,24 @@ public abstract class LivingEntityMixin implements IChromosomeCarrier {
 				(IChromosomeLibEntityType)((LivingEntity)(Object)this).getType(),
 				IWeightedGeneList.Context.of(this.getRandom())
 		));
+		this.chromosomelib$isTraitsSolved = false;
 	}
 
 	@Inject(method = "addAdditionalSaveData", at = @At(value = "HEAD"))
 	private void chromosomelib$saveChromosomes(CompoundTag nbt, CallbackInfo ci) {
+		nbt.putBoolean("ChromosomeLibIsTraitsSolved", this.chromosomelib$isTraitsSolved);
 		RegistryOps<Tag> ops = RegistryOps.create(NbtOps.INSTANCE, ((LivingEntity)(Object)this).level().registryAccess());
-		nbt.put(CHROMOSOMELIB_CHROMOSOMES, ChromosomeInstance.LIST_CODEC.encodeStart(ops, this.chromosomelib$chromosomes).getOrThrow(false, CLLogger::error));
+		nbt.put("ChromosomeLibChromosomes", ChromosomeInstance.LIST_CODEC.encodeStart(ops, this.chromosomelib$chromosomes).getOrThrow(false, CLLogger::error));
 	}
 
 	@Inject(method = "readAdditionalSaveData", at = @At(value = "HEAD"))
 	private void chromosomelib$loadChromosomes(CompoundTag nbt, CallbackInfo ci) {
-		if(nbt.contains(CHROMOSOMELIB_CHROMOSOMES, Tag.TAG_LIST)) {
+		this.chromosomelib$isTraitsSolved = nbt.getBoolean("ChromosomeLibIsTraitsSolved");
+		if(nbt.contains("ChromosomeLibChromosomes", Tag.TAG_LIST)) {
 			RegistryOps<Tag> ops = RegistryOps.create(NbtOps.INSTANCE, ((LivingEntity)(Object)this).level().registryAccess());
 			this.chromosomelib$setChromosomes(
 					ChromosomeInstance.LIST_CODEC
-							.parse(ops, nbt.getList(CHROMOSOMELIB_CHROMOSOMES, Tag.TAG_COMPOUND))
+							.parse(ops, nbt.getList("ChromosomeLibChromosomes", Tag.TAG_COMPOUND))
 							.getOrThrow(false, CLLogger::error)
 			);
 		}
@@ -98,7 +101,10 @@ public abstract class LivingEntityMixin implements IChromosomeCarrier {
 		this.chromosomelib$activeTraits.clear();
 		((IChromosomeLibEntityType)(current).getType()).chromosomelib$getTraitTypes()
 				.forEach(traitType -> this.chromosomelib$activeTraits.put(traitType, TraitHandler.getHandler(traitType).handle(this.chromosomelib$activeGenes)));
-		Services.PLATFORM.solveAfterAssigningTrait(current, this.chromosomelib$activeTraits, this.chromosomelib$activeTraits.values()::contains);
+		if(!this.chromosomelib$isTraitsSolved) {
+			Services.PLATFORM.solveAfterAssigningTrait(current, this.chromosomelib$activeTraits, this.chromosomelib$activeTraits.values()::contains);
+			this.chromosomelib$isTraitsSolved = true;
+		}
 	}
 
 	@Override
@@ -109,5 +115,10 @@ public abstract class LivingEntityMixin implements IChromosomeCarrier {
 	@Override
 	public Collection<Holder<Trait>> chromosomelib$getActiveTraits() {
 		return this.chromosomelib$activeTraits.values();
+	}
+
+	@Override
+	public void chromosomelib$resetTraits() {
+		this.chromosomelib$isTraitsSolved = false;
 	}
 }

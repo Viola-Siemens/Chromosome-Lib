@@ -30,6 +30,7 @@ public final class CLCommonEvents {
 				child.getRandom()
 		);
 		Breeders.mutate(childChromosomes, child.getRandom());
+		carrierChild.chromosomelib$resetTraits();
 		carrierChild.chromosomelib$setChromosomes(childChromosomes);
 
 		return true;

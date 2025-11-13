@@ -68,4 +68,9 @@ public interface IChromosomeCarrier {
 	default int chromosomelib$getPloidy() {
 		return 2;
 	}
+
+	/**
+	 * Mark isTraitsSolved flag to false.
+	 */
+	void chromosomelib$resetTraits();
 }
