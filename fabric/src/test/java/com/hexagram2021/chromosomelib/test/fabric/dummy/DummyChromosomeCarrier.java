@@ -63,4 +63,9 @@ public class DummyChromosomeCarrier implements IChromosomeCarrier {
 	public Collection<Holder<Trait>> chromosomelib$getActiveTraits() {
 		return this.activeTraits;
 	}
+
+	@Override
+	public void chromosomelib$resetTraits() {
+		// Do nothing
+	}
 }
