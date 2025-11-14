@@ -36,7 +36,7 @@ public class DummyChromosomeCarrier implements IChromosomeCarrier {
 	}
 
 	@Override
-	public Collection<ChromosomeInstance> chromosomelib$getChromosomes() {
+	public List<ChromosomeInstance> chromosomelib$getChromosomes() {
 		return this.chromosomes;
 	}
 
@@ -49,9 +49,7 @@ public class DummyChromosomeCarrier implements IChromosomeCarrier {
 		this.activeGenes.putAll(Mappers.convertChromosomeInstancesToExpressingGenes(chromosomes));
 		Gene.doDisable(this.activeGenes);
 
-		this.activeTraits.clear();
-		((IChromosomeLibEntityType)this.entityType).chromosomelib$getTraitTypes()
-				.forEach(traitType -> this.activeTraits.add(TraitHandler.getHandler(traitType).handle(this.activeGenes)));
+		this.chromosomelib$assignTraits();
 	}
 
 	@Override
@@ -62,6 +60,13 @@ public class DummyChromosomeCarrier implements IChromosomeCarrier {
 	@Override
 	public Collection<Holder<Trait>> chromosomelib$getActiveTraits() {
 		return this.activeTraits;
+	}
+
+	@Override
+	public void chromosomelib$assignTraits() {
+		this.activeTraits.clear();
+		((IChromosomeLibEntityType)this.entityType).chromosomelib$getTraitTypes()
+				.forEach(traitType -> this.activeTraits.add(TraitHandler.getHandler(traitType).handle(this.activeGenes)));
 	}
 
 	@Override

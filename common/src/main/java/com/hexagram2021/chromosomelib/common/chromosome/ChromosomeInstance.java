@@ -8,8 +8,8 @@ import com.hexagram2021.chromosomelib.registry.CLRegistries;
 import com.hexagram2021.chromosomelib.registry.IWeightedGeneList;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import it.unimi.dsi.fastutil.ints.Int2ObjectArrayMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
+import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.RegistryFixedCodec;
@@ -57,11 +57,11 @@ public class ChromosomeInstance {
 	}
 
 	public static ChromosomeInstance of(Holder<Chromosome> chromosome, ChromosomeType type, IWeightedGeneList.Context context) {
-		return new ChromosomeInstance(chromosome, type, new Int2ObjectArrayMap<>(), context);
+		return new ChromosomeInstance(chromosome, type, new Int2ObjectOpenHashMap<>(), context);
 	}
 
 	public static ChromosomeInstance of(Holder<Chromosome> chromosome, ChromosomeType type, Collection<GeneLocusInstance> geneLocusInstances, IWeightedGeneList.Context context) {
-		Int2ObjectMap<GeneLocusInstance> geneLocusInstancesMap = new Int2ObjectArrayMap<>();
+		Int2ObjectMap<GeneLocusInstance> geneLocusInstancesMap = new Int2ObjectOpenHashMap<>();
 		geneLocusInstances.forEach(geneLocusInstance -> {
 			int index = geneLocusInstance.index(type);
 			if (index < 0) {

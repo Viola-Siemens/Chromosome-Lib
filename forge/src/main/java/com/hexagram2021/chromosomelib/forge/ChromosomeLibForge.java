@@ -3,9 +3,11 @@ package com.hexagram2021.chromosomelib.forge;
 import com.hexagram2021.chromosomelib.ChromosomeLib;
 import com.hexagram2021.chromosomelib.common.CLCommonEvents;
 import com.hexagram2021.chromosomelib.common.chromosome.BuiltInChromosomes;
+import com.hexagram2021.chromosomelib.common.command.ChromosomeLibCommand;
 import com.hexagram2021.chromosomelib.registry.CLRegistries;
 import com.hexagram2021.chromosomelib.registry.RegistryRelations;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.TagsUpdatedEvent;
 import net.minecraftforge.event.entity.living.BabyEntitySpawnEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -44,5 +46,10 @@ public class ChromosomeLibForge {
 		if(!CLCommonEvents.onEntityBreed(event.getParentA(), event.getParentB(), event.getChild())) {
 			event.setChild(null);
 		}
+	}
+
+	@SubscribeEvent
+	public void onCommandRegister(RegisterCommandsEvent event) {
+		event.getDispatcher().register(ChromosomeLibCommand.register());
 	}
 }

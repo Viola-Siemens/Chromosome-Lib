@@ -9,6 +9,7 @@ import net.minecraft.core.HolderSet;
 @SuppressWarnings("java:S100")
 public interface IChromosomeLibEntityType {
 	Int2ObjectMap<Holder<Chromosome>> chromosomelib$getChromosomes();
+	int chromosomelib$getChromosomeIndex(Holder<Chromosome> chromosome);
 	void chromosomelib$setChromosomes(Int2ObjectMap<Holder<Chromosome>> chromosomes);
 	HolderSet<TraitType> chromosomelib$getTraitTypes();
 	void chromosomelib$setTraitTypes(HolderSet<TraitType> traits);

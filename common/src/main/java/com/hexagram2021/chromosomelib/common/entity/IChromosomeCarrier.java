@@ -19,7 +19,7 @@ public interface IChromosomeCarrier {
 	 * Get all chromosomes of this entity.
 	 * @return chromosomes
 	 */
-	Collection<ChromosomeInstance> chromosomelib$getChromosomes();
+	List<ChromosomeInstance> chromosomelib$getChromosomes();
 	/**
 	 * Set chromosomes of this entity. At the same time, compute active genes and active traits.
 	 * @param chromosomes	chromosomes
@@ -37,6 +37,11 @@ public interface IChromosomeCarrier {
 	 * @return active traits
 	 */
 	Collection<Holder<Trait>> chromosomelib$getActiveTraits();
+
+	/**
+	 * Assign traits to this entity.
+	 */
+	void chromosomelib$assignTraits();
 
 	/**
 	 * Build default chromosomes of this entity.

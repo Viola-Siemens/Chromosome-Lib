@@ -1,5 +1,6 @@
 package com.hexagram2021.chromosomelib.common.chromosome;
 
+import com.hexagram2021.chromosomelib.common.entity.type.IChromosomeLibEntityType;
 import com.hexagram2021.chromosomelib.common.gene_locus.GeneLocus;
 import it.unimi.dsi.fastutil.ints.Int2IntMap;
 import it.unimi.dsi.fastutil.ints.Int2IntOpenHashMap;
@@ -8,6 +9,7 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectMaps;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import it.unimi.dsi.fastutil.objects.ObjectSet;
 import net.minecraft.core.Holder;
+import net.minecraft.world.entity.EntityType;
 import org.jetbrains.annotations.ApiStatus;
 
 import java.util.Comparator;
@@ -34,6 +36,13 @@ public class Chromosome {
 
 	public int index() {
 		return this.index;
+	}
+
+	public static int index(Holder<Chromosome> chromosome, EntityType<?> entityType) {
+		if(entityType instanceof IChromosomeLibEntityType chromosomeLibEntityType) {
+			return chromosomeLibEntityType.chromosomelib$getChromosomeIndex(chromosome);
+		}
+		return chromosome.value().index();
 	}
 
 	public Int2ObjectMap<Holder<GeneLocus>> geneLoci(ChromosomeType type) {

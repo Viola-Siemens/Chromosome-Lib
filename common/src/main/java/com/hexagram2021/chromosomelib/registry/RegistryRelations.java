@@ -14,9 +14,9 @@ import com.hexagram2021.chromosomelib.common.util.CLLogger;
 import com.hexagram2021.chromosomelib.common.util.exception.GeneFrequencyNotPresentException;
 import com.hexagram2021.chromosomelib.common.util.exception.InvalidGeneFromGeneLocusException;
 import com.hexagram2021.chromosomelib.common.util.exception.RegistryConcurrentModificationException;
-import it.unimi.dsi.fastutil.ints.Int2ObjectArrayMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMaps;
+import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2IntRBTreeMap;
@@ -307,8 +307,8 @@ public final class RegistryRelations {
 		chromosome2GeneLocusMap.forEach((chromosomeHolder, builder) -> {
 			Chromosome chromosome = chromosomeHolder.value();
 			ImmutableList<Holder<GeneLocus>> geneLoci = builder.build();
-			Int2ObjectMap<Holder<GeneLocus>> leftGeneLocusMap = new Int2ObjectArrayMap<>();
-			Int2ObjectMap<Holder<GeneLocus>> rightGeneLocusMap = new Int2ObjectArrayMap<>();
+			Int2ObjectMap<Holder<GeneLocus>> leftGeneLocusMap = new Int2ObjectOpenHashMap<>();
+			Int2ObjectMap<Holder<GeneLocus>> rightGeneLocusMap = new Int2ObjectOpenHashMap<>();
 			for(Holder<GeneLocus> geneLocusHolder : geneLoci) {
 				GeneLocus geneLocus = geneLocusHolder.value();
 				int leftIndex = geneLocus.index(ChromosomeType.LEFT);
@@ -357,7 +357,7 @@ public final class RegistryRelations {
 		entityTypeTag2ChromosomeMap.clear();
 		entityType2ChromosomeMap.forEach((entityType, builder) -> {
 			ImmutableList<Holder<Chromosome>> chromosomes = builder.build();
-			Int2ObjectMap<Holder<Chromosome>> chromosomeMap = new Int2ObjectArrayMap<>();
+			Int2ObjectMap<Holder<Chromosome>> chromosomeMap = new Int2ObjectOpenHashMap<>();
 			for(Holder<Chromosome> chromosomeHolder : chromosomes) {
 				Chromosome chromosome = chromosomeHolder.value();
 				int index = chromosomeIndexRemapper.getInt(new RemapKey(entityType, chromosomeHolder));

@@ -1,20 +1,31 @@
 package com.hexagram2021.chromosomelib.common.command;
 
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Sets;
+import com.hexagram2021.chromosomelib.ChromosomeLib;
 import com.hexagram2021.chromosomelib.common.chromosome.Chromosome;
+import com.hexagram2021.chromosomelib.common.chromosome.ChromosomeInstance;
 import com.hexagram2021.chromosomelib.common.entity.IChromosomeCarrier;
 import com.hexagram2021.chromosomelib.common.gene.Gene;
+import com.hexagram2021.chromosomelib.common.gene_locus.GeneLocusInstance;
 import com.hexagram2021.chromosomelib.registry.AbstractRegisterEntry;
 import com.hexagram2021.chromosomelib.registry.CLRegistries;
 import com.mojang.brigadier.Command;
+import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
+import com.mojang.brigadier.suggestion.SuggestionProvider;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
+import net.minecraft.commands.SharedSuggestionProvider;
 import net.minecraft.commands.arguments.EntityArgument;
+import net.minecraft.commands.arguments.ResourceLocationArgument;
+import net.minecraft.commands.synchronization.SuggestionProviders;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
@@ -24,35 +35,77 @@ import javax.annotation.Nullable;
 import java.util.Comparator;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.ToIntFunction;
 
 /**
  * Commands for showing chromosome information of entities.
  */
+@SuppressWarnings("unchecked")
 @ApiStatus.Internal
 public final class ChromosomeLibCommand {
+	private static final String ENTITY_ARGUMENT = "entity";
+	private static final String CHROMOSOME_INDEX_ARGUMENT = "chromosome_index";
+	private static final String GENE_LOCUS_INDEX_ARGUMENT = "gene_locus_index";
+	private static final String GENE_1_ARGUMENT = "gene_1";
+	private static final String GENE_2_ARGUMENT = "gene_2";
+
 	/**
 	 * Register commands.
 	 */
 	public static LiteralArgumentBuilder<CommandSourceStack> register() {
 		return Commands.literal("chromosomelib").requires(stack -> stack.hasPermission(2)).then(
 				Commands.literal("show")
-						.executes(ctx -> show(ctx.getSource().getPlayer(), ctx.getSource().getEntity()))
-						.then(
-								Commands.argument("entity", EntityArgument.entity())
-										.executes(ctx -> show(ctx.getSource().getPlayer(), EntityArgument.getEntity(ctx, "entity")))
+						.executes(ctx -> show(ctx.getSource().getPlayer(), ctx.getSource().getEntity())).then(
+								Commands.argument(ENTITY_ARGUMENT, EntityArgument.entity())
+										.executes(ctx -> show(ctx.getSource().getPlayer(), EntityArgument.getEntity(ctx, ENTITY_ARGUMENT)))
 						)
+		).then(
+				Commands.literal("reassign")
+						.executes(ctx -> reassign(ctx.getSource().getEntity())).then(
+								Commands.argument(ENTITY_ARGUMENT, EntityArgument.entity())
+										.executes(ctx -> reassign(EntityArgument.getEntity(ctx, ENTITY_ARGUMENT)))
+						)
+		).then(
+				Commands.literal("set").then(
+						Commands.argument(ENTITY_ARGUMENT, EntityArgument.entity()).then(
+								Commands.argument(CHROMOSOME_INDEX_ARGUMENT, IntegerArgumentType.integer(0)).then(
+										Commands.argument(GENE_LOCUS_INDEX_ARGUMENT, IntegerArgumentType.integer(0)).then(
+												Commands.argument(GENE_1_ARGUMENT, ResourceLocationArgument.id()).suggests(GENE_SUGGESTIONS).executes(ctx -> set(
+														EntityArgument.getEntity(ctx, ENTITY_ARGUMENT),
+														IntegerArgumentType.getInteger(ctx, CHROMOSOME_INDEX_ARGUMENT),
+														IntegerArgumentType.getInteger(ctx, GENE_LOCUS_INDEX_ARGUMENT),
+														ResourceLocationArgument.getId(ctx, GENE_1_ARGUMENT),
+														ResourceLocationArgument.getId(ctx, GENE_1_ARGUMENT)
+												)).then(
+														Commands.argument(GENE_2_ARGUMENT, ResourceLocationArgument.id()).suggests(GENE_SUGGESTIONS)
+																.executes(ctx -> set(
+																		EntityArgument.getEntity(ctx, ENTITY_ARGUMENT),
+																		IntegerArgumentType.getInteger(ctx, CHROMOSOME_INDEX_ARGUMENT),
+																		IntegerArgumentType.getInteger(ctx, GENE_LOCUS_INDEX_ARGUMENT),
+																		ResourceLocationArgument.getId(ctx, GENE_1_ARGUMENT),
+																		ResourceLocationArgument.getId(ctx, GENE_2_ARGUMENT)
+																))
+												)
+										)
+
+								)
+						)
+				)
 		);
 	}
 
-	@Nullable
-	private static Registry<Chromosome> chromosomeRegistry = null;
+	private static final Registry<Chromosome> chromosomeRegistry = (Registry<Chromosome>) Objects.requireNonNull(BuiltInRegistries.REGISTRY.get(CLRegistries.CHROMOSOMES.location()));
 
-	@Nullable
-	private static Registry<Gene> geneRegistry = null;
+	private static final Registry<Gene> geneRegistry = (Registry<Gene>) Objects.requireNonNull(BuiltInRegistries.REGISTRY.get(CLRegistries.GENES.location()));
+
+	private static final SuggestionProvider<CommandSourceStack> GENE_SUGGESTIONS = SuggestionProviders.register(
+			new ResourceLocation(ChromosomeLib.MODID, "genes"),
+			(context, builder) -> SharedSuggestionProvider.suggestResource(geneRegistry.holders().flatMap(holder -> holder.unwrapKey().stream().map(ResourceKey::location)), builder)
+	);
 
 	private static String chromosome2Loc(Holder<Chromosome> holder) {
-		assert chromosomeRegistry != null;
 		return holder.unwrap().map(key -> key.location().toString(), value -> {
 			ResourceLocation key = chromosomeRegistry.getKey(value);
 			if(key == null) {
@@ -63,7 +116,6 @@ public final class ChromosomeLibCommand {
 	}
 
 	private static String gene2Loc(Holder<Gene> holder) {
-		assert geneRegistry != null;
 		return holder.unwrap().map(key -> key.location().toString(), value -> {
 			ResourceLocation key = geneRegistry.getKey(value);
 			if(key == null) {
@@ -73,14 +125,7 @@ public final class ChromosomeLibCommand {
 		});
 	}
 
-	@SuppressWarnings("unchecked")
 	private static int show(@Nullable ServerPlayer player, @Nullable Entity entity) {
-		if(chromosomeRegistry == null) {
-			chromosomeRegistry = (Registry<Chromosome>) Objects.requireNonNull(BuiltInRegistries.REGISTRY.get(CLRegistries.CHROMOSOMES.location()));
-		}
-		if(geneRegistry == null) {
-			geneRegistry = (Registry<Gene>) Objects.requireNonNull(BuiltInRegistries.REGISTRY.get(CLRegistries.GENES.location()));
-		}
 		Map<Holder<Chromosome>, Object2IntMap<Holder<Gene>>> toShow = AbstractRegisterEntry.newHolderTreeMap();
 		if(player != null && entity instanceof IChromosomeCarrier carrier) {
 			ToIntFunction<Holder<Gene>> activeGenes = carrier.chromosomelib$getActiveGenes();
@@ -102,6 +147,43 @@ public final class ChromosomeLibCommand {
 			});
 
 			player.sendSystemMessage(Component.literal(builder.toString()));
+		}
+		return Command.SINGLE_SUCCESS;
+	}
+
+	private static int reassign(@Nullable Entity entity) {
+		if(entity instanceof IChromosomeCarrier carrier) {
+			carrier.chromosomelib$resetTraits();
+			carrier.chromosomelib$assignTraits();
+		}
+		return Command.SINGLE_SUCCESS;
+	}
+
+	private static int set(@Nullable Entity entity, int chromosomeIndex, int geneLocusIndex, ResourceLocation gene1, ResourceLocation gene2) {
+		if(entity instanceof IChromosomeCarrier carrier) {
+			AtomicInteger cnt = new AtomicInteger(0);
+			ImmutableSet.Builder<ChromosomeInstance> builder = ImmutableSet.builder();
+			for(ChromosomeInstance chromosomeInstance: carrier.chromosomelib$getChromosomes()) {
+				int index = Chromosome.index(chromosomeInstance.chromosome(), entity.getType());
+				if(index == chromosomeIndex) {
+					Set<GeneLocusInstance> geneLocusInstances = Sets.newIdentityHashSet();
+					chromosomeInstance.geneLocusInstances().forEach((locusIndex, geneLocusInstance) -> {
+						if(locusIndex == geneLocusIndex) {
+							int currentCnt = cnt.get();
+							if((currentCnt & 1) == 0) {
+								geneLocusInstances.add(new GeneLocusInstance(geneRegistry.getHolderOrThrow(ResourceKey.create(CLRegistries.GENES, gene1))));
+							} else {
+								geneLocusInstances.add(new GeneLocusInstance(geneRegistry.getHolderOrThrow(ResourceKey.create(CLRegistries.GENES, gene2))));
+							}
+							cnt.set(currentCnt + 1);
+						} else {
+							geneLocusInstances.add(geneLocusInstance);
+						}
+					});
+					builder.add(ChromosomeInstance.of(chromosomeInstance.chromosome(), chromosomeInstance.type(), geneLocusInstances));
+				}
+			}
+			carrier.chromosomelib$setChromosomes(builder.build());
 		}
 		return Command.SINGLE_SUCCESS;
 	}
