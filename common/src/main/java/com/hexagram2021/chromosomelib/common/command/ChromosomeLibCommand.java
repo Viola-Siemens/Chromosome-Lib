@@ -5,6 +5,7 @@ import com.google.common.collect.Sets;
 import com.hexagram2021.chromosomelib.ChromosomeLib;
 import com.hexagram2021.chromosomelib.common.chromosome.Chromosome;
 import com.hexagram2021.chromosomelib.common.chromosome.ChromosomeInstance;
+import com.hexagram2021.chromosomelib.common.chromosome.ChromosomeType;
 import com.hexagram2021.chromosomelib.common.entity.IChromosomeCarrier;
 import com.hexagram2021.chromosomelib.common.gene.Gene;
 import com.hexagram2021.chromosomelib.common.gene_locus.GeneLocusInstance;
@@ -13,7 +14,10 @@ import com.hexagram2021.chromosomelib.registry.CLRegistries;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import com.mojang.brigadier.exceptions.Dynamic2CommandExceptionType;
 import com.mojang.brigadier.suggestion.SuggestionProvider;
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -159,7 +163,13 @@ public final class ChromosomeLibCommand {
 		return Command.SINGLE_SUCCESS;
 	}
 
-	private static int set(@Nullable Entity entity, int chromosomeIndex, int geneLocusIndex, ResourceLocation gene1, ResourceLocation gene2) {
+	public static final Dynamic2CommandExceptionType GENE_LOCUS_INDEX_MISMATCHED = new Dynamic2CommandExceptionType(
+			(expected, found) -> Component.literal("Gene Locus index mismatched. Expected %d, found %d.".formatted((int)expected, (int)found))
+	);
+
+	private static int set(@Nullable Entity entity, int chromosomeIndex, int geneLocusIndex, ResourceLocation geneId1, ResourceLocation geneId2) throws CommandSyntaxException {
+		Holder<Gene> gene1 = geneRegistry.getHolderOrThrow(ResourceKey.create(CLRegistries.GENES, geneId1));
+		Holder<Gene> gene2 = geneRegistry.getHolderOrThrow(ResourceKey.create(CLRegistries.GENES, geneId2));
 		if(entity instanceof IChromosomeCarrier carrier) {
 			AtomicInteger cnt = new AtomicInteger(0);
 			ImmutableSet.Builder<ChromosomeInstance> builder = ImmutableSet.builder();
@@ -167,25 +177,37 @@ public final class ChromosomeLibCommand {
 				int index = Chromosome.index(chromosomeInstance.chromosome(), entity.getType());
 				if(index == chromosomeIndex) {
 					Set<GeneLocusInstance> geneLocusInstances = Sets.newIdentityHashSet();
-					chromosomeInstance.geneLocusInstances().forEach((locusIndex, geneLocusInstance) -> {
+					Int2ObjectMap<GeneLocusInstance> original = chromosomeInstance.geneLocusInstances();
+					for(int locusIndex: original.keySet()) {
 						if(locusIndex == geneLocusIndex) {
 							int currentCnt = cnt.get();
 							if((currentCnt & 1) == 0) {
-								geneLocusInstances.add(new GeneLocusInstance(geneRegistry.getHolderOrThrow(ResourceKey.create(CLRegistries.GENES, gene1))));
+								checkGeneLocusIndex(gene1, chromosomeInstance.type(), geneLocusIndex);
+								geneLocusInstances.add(new GeneLocusInstance(gene1));
 							} else {
-								geneLocusInstances.add(new GeneLocusInstance(geneRegistry.getHolderOrThrow(ResourceKey.create(CLRegistries.GENES, gene2))));
+								checkGeneLocusIndex(gene2, chromosomeInstance.type(), geneLocusIndex);
+								geneLocusInstances.add(new GeneLocusInstance(gene2));
 							}
 							cnt.set(currentCnt + 1);
 						} else {
-							geneLocusInstances.add(geneLocusInstance);
+							geneLocusInstances.add(original.get(locusIndex));
 						}
-					});
+					}
 					builder.add(ChromosomeInstance.of(chromosomeInstance.chromosome(), chromosomeInstance.type(), geneLocusInstances));
+				} else {
+					builder.add(chromosomeInstance);
 				}
 			}
 			carrier.chromosomelib$setChromosomes(builder.build());
 		}
 		return Command.SINGLE_SUCCESS;
+	}
+
+	private static void checkGeneLocusIndex(Holder<Gene> gene, ChromosomeType type, int index) throws CommandSyntaxException {
+		int found = Objects.requireNonNull(gene.value().geneLocus).value().index(type);
+		if(found != index) {
+			throw GENE_LOCUS_INDEX_MISMATCHED.create(index, found);
+		}
 	}
 
 	private ChromosomeLibCommand() {
