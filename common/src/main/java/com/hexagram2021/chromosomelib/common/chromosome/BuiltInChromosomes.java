@@ -8,6 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 
 import java.util.Locale;
+import java.util.function.Consumer;
 
 import static com.hexagram2021.chromosomelib.ChromosomeLib.MODID;
 
@@ -41,7 +42,7 @@ public final class BuiltInChromosomes {
 			// Lazy init
 		}
 
-		static {
+		public static void registerRelations() {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.AXOLOTL, AXOLOTL_1);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.AXOLOTL, AXOLOTL_2);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.AXOLOTL, AXOLOTL_3);
@@ -56,6 +57,8 @@ public final class BuiltInChromosomes {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.AXOLOTL, AXOLOTL_12);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.AXOLOTL, AXOLOTL_13);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.AXOLOTL, AXOLOTL_XY);
+
+			RegistryRelations.registerNecessaryChromosomeTypes(AXOLOTL_XY, ChromosomeType.LEFT);
 		}
 	}
 
@@ -87,7 +90,7 @@ public final class BuiltInChromosomes {
 			// Lazy init
 		}
 
-		static {
+		public static void registerRelations() {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.BEE, BEE_1);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.BEE, BEE_2);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.BEE, BEE_3);
@@ -138,7 +141,7 @@ public final class BuiltInChromosomes {
 			// Lazy init
 		}
 
-		static {
+		public static void registerRelations() {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.CAT, CAT_1);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.CAT, CAT_2);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.CAT, CAT_3);
@@ -158,6 +161,8 @@ public final class BuiltInChromosomes {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.CAT, CAT_17);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.CAT, CAT_18);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.CAT, CAT_XY);
+
+			RegistryRelations.registerNecessaryChromosomeTypes(CAT_XY, ChromosomeType.LEFT);
 		}
 	}
 
@@ -212,7 +217,7 @@ public final class BuiltInChromosomes {
 			// Lazy init
 		}
 
-		static {
+		public static void registerRelations() {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.CHICKEN, Chicken.CHICKEN_1);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.CHICKEN, Chicken.CHICKEN_2);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.CHICKEN, Chicken.CHICKEN_3);
@@ -252,6 +257,8 @@ public final class BuiltInChromosomes {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.CHICKEN, Chicken.CHICKEN_37);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.CHICKEN, Chicken.CHICKEN_38);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.CHICKEN, Chicken.CHICKEN_ZW);
+
+			RegistryRelations.registerNecessaryChromosomeTypes(CHICKEN_ZW, ChromosomeType.LEFT);
 		}
 	}
 
@@ -297,7 +304,7 @@ public final class BuiltInChromosomes {
 			// Lazy init
 		}
 
-		static {
+		public static void registerRelations() {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.COW, COW_1);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.COW, COW_2);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.COW, COW_3);
@@ -328,6 +335,8 @@ public final class BuiltInChromosomes {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.COW, COW_28);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.COW, COW_29);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.COW, COW_XY);
+
+			RegistryRelations.registerNecessaryChromosomeTypes(COW_XY, ChromosomeType.LEFT);
 		}
 	}
 
@@ -374,7 +383,7 @@ public final class BuiltInChromosomes {
 			// Lazy init
 		}
 
-		static {
+		public static void registerRelations() {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.DONKEY, DONKEY_1);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.DONKEY, DONKEY_2);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.DONKEY, DONKEY_3);
@@ -406,6 +415,8 @@ public final class BuiltInChromosomes {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.DONKEY, DONKEY_29);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.DONKEY, DONKEY_30);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.DONKEY, DONKEY_XY);
+
+			RegistryRelations.registerNecessaryChromosomeTypes(DONKEY_XY, ChromosomeType.LEFT);
 		}
 	}
 
@@ -438,7 +449,7 @@ public final class BuiltInChromosomes {
 			// Lazy init
 		}
 
-		static {
+		public static void registerRelations() {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.FOX, FOX_1);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.FOX, FOX_2);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.FOX, FOX_3);
@@ -456,6 +467,8 @@ public final class BuiltInChromosomes {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.FOX, FOX_15);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.FOX, FOX_16);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.FOX, FOX_XY);
+
+			RegistryRelations.registerNecessaryChromosomeTypes(FOX_XY, ChromosomeType.LEFT);
 		}
 	}
 
@@ -484,7 +497,7 @@ public final class BuiltInChromosomes {
 			// Lazy init
 		}
 
-		static {
+		public static void registerRelations() {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.FROG, FROG_1);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.FROG, FROG_2);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.FROG, FROG_3);
@@ -498,6 +511,8 @@ public final class BuiltInChromosomes {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.FROG, FROG_11);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.FROG, FROG_12);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.FROG, FROG_XY);
+
+			RegistryRelations.registerNecessaryChromosomeTypes(FROG_XY, ChromosomeType.LEFT);
 		}
 	}
 
@@ -543,7 +558,7 @@ public final class BuiltInChromosomes {
 			// Lazy init
 		}
 
-		static {
+		public static void registerRelations() {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.GOAT, GOAT_1);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.GOAT, GOAT_2);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.GOAT, GOAT_3);
@@ -574,6 +589,8 @@ public final class BuiltInChromosomes {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.GOAT, GOAT_28);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.GOAT, GOAT_29);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.GOAT, GOAT_XY);
+
+			RegistryRelations.registerNecessaryChromosomeTypes(GOAT_XY, ChromosomeType.LEFT);
 		}
 	}
 
@@ -621,7 +638,7 @@ public final class BuiltInChromosomes {
 			// Lazy init
 		}
 
-		static {
+		public static void registerRelations() {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.HORSE, HORSE_1);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.HORSE, HORSE_2);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.HORSE, HORSE_3);
@@ -654,6 +671,8 @@ public final class BuiltInChromosomes {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.HORSE, HORSE_30);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.HORSE, HORSE_31);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.HORSE, HORSE_XY);
+
+			RegistryRelations.registerNecessaryChromosomeTypes(HORSE_XY, ChromosomeType.LEFT);
 		}
 	}
 
@@ -692,7 +711,7 @@ public final class BuiltInChromosomes {
 			// Lazy init
 		}
 
-		static {
+		public static void registerRelations() {
 			RegistryRelations.registerEntityTypeTag2Chromosome(CLEntityTypeTags.HUMANS, HUMAN_1);
 			RegistryRelations.registerEntityTypeTag2Chromosome(CLEntityTypeTags.HUMANS, HUMAN_2);
 			RegistryRelations.registerEntityTypeTag2Chromosome(CLEntityTypeTags.HUMANS, HUMAN_3);
@@ -716,6 +735,8 @@ public final class BuiltInChromosomes {
 			RegistryRelations.registerEntityTypeTag2Chromosome(CLEntityTypeTags.HUMANS, HUMAN_21);
 			RegistryRelations.registerEntityTypeTag2Chromosome(CLEntityTypeTags.HUMANS, HUMAN_22);
 			RegistryRelations.registerEntityTypeTag2Chromosome(CLEntityTypeTags.HUMANS, HUMAN_XY);
+
+			RegistryRelations.registerNecessaryChromosomeTypes(HUMAN_XY, ChromosomeType.LEFT);
 		}
 	}
 
@@ -730,7 +751,7 @@ public final class BuiltInChromosomes {
 			// Lazy init
 		}
 
-		static {
+		public static void registerRelations() {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.MULE, Donkey.DONKEY_1);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.MULE, Donkey.DONKEY_2);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.MULE, Donkey.DONKEY_3);
@@ -828,7 +849,7 @@ public final class BuiltInChromosomes {
 			// Lazy init
 		}
 
-		static {
+		public static void registerRelations() {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.OCELOT, OCELOT_1);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.OCELOT, OCELOT_2);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.OCELOT, OCELOT_3);
@@ -847,6 +868,8 @@ public final class BuiltInChromosomes {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.OCELOT, OCELOT_16);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.OCELOT, OCELOT_17);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.OCELOT, OCELOT_XY);
+
+			RegistryRelations.registerNecessaryChromosomeTypes(OCELOT_XY, ChromosomeType.LEFT);
 		}
 	}
 
@@ -883,7 +906,7 @@ public final class BuiltInChromosomes {
 			// Lazy init
 		}
 
-		static {
+		public static void registerRelations() {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.PANDA, PANDA_1);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.PANDA, PANDA_2);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.PANDA, PANDA_3);
@@ -905,6 +928,8 @@ public final class BuiltInChromosomes {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.PANDA, PANDA_19);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.PANDA, PANDA_20);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.PANDA, PANDA_XY);
+
+			RegistryRelations.registerNecessaryChromosomeTypes(PANDA_XY, ChromosomeType.LEFT);
 		}
 	}
 
@@ -951,7 +976,7 @@ public final class BuiltInChromosomes {
 			// Lazy init
 		}
 
-		static {
+		public static void registerRelations() {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.PARROT, PARROT_1);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.PARROT, PARROT_2);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.PARROT, PARROT_3);
@@ -983,6 +1008,8 @@ public final class BuiltInChromosomes {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.PARROT, PARROT_29);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.PARROT, PARROT_30);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.PARROT, PARROT_ZW);
+
+			RegistryRelations.registerNecessaryChromosomeTypes(PARROT_ZW, ChromosomeType.LEFT);
 		}
 	}
 
@@ -1017,7 +1044,7 @@ public final class BuiltInChromosomes {
 			// Lazy init
 		}
 
-		static {
+		public static void registerRelations() {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.PIG, PIG_1);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.PIG, PIG_2);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.PIG, PIG_3);
@@ -1037,6 +1064,8 @@ public final class BuiltInChromosomes {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.PIG, PIG_17);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.PIG, PIG_18);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.PIG, PIG_XY);
+
+			RegistryRelations.registerNecessaryChromosomeTypes(PIG_XY, ChromosomeType.LEFT);
 		}
 	}
 
@@ -1089,7 +1118,7 @@ public final class BuiltInChromosomes {
 			// Lazy init
 		}
 
-		static {
+		public static void registerRelations() {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.POLAR_BEAR, POLAR_BEAR_1);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.POLAR_BEAR, POLAR_BEAR_2);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.POLAR_BEAR, POLAR_BEAR_3);
@@ -1127,6 +1156,8 @@ public final class BuiltInChromosomes {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.POLAR_BEAR, POLAR_BEAR_35);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.POLAR_BEAR, POLAR_BEAR_36);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.POLAR_BEAR, POLAR_BEAR_XY);
+
+			RegistryRelations.registerNecessaryChromosomeTypes(POLAR_BEAR_XY, ChromosomeType.LEFT);
 		}
 	}
 
@@ -1166,7 +1197,7 @@ public final class BuiltInChromosomes {
 			// Lazy init
 		}
 
-		static {
+		public static void registerRelations() {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.RABBIT, RABBIT_1);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.RABBIT, RABBIT_2);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.RABBIT, RABBIT_3);
@@ -1191,6 +1222,8 @@ public final class BuiltInChromosomes {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.RABBIT, RABBIT_22);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.RABBIT, RABBIT_23);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.RABBIT, RABBIT_XY);
+
+			RegistryRelations.registerNecessaryChromosomeTypes(RABBIT_XY, ChromosomeType.LEFT);
 		}
 	}
 
@@ -1233,7 +1266,7 @@ public final class BuiltInChromosomes {
 			// Lazy init
 		}
 
-		static {
+		public static void registerRelations() {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.SHEEP, SHEEP_1);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.SHEEP, SHEEP_2);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.SHEEP, SHEEP_3);
@@ -1261,6 +1294,8 @@ public final class BuiltInChromosomes {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.SHEEP, SHEEP_25);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.SHEEP, SHEEP_26);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.SHEEP, SHEEP_XY);
+
+			RegistryRelations.registerNecessaryChromosomeTypes(SHEEP_XY, ChromosomeType.LEFT);
 		}
 	}
 
@@ -1304,7 +1339,7 @@ public final class BuiltInChromosomes {
 			// Lazy init
 		}
 
-		static {
+		public static void registerRelations() {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.TURTLE, TURTLE_1);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.TURTLE, TURTLE_2);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.TURTLE, TURTLE_3);
@@ -1333,6 +1368,8 @@ public final class BuiltInChromosomes {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.TURTLE, TURTLE_26);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.TURTLE, TURTLE_27);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.TURTLE, TURTLE_XY);
+
+			RegistryRelations.registerNecessaryChromosomeTypes(TURTLE_XY, ChromosomeType.LEFT);
 		}
 	}
 
@@ -1342,7 +1379,7 @@ public final class BuiltInChromosomes {
 	/**
 	 * Lazy init
 	 */
-	public static void init() {
+	public static void init(Consumer<Runnable> enqueue) {
 		Axolotl.init();
 		Bee.init();
 		Cat.init();
@@ -1363,6 +1400,27 @@ public final class BuiltInChromosomes {
 		Rabbit.init();
 		Sheep.init();
 		Turtle.init();
+
+		enqueue.accept(Axolotl::registerRelations);
+		enqueue.accept(Bee::registerRelations);
+		enqueue.accept(Cat::registerRelations);
+		enqueue.accept(Chicken::registerRelations);
+		enqueue.accept(Cow::registerRelations);
+		enqueue.accept(Donkey::registerRelations);
+		enqueue.accept(Fox::registerRelations);
+		enqueue.accept(Frog::registerRelations);
+		enqueue.accept(Goat::registerRelations);
+		enqueue.accept(Horse::registerRelations);
+		enqueue.accept(Human::registerRelations);
+		enqueue.accept(Mule::registerRelations);
+		enqueue.accept(Ocelot::registerRelations);
+		enqueue.accept(Panda::registerRelations);
+		enqueue.accept(Parrot::registerRelations);
+		enqueue.accept(Pig::registerRelations);
+		enqueue.accept(PolarBear::registerRelations);
+		enqueue.accept(Rabbit::registerRelations);
+		enqueue.accept(Sheep::registerRelations);
+		enqueue.accept(Turtle::registerRelations);
 	}
 
 	private static Holder<Chromosome> register(String name, int index) {

@@ -26,7 +26,7 @@ public class ChromosomeLibFabric implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		// mod initialization
-		BuiltInChromosomes.init();
+		BuiltInChromosomes.init(Runnable::run);
 
 		CommonLifecycleEvents.TAGS_LOADED.register((registries, client) -> RegistryRelations.freezeAndBuild());
 

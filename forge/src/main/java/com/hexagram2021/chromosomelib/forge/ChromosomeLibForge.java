@@ -11,15 +11,21 @@ import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.TagsUpdatedEvent;
 import net.minecraftforge.event.entity.living.BabyEntitySpawnEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.DeferredWorkQueue;
+import net.minecraftforge.fml.ModLoadingContext;
+import net.minecraftforge.fml.ModLoadingStage;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.NewRegistryEvent;
 import net.minecraftforge.registries.RegistryBuilder;
 
+import java.util.Optional;
+
 @Mod(ChromosomeLib.MODID)
 public class ChromosomeLibForge {
 	public ChromosomeLibForge() {
-		BuiltInChromosomes.init();
+		DeferredWorkQueue queue = DeferredWorkQueue.lookup(Optional.of(ModLoadingStage.CONSTRUCT)).orElseThrow();
+		BuiltInChromosomes.init(runnable -> queue.enqueueWork(ModLoadingContext.get().getActiveContainer(), runnable));
 
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onRegistryCreate);
 
