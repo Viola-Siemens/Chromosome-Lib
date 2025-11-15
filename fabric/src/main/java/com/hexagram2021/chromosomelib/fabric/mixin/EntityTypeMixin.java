@@ -1,4 +1,4 @@
-package com.hexagram2021.chromosomelib.mixin;
+package com.hexagram2021.chromosomelib.fabric.mixin;
 
 import com.hexagram2021.chromosomelib.common.chromosome.Chromosome;
 import com.hexagram2021.chromosomelib.common.entity.type.IChromosomeLibEntityType;
