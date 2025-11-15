@@ -24,6 +24,7 @@ public class ChromosomeLibForge {
 
 		IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
 		modBus.addListener(this::onRegistryCreate);
+		ForgePlatformHelper.register(modBus);
 
 		MinecraftForge.EVENT_BUS.register(this);
 	}

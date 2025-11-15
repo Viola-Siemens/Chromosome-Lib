@@ -21,6 +21,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import org.jetbrains.annotations.ApiStatus;
 
@@ -97,5 +98,13 @@ public class ForgePlatformHelper implements IPlatformHelper {
 	public void solveAfterAssigningTrait(LivingEntity livingEntity, Map<Holder<TraitType>, Holder<Trait>> map, Predicate<Holder<Trait>> hasTrait) {
 		SolveAfterAssigningTraitEvent event = new SolveAfterAssigningTraitEvent(livingEntity, map, hasTrait);
 		MinecraftForge.EVENT_BUS.post(event);
+	}
+
+	static void register(IEventBus bus) {
+		CHROMOSOME_REGISTERS.values().forEach(bus::register);
+		GENE_LOCI_REGISTERS.values().forEach(bus::register);
+		GENE_REGISTERS.values().forEach(bus::register);
+		TRAIT_REGISTERS.values().forEach(bus::register);
+		TRAIT_TYPE_REGISTERS.values().forEach(bus::register);
 	}
 }
