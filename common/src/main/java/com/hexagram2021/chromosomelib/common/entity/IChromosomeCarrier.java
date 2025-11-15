@@ -1,5 +1,6 @@
 package com.hexagram2021.chromosomelib.common.entity;
 
+import com.hexagram2021.chromosomelib.common.chromosome.Chromosome;
 import com.hexagram2021.chromosomelib.common.chromosome.ChromosomeInstance;
 import com.hexagram2021.chromosomelib.common.chromosome.ChromosomeType;
 import com.hexagram2021.chromosomelib.common.entity.type.IChromosomeLibEntityType;
@@ -56,11 +57,12 @@ public interface IChromosomeCarrier {
 					int ploidy = this.chromosomelib$getPloidy();
 					ChromosomeInstance instance = null;
 					for(int i = 0; i < ploidy; ++i) {
-						instance = ChromosomeInstance.of(
-								chromosome,
-								context.random().nextBoolean() ? ChromosomeType.LEFT : ChromosomeType.RIGHT,
-								context.withLast(instance)
-						);
+						//TODO: Only male and female can breed? Now we regard it as bimaternal reproduction.
+						ChromosomeType type = Chromosome.getNecessaryChromosomeType(chromosome);
+						if(type == null) {
+							type = context.random().nextBoolean() ? ChromosomeType.LEFT : ChromosomeType.RIGHT;
+						}
+						instance = ChromosomeInstance.of(chromosome, type, context.withLast(instance));
 						consumer.accept(instance);
 					}
 				}).toList();

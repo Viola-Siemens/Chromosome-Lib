@@ -52,6 +52,7 @@ public final class RegistryRelations {
 
 	private static final Object2IntMap<RemapKey> chromosomeIndexRemapper = new Object2IntOpenHashMap<>();
 	private static final Object2IntMap<RemapTagKey> taggedChromosomeIndexRemapper = new Object2IntOpenHashMap<>();
+	private static final ImmutableMap.Builder<Holder<Chromosome>, ChromosomeType> necessaryChromosomeTypes = ImmutableMap.builder();
 
 	private static int countEntityType2Chromosome = 0;
 	private static int countChromosome2GeneLocus = 0;
@@ -220,6 +221,21 @@ public final class RegistryRelations {
 		geneFrequency.put(geneLocus, entries.build());
 	}
 
+	/**
+	 * Register a necessary chromosome type of chromosome of a diploid.
+	 * <p>For example, X is necessary in XX/XY system, while Z is necessary in ZZ/ZW system.
+	 */
+	public static void registerNecessaryChromosomeTypes(Holder<Chromosome> chromosome, ChromosomeType chromosomeType) {
+		if(isFrozen) {
+			throw new IllegalStateException("Relations registry is already frozen!");
+		}
+		try {
+			necessaryChromosomeTypes.put(chromosome, chromosomeType);
+		} catch (ConcurrentModificationException | IndexOutOfBoundsException e) {
+			throw new RegistryConcurrentModificationException(RegistryRelations.class.getName(), "necessaryChromosomeTypes", "Map", e);
+		}
+	}
+
 	@ApiStatus.Internal
 	@SuppressWarnings("unchecked")
 	public static void freezeAndBuild() {
@@ -238,6 +254,8 @@ public final class RegistryRelations {
 		buildEntityType2TraitRelations(entityTypeRegistry);
 
 		checkGeneFrequencyLists(geneLocusRegistry);
+
+		Chromosome.setNecessaryChromosomeTypes(necessaryChromosomeTypes.build());
 
 		buildTraitType2TraitsReversedRelations(traitRegistry);
 

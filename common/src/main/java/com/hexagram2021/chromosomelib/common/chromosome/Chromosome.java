@@ -12,10 +12,18 @@ import net.minecraft.core.Holder;
 import net.minecraft.world.entity.EntityType;
 import org.jetbrains.annotations.ApiStatus;
 
+import javax.annotation.Nullable;
 import java.util.Comparator;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Chromosome {
+	/**
+	 * The necessary chromosome type of each chromosome.
+	 * @see com.hexagram2021.chromosomelib.registry.RegistryRelations#registerNecessaryChromosomeTypes
+	 */
+	private static Map<Holder<Chromosome>, ChromosomeType> necessaryChromosomeTypes = Map.of();
+
 	/**
 	 * The gene loci of the left side of this chromosome.
 	 */
@@ -53,7 +61,7 @@ public class Chromosome {
 	}
 
 	/**
-	 * @see com.hexagram2021.chromosomelib.registry.RegistryRelations#buildChromosome2GeneLocusRelations()
+	 * @see com.hexagram2021.chromosomelib.registry.RegistryRelations#buildChromosome2GeneLocusRelations
 	 * @param leftGeneLoci	left gene loci
 	 * @param rightGeneLoci	right gene loci
 	 */
@@ -86,5 +94,24 @@ public class Chromosome {
 	@ApiStatus.Internal
 	public int homoSegmentStartDiff() {
 		return this.homoSegmentStartDiff;
+	}
+
+	/**
+	 * Set necessary chromosome types.
+	 * @param necessaryChromosomeTypes	necessary chromosome types
+	 */
+	@ApiStatus.Internal
+	public static void setNecessaryChromosomeTypes(Map<Holder<Chromosome>, ChromosomeType> necessaryChromosomeTypes) {
+		Chromosome.necessaryChromosomeTypes = necessaryChromosomeTypes;
+	}
+
+	/**
+	 * Get necessary chromosome type.
+	 * @param chromosome	chromosome
+	 * @return necessary chromosome type of this chromosome. {@code null} if this chromosome has no necessary chromosome type.
+	 */
+	@Nullable
+	public static ChromosomeType getNecessaryChromosomeType(Holder<Chromosome> chromosome) {
+		return necessaryChromosomeTypes.get(chromosome);
 	}
 }
