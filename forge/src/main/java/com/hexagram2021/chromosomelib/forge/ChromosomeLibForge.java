@@ -10,7 +10,6 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.TagsUpdatedEvent;
 import net.minecraftforge.event.entity.living.BabyEntitySpawnEvent;
-import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -22,9 +21,7 @@ public class ChromosomeLibForge {
 	public ChromosomeLibForge() {
 		BuiltInChromosomes.init();
 
-		IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
-		modBus.addListener(this::onRegistryCreate);
-		ForgePlatformHelper.register(modBus);
+		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onRegistryCreate);
 
 		MinecraftForge.EVENT_BUS.register(this);
 	}

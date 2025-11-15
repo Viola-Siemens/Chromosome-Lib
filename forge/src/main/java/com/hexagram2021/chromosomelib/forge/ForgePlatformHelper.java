@@ -15,6 +15,7 @@ import com.hexagram2021.chromosomelib.platform.services.IPlatformHelper;
 import com.hexagram2021.chromosomelib.registry.AbstractRegisterEntry;
 import com.hexagram2021.chromosomelib.registry.CLRegistries;
 import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
@@ -22,6 +23,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import org.jetbrains.annotations.ApiStatus;
 
@@ -32,17 +34,17 @@ import java.util.function.Supplier;
 
 @ApiStatus.Internal
 public class ForgePlatformHelper implements IPlatformHelper {
-	private static final Map<String, DeferredRegister<Chromosome>> CHROMOSOME_REGISTERS = Maps.newHashMap();
-	private static final Map<String, DeferredRegister<GeneLocus>> GENE_LOCI_REGISTERS = Maps.newHashMap();
-	private static final Map<String, DeferredRegister<Gene>> GENE_REGISTERS = Maps.newHashMap();
-	private static final Map<String, DeferredRegister<Trait>> TRAIT_REGISTERS = Maps.newHashMap();
-	private static final Map<String, DeferredRegister<TraitType>> TRAIT_TYPE_REGISTERS = Maps.newHashMap();
+	private static final Map<String, DeferredRegister<Chromosome>> CHROMOSOME_REGISTERS = Maps.newConcurrentMap();
+	private static final Map<String, DeferredRegister<GeneLocus>> GENE_LOCI_REGISTERS = Maps.newConcurrentMap();
+	private static final Map<String, DeferredRegister<Gene>> GENE_REGISTERS = Maps.newConcurrentMap();
+	private static final Map<String, DeferredRegister<Trait>> TRAIT_REGISTERS = Maps.newConcurrentMap();
+	private static final Map<String, DeferredRegister<TraitType>> TRAIT_TYPE_REGISTERS = Maps.newConcurrentMap();
 
 	@Override
 	public AbstractRegisterEntry<Chromosome> registerChromosome(ResourceLocation id, Supplier<Chromosome> chromosome) {
 		return new ForgeRegisterEntry<>(
 				CHROMOSOME_REGISTERS
-						.computeIfAbsent(id.getNamespace(), namespace -> DeferredRegister.create(CLRegistries.CHROMOSOMES, namespace))
+						.computeIfAbsent(id.getNamespace(), namespace -> create(CLRegistries.CHROMOSOMES, namespace))
 						.register(id.getPath(), chromosome),
 				ResourceKey.create(CLRegistries.CHROMOSOMES, id)
 		);
@@ -52,7 +54,7 @@ public class ForgePlatformHelper implements IPlatformHelper {
 	public AbstractRegisterEntry<GeneLocus> registerGeneLocus(ResourceLocation id, Supplier<GeneLocus> geneLocus) {
 		return new ForgeRegisterEntry<>(
 				GENE_LOCI_REGISTERS
-						.computeIfAbsent(id.getNamespace(), namespace -> DeferredRegister.create(CLRegistries.GENE_LOCI, namespace))
+						.computeIfAbsent(id.getNamespace(), namespace -> create(CLRegistries.GENE_LOCI, namespace))
 						.register(id.getPath(), geneLocus),
 				ResourceKey.create(CLRegistries.GENE_LOCI, id)
 		);
@@ -62,7 +64,7 @@ public class ForgePlatformHelper implements IPlatformHelper {
 	public AbstractRegisterEntry<Gene> registerGene(ResourceLocation id, Supplier<Gene> gene) {
 		return new ForgeRegisterEntry<>(
 				GENE_REGISTERS
-						.computeIfAbsent(id.getNamespace(), namespace -> DeferredRegister.create(CLRegistries.GENES, namespace))
+						.computeIfAbsent(id.getNamespace(), namespace -> create(CLRegistries.GENES, namespace))
 						.register(id.getPath(), gene),
 				ResourceKey.create(CLRegistries.GENES, id)
 		);
@@ -72,7 +74,7 @@ public class ForgePlatformHelper implements IPlatformHelper {
 	public AbstractRegisterEntry<Trait> registerTrait(ResourceLocation id, Supplier<Trait> trait) {
 		return new ForgeRegisterEntry<>(
 				TRAIT_REGISTERS
-						.computeIfAbsent(id.getNamespace(), namespace -> DeferredRegister.create(CLRegistries.TRAITS, namespace))
+						.computeIfAbsent(id.getNamespace(), namespace -> create(CLRegistries.TRAITS, namespace))
 						.register(id.getPath(), trait),
 				ResourceKey.create(CLRegistries.TRAITS, id)
 		);
@@ -82,7 +84,7 @@ public class ForgePlatformHelper implements IPlatformHelper {
 	public AbstractRegisterEntry<TraitType> registerTraitType(ResourceLocation id, Supplier<TraitType> traitType) {
 		return new ForgeRegisterEntry<>(
 				TRAIT_TYPE_REGISTERS
-						.computeIfAbsent(id.getNamespace(), namespace -> DeferredRegister.create(CLRegistries.TRAIT_TYPES, namespace))
+						.computeIfAbsent(id.getNamespace(), namespace -> create(CLRegistries.TRAIT_TYPES, namespace))
 						.register(id.getPath(), traitType),
 				ResourceKey.create(CLRegistries.TRAIT_TYPES, id)
 		);
@@ -100,11 +102,10 @@ public class ForgePlatformHelper implements IPlatformHelper {
 		MinecraftForge.EVENT_BUS.post(event);
 	}
 
-	static void register(IEventBus bus) {
-		CHROMOSOME_REGISTERS.values().forEach(bus::register);
-		GENE_LOCI_REGISTERS.values().forEach(bus::register);
-		GENE_REGISTERS.values().forEach(bus::register);
-		TRAIT_REGISTERS.values().forEach(bus::register);
-		TRAIT_TYPE_REGISTERS.values().forEach(bus::register);
+	private static final IEventBus MOD_BUS = FMLJavaModLoadingContext.get().getModEventBus();
+	private static <T> DeferredRegister<T> create(ResourceKey<? extends Registry<T>> key, String modid) {
+		DeferredRegister<T> ret = DeferredRegister.create(key, modid);
+		ret.register(MOD_BUS);
+		return ret;
 	}
 }
