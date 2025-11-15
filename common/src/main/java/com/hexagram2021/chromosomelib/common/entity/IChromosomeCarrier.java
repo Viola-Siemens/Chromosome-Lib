@@ -78,4 +78,9 @@ public interface IChromosomeCarrier {
 	 * Mark isTraitsSolved flag to false.
 	 */
 	void chromosomelib$resetTraits();
+
+	/**
+	 * Check if isTraitsSolve flag is true.
+	 */
+	boolean chromosomelib$isTraitsSolved();
 }

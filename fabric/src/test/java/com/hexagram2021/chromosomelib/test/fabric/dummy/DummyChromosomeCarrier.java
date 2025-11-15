@@ -73,4 +73,9 @@ public class DummyChromosomeCarrier implements IChromosomeCarrier {
 	public void chromosomelib$resetTraits() {
 		// Do nothing
 	}
+
+	@Override
+	public boolean chromosomelib$isTraitsSolved() {
+		return true;
+	}
 }

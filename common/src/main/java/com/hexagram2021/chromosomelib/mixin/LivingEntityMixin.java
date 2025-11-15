@@ -50,11 +50,11 @@ public abstract class LivingEntityMixin implements IChromosomeCarrier {
 		this.chromosomelib$chromosomes = Lists.newArrayList();
 		this.chromosomelib$activeGenes = AbstractRegisterEntry.newHolderObject2IntTreeMap();
 		this.chromosomelib$activeTraits = AbstractRegisterEntry.newHolderTreeMap();
+		this.chromosomelib$isTraitsSolved = false;
 		this.chromosomelib$setChromosomes(this.chromosomelib$buildDefaultChromosomes(
 				(IChromosomeLibEntityType)((LivingEntity)(Object)this).getType(),
 				IWeightedGeneList.Context.of(this.getRandom())
 		));
-		this.chromosomelib$isTraitsSolved = false;
 	}
 
 	@Inject(method = "addAdditionalSaveData", at = @At(value = "HEAD"))
@@ -111,5 +111,10 @@ public abstract class LivingEntityMixin implements IChromosomeCarrier {
 	@Override
 	public void chromosomelib$resetTraits() {
 		this.chromosomelib$isTraitsSolved = false;
+	}
+
+	@Override
+	public boolean chromosomelib$isTraitsSolved() {
+		return this.chromosomelib$isTraitsSolved;
 	}
 }

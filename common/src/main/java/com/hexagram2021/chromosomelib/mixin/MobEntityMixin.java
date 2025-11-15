@@ -31,6 +31,8 @@ public abstract class MobEntityMixin implements IChromosomeCarrier {
 					(IChromosomeLibEntityType) current.getType(),
 					IWeightedGeneList.Context.of(level, current.blockPosition(), current.getRandom())
 			));
+		} else if(!this.chromosomelib$isTraitsSolved()) {
+			this.chromosomelib$assignTraits();
 		}
 	}
 }
