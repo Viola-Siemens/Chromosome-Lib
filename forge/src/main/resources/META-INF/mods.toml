@@ -24,9 +24,3 @@ issueTrackerURL="${issue_tracker_url}"
     versionRange = "${minecraft_version_range}"
     ordering = "NONE"
     side = "BOTH"
-[[dependencies.${mod_id}]]
-    modId = "mixinextras"
-    mandatory = true
-    versionRange = "[0.3,)"
-    ordering = "NONE"
-    side = "BOTH"
