@@ -10,11 +10,31 @@ import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 
+/**
+ * Registry keys for all custom registries in Chromosome Lib.
+ *
+ * @author liudongyu
+ */
 public final class CLRegistries {
+	/**
+	 * Registry key for chromosomes.
+	 */
 	public static final ResourceKey<Registry<Chromosome>> CHROMOSOMES = ResourceKey.createRegistryKey(new ResourceLocation(ChromosomeLib.MODID, "chromosomes"));
+	/**
+	 * Registry key for gene loci.
+	 */
 	public static final ResourceKey<Registry<GeneLocus>> GENE_LOCI = ResourceKey.createRegistryKey(new ResourceLocation(ChromosomeLib.MODID, "gene_loci"));
+	/**
+	 * Registry key for genes.
+	 */
 	public static final ResourceKey<Registry<Gene>> GENES = ResourceKey.createRegistryKey(new ResourceLocation(ChromosomeLib.MODID, "genes"));
+	/**
+	 * Registry key for traits.
+	 */
 	public static final ResourceKey<Registry<Trait>> TRAITS = ResourceKey.createRegistryKey(new ResourceLocation(ChromosomeLib.MODID, "traits"));
+	/**
+	 * Registry key for trait types.
+	 */
 	public static final ResourceKey<Registry<TraitType>> TRAIT_TYPES = ResourceKey.createRegistryKey(new ResourceLocation(ChromosomeLib.MODID, "trait_types"));
 
 	private CLRegistries() {

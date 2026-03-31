@@ -5,12 +5,25 @@ import net.minecraft.util.StringRepresentable;
 
 import java.util.Locale;
 
+/**
+ * Represents the type of chromosome (left or right side). <br/>
+ * LEFT corresponds to X or Z chromosomes, RIGHT corresponds to Y or W chromosomes.
+ *
+ * @author liudongyu
+ */
 public enum ChromosomeType implements StringRepresentable {
-	// only in X or Z
+	/**
+	 * Only in X or Z chromosome.
+	 */
 	LEFT,
-	// only in Y or W
+	/**
+	 * Only in Y or W chromosome.
+	 */
 	RIGHT;
 
+	/**
+	 * Codec for serializing and deserializing chromosome types.
+	 */
 	public static final Codec<ChromosomeType> CODEC = StringRepresentable.fromEnum(ChromosomeType::values);
 
 	@Override

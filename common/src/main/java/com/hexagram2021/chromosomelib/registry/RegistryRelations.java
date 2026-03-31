@@ -34,29 +34,79 @@ import java.util.stream.Collectors;
 /**
  * This class is used to register relations between registries.
  * Please ONLY call these APIs in main thread to avoid {@code ConcurrentModificationException}!
+ *
+ * @author liudongyu
  */
 @SuppressWarnings("UnstableApiUsage")
 public final class RegistryRelations {
+	/**
+	 * Flag indicating if the registry is frozen (no more registrations allowed).
+	 */
 	private static boolean isFrozen = false;
 
+	/**
+	 * Map from entity type to chromosome list builders.
+	 */
 	private static final Map<EntityType<?>, ImmutableList.Builder<Holder<Chromosome>>> entityType2ChromosomeMap = Maps.newIdentityHashMap();
+	/**
+	 * Map from chromosome to gene locus list builders.
+	 */
 	private static final Map<Holder<Chromosome>, ImmutableList.Builder<Holder<GeneLocus>>> chromosome2GeneLocusMap = Maps.newIdentityHashMap();
+	/**
+	 * Map from gene locus to gene list builders.
+	 */
 	private static final Map<Holder<GeneLocus>, ImmutableList.Builder<Holder<Gene>>> geneLocus2GeneMap = Maps.newIdentityHashMap();
+	/**
+	 * Map from entity type to trait type list builders.
+	 */
 	private static final Map<EntityType<?>, ImmutableList.Builder<Holder<TraitType>>> entityType2TraitTypeMap = Maps.newIdentityHashMap();
+	/**
+	 * Map from entity type tag to chromosome list builders.
+	 */
 	private static final Map<TagKey<EntityType<?>>, ImmutableList.Builder<Holder<Chromosome>>> entityTypeTag2ChromosomeMap = Maps.newHashMap();
+	/**
+	 * Map from entity type tag to trait type list builders.
+	 */
 	private static final Map<TagKey<EntityType<?>>, ImmutableList.Builder<Holder<TraitType>>> entityTypeTag2TraitTypeMap = Maps.newHashMap();
 
+	/**
+	 * Graph builder for gene disable relationships.
+	 */
 	private static final ImmutableGraph.Builder<Holder<Gene>> disableRelations = GraphBuilder.directed().immutable();
 
+	/**
+	 * Map builder for gene frequency data.
+	 */
 	private static final ImmutableMap.Builder<Holder<GeneLocus>, IWeightedGeneList> geneFrequency = ImmutableMap.builder();
 
+	/**
+	 * Remapper for chromosome indices by entity type.
+	 */
 	private static final Object2IntMap<RemapKey> chromosomeIndexRemapper = new Object2IntOpenHashMap<>();
+	/**
+	 * Remapper for chromosome indices by entity type tag.
+	 */
 	private static final Object2IntMap<RemapTagKey> taggedChromosomeIndexRemapper = new Object2IntOpenHashMap<>();
+	/**
+	 * Map builder for necessary chromosome types.
+	 */
 	private static final ImmutableMap.Builder<Holder<Chromosome>, ChromosomeType> necessaryChromosomeTypes = ImmutableMap.builder();
 
+	/**
+	 * Counter for entity type to chromosome registrations.
+	 */
 	private static int countEntityType2Chromosome = 0;
+	/**
+	 * Counter for chromosome to gene locus registrations.
+	 */
 	private static int countChromosome2GeneLocus = 0;
+	/**
+	 * Counter for gene locus to gene registrations.
+	 */
 	private static int countGeneLocus2Gene = 0;
+	/**
+	 * Counter for entity type to trait type registrations.
+	 */
 	private static int countEntityType2Trait = 0;
 
 	private RegistryRelations() {
@@ -179,6 +229,15 @@ public final class RegistryRelations {
 		}
 	}
 
+	/**
+	 * Gets or creates a builder for the specified key in the map.
+	 *
+	 * @param map The map to get builder from
+	 * @param key The key to look up
+	 * @return The builder for the key
+	 * @param <T> The key type
+	 * @param <R> The holder type
+	 */
 	private static <T, R> ImmutableList.Builder<Holder<R>> getBuilder(Map<T, ImmutableList.Builder<Holder<R>>> map, T key) {
 		if(isFrozen) {
 			throw new IllegalStateException("Relations registry is already frozen!");
@@ -222,8 +281,11 @@ public final class RegistryRelations {
 	}
 
 	/**
-	 * Register a necessary chromosome type of chromosome of a diploid.
-	 * <p>For example, X is necessary in XX/XY system, while Z is necessary in ZZ/ZW system.
+	 * Register a necessary chromosome type of chromosome of a diploid.<br/>
+	 * For example, X is necessary in XX/XY system, while Z is necessary in ZZ/ZW system.
+	 *
+	 * @param chromosome		the chromosome
+	 * @param chromosomeType	the necessary chromosome type
 	 */
 	public static void registerNecessaryChromosomeTypes(Holder<Chromosome> chromosome, ChromosomeType chromosomeType) {
 		if(isFrozen) {
@@ -236,6 +298,10 @@ public final class RegistryRelations {
 		}
 	}
 
+	/**
+	 * Freezes the registry relations and builds all internal data structures. <br/>
+	 * This method should be called after all relations have been registered.
+	 */
 	@ApiStatus.Internal
 	@SuppressWarnings("unchecked")
 	public static void freezeAndBuild() {
@@ -265,6 +331,11 @@ public final class RegistryRelations {
 		CLLogger.info("Register successfully. Relations registry is frozen.");
 	}
 
+	/**
+	 * Checks that all gene loci have valid gene frequency data.
+	 *
+	 * @param geneLocusRegistry The gene locus registry
+	 */
 	private static void checkGeneFrequencyLists(Registry<GeneLocus> geneLocusRegistry) {
 		Set<Holder<GeneLocus>> baseline = geneLocusRegistry.holders().collect(Collectors.toCollection(AbstractRegisterEntry::newHolderTreeSet));
 		Map<Holder<GeneLocus>, IWeightedGeneList> geneFrequencyLists = geneFrequency.build();
@@ -289,6 +360,11 @@ public final class RegistryRelations {
 		GeneLocus.setGeneFrequency(geneFrequencyLists);
 	}
 
+	/**
+	 * Builds entity type to trait type relationships from registered data.
+	 *
+	 * @param entityTypeRegistry The entity type registry
+	 */
 	private static void buildEntityType2TraitRelations(Registry<EntityType<?>> entityTypeRegistry) {
 		CLLogger.info("Extracting {} EntityType tags for EntityType to Trait Type relations...", entityTypeTag2TraitTypeMap.size());
 		entityTypeTag2TraitTypeMap.forEach((tag, builder) -> {
@@ -399,6 +475,7 @@ public final class RegistryRelations {
 		ListMultimap<Holder<TraitType>, Holder<Trait>> traitType2TraitsMap = Multimaps.newListMultimap(Maps.newIdentityHashMap(), Lists::newArrayList);
 		traitRegistry.holders().forEach(traitHolder -> traitType2TraitsMap.put(traitHolder.value().getType(), traitHolder));
 		for(Holder<TraitType> traitTypeHolder: traitType2TraitsMap.keySet()) {
+			assert traitTypeHolder != null;
 			traitTypeHolder.value().setValues(HolderSet.direct(traitType2TraitsMap.get(traitTypeHolder)));
 		}
 	}

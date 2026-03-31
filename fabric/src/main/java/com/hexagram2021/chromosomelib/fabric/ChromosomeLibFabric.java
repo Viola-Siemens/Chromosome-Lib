@@ -16,6 +16,11 @@ import net.fabricmc.fabric.api.event.registry.FabricRegistryBuilder;
 import net.fabricmc.fabric.api.event.registry.RegistryAttribute;
 import net.minecraft.core.MappedRegistry;
 
+/**
+ * Fabric entrypoint of ChromosomeLib.
+ *
+ * @author liudongyu
+ */
 public class ChromosomeLibFabric implements ModInitializer {
 	static final MappedRegistry<Chromosome> CHROMOSOMES = FabricRegistryBuilder.createSimple(CLRegistries.CHROMOSOMES).buildAndRegister();
 	static final MappedRegistry<GeneLocus> GENE_LOCI = FabricRegistryBuilder.createSimple(CLRegistries.GENE_LOCI).buildAndRegister();

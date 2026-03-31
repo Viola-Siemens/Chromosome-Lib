@@ -26,6 +26,11 @@ import java.util.Map;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
+/**
+ * Fabric implementation of {@link IPlatformHelper}.
+ *
+ * @author liudongyu
+ */
 @ApiStatus.Internal
 public class FabricPlatformHelper implements IPlatformHelper {
 	@Override

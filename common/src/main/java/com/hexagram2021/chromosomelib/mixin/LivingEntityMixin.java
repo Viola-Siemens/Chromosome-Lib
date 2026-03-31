@@ -29,6 +29,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.ToIntFunction;
 
+/**
+ * Mixin to {@link LivingEntity} implementing {@link IChromosomeCarrier}. <br/>
+ * Adds chromosome storage, gene expression tracking, and trait assignment functionality to living entities.
+ * Manages the lifecycle of genetic data including initialization, persistence, and trait calculation.
+ *
+ * @author liudongyu
+ */
 @SuppressWarnings({"java:S100", "java:S116", "NotNullFieldNotInitialized"})
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin implements IChromosomeCarrier {
@@ -45,6 +52,12 @@ public abstract class LivingEntityMixin implements IChromosomeCarrier {
 	@Unique
 	private boolean chromosomelib$isTraitsSolved;
 
+	/**
+	 * Initializes chromosome data structures when a living entity is constructed. <br/>
+	 * Creates empty collections for chromosomes, active genes, and traits, then builds default chromosomes.
+	 *
+	 * @param ci callback info (unused)
+	 */
 	@Inject(method = "<init>", at = @At(value = "TAIL"))
 	private void chromosomelib$initChromosomes(CallbackInfo ci) {
 		this.chromosomelib$chromosomes = Lists.newArrayList();
@@ -57,11 +70,25 @@ public abstract class LivingEntityMixin implements IChromosomeCarrier {
 		));
 	}
 
+	/**
+	 * Saves the trait-solved state when entity writes additional save data. <br/>
+	 * Stores whether traits have been assigned to prevent redundant trait calculations on reload.
+	 *
+	 * @param nbt the compound tag to write data into
+	 * @param ci callback info (unused)
+	 */
 	@Inject(method = "addAdditionalSaveData", at = @At(value = "HEAD"))
 	private void chromosomelib$saveChromosomes(CompoundTag nbt, CallbackInfo ci) {
 		nbt.putBoolean("ChromosomeLibIsTraitsSolved", this.chromosomelib$isTraitsSolved);
 	}
 
+	/**
+	 * Loads the trait-solved state when entity reads additional save data. <br/>
+	 * Restores whether traits have been assigned from disk.
+	 *
+	 * @param nbt the compound tag containing entity data
+	 * @param ci callback info (unused)
+	 */
 	@Inject(method = "readAdditionalSaveData", at = @At(value = "HEAD"))
 	private void chromosomelib$loadChromosomes(CompoundTag nbt, CallbackInfo ci) {
 		this.chromosomelib$isTraitsSolved = nbt.getBoolean("ChromosomeLibIsTraitsSolved");

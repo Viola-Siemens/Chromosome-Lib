@@ -16,15 +16,20 @@ import java.util.Set;
 
 /**
  * A gene is a unit of hereditary information.
+ *
+ * @author liudongyu
  */
 @SuppressWarnings("UnstableApiUsage")
 public class Gene {
 	/**
-	 * The relationship between genes.
-	 * <p> Assert: this graph is a directed acyclic graph.
+	 * The relationship between genes.<br/>
+	 * Assert: this graph is a directed acyclic graph.
 	 */
 	private static ImmutableGraph<Holder<Gene>> disableRelationship = GraphBuilder.directed().<Holder<Gene>>immutable().build();
 
+	/**
+	 * Comparator for sorting genes by topological order and code.
+	 */
 	public static final Comparator<Holder<Gene>> COMPARATOR = Comparator
 			.<Holder<Gene>>comparingInt(holder -> holder.value().topologicalOrder)
 			.thenComparing(holder -> holder.value().code());
@@ -37,13 +42,22 @@ public class Gene {
 	public Holder<GeneLocus> geneLocus = null;
 
 	/**
+	 * The topological order of this gene.
 	 * @see com.hexagram2021.chromosomelib.registry.RegistryRelations#buildGeneTopologicalOrder
 	 */
 	@ApiStatus.Internal
 	public int topologicalOrder = -1;
 
+	/**
+	 * The code of this gene.
+	 */
 	private final String code;
 
+	/**
+	 * Constructs a gene with the specified code.
+	 *
+	 * @param code The unique code for this gene
+	 */
 	public Gene(String code) {
 		this.code = code;
 	}
@@ -61,12 +75,12 @@ public class Gene {
 	 *
 	 * @see com.hexagram2021.chromosomelib.common.util.Mappers#convertChromosomeInstancesToExpressingGenes
 	 * @see Gene#doDisable
-	 * @deprecated I don't think you need this lol.
+	 * @deprecated I don't think you need this API lol.
 	 * @param gene1	the first gene, probably the dominant gene
 	 * @param gene2	the second gene, probably the recessive gene
 	 * @return {@code true} if two genes are connected, {@code false} otherwise
 	 */
-	@Deprecated
+	@Deprecated(since = "0.1.0")
 	public static boolean isConnected(Holder<Gene> gene1, Holder<Gene> gene2) {
 		Queue<Holder<Gene>> queue = Queues.newArrayDeque();
 		queue.add(gene1);
@@ -104,6 +118,11 @@ public class Gene {
 		}
 	}
 
+	/**
+	 * Sets the gene disable relationship graph.
+	 *
+	 * @param disableRelationship The directed acyclic graph representing gene disable relationships
+	 */
 	@ApiStatus.Internal
 	public static void setDisableRelationship(ImmutableGraph<Holder<Gene>> disableRelationship) {
 		Gene.disableRelationship = disableRelationship;

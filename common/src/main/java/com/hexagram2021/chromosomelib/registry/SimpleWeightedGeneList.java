@@ -10,10 +10,21 @@ import java.util.stream.Stream;
 
 /**
  * Simple implementation of weighted gene list.
+ *
+ * @author liudongyu
  */
 public class SimpleWeightedGeneList implements IWeightedGeneList {
+	/**
+	 * The list of entries.
+	 */
 	protected final ImmutableList<Entry> entries;
+	/**
+	 * Prefix sums of weights for random selection.
+	 */
 	protected final IntList weightPrefixSums;
+	/**
+	 * Total weight of all entries.
+	 */
 	protected final int totalWeight;
 
 	protected SimpleWeightedGeneList(ImmutableList<Entry> entries) {
@@ -51,6 +62,11 @@ public class SimpleWeightedGeneList implements IWeightedGeneList {
 		return new Builder();
 	}
 
+	/**
+	 * Builder for SimpleWeightedGeneList.
+	 *
+	 * @author liudongyu
+	 */
 	public static class Builder extends IWeightedGeneList.Builder {
 		@Override
 		SimpleWeightedGeneList build() {

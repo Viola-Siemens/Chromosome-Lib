@@ -17,9 +17,27 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Collection;
 
+/**
+ * Mixin to {@link Mob} for handling chromosome initialization during spawn finalization. <br/>
+ * Ensures that mobs spawned in the world (not loaded from disk) receive proper chromosomes and traits
+ * based on spawn location and context.
+ *
+ * @author liudongyu
+ */
 @SuppressWarnings("java:S100")
 @Mixin(Mob.class)
 public abstract class MobEntityMixin implements IChromosomeCarrier {
+	/**
+	 * Finalizes chromosome assignment when a mob spawns into the world. <br/>
+	 * Builds location-based chromosomes for newly spawned mobs, or assigns traits to loaded mobs.
+	 *
+	 * @param level the server level accessor
+	 * @param difficulty the difficulty instance at spawn location
+	 * @param reason the spawn type (natural, spawner, etc.)
+	 * @param spawnData the spawn group data
+	 * @param dataTag additional data tag (may be null)
+	 * @param cir callback info returnable (unused)
+	 */
 	@Inject(method = "finalizeSpawn", at = @At(value = "TAIL"))
 	private void chromosomelib$finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType reason, SpawnGroupData spawnData,
 											 CompoundTag dataTag, CallbackInfoReturnable<SpawnGroupData> cir) {

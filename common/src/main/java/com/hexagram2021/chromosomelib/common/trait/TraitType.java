@@ -8,6 +8,8 @@ import java.util.Comparator;
 
 /**
  * Trait type.
+ *
+ * @author liudongyu
  */
 public interface TraitType {
 	/**

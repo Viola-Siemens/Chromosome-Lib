@@ -14,6 +14,12 @@ import java.util.Collection;
 import java.util.List;
 import java.util.function.ToIntFunction;
 
+/**
+ * Interface for entities that can carry chromosomes and express traits. <br/>
+ * Typically implemented via Mixin on LivingEntity or specific entity types.
+ *
+ * @author liudongyu
+ */
 @SuppressWarnings("java:S100")
 public interface IChromosomeCarrier {
 	/**
@@ -82,7 +88,9 @@ public interface IChromosomeCarrier {
 	void chromosomelib$resetTraits();
 
 	/**
-	 * Check if isTraitsSolve flag is true.
+	 * Check if isTraitsSolved flag is true.
+	 *
+	 * @return true if traits have been solved, false otherwise
 	 */
 	boolean chromosomelib$isTraitsSolved();
 }

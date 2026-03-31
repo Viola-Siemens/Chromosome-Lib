@@ -15,6 +15,8 @@ import java.util.stream.Stream;
 
 /**
  * Biome-specific weighted gene list.
+ *
+ * @author liudongyu
  */
 public class BiomeSpecificWeightedGeneList implements IWeightedGeneList {
 	/**
@@ -107,6 +109,7 @@ public class BiomeSpecificWeightedGeneList implements IWeightedGeneList {
 		private final WeightedGeneListFactory factory;
 
 		/**
+		 * Create a builder.
 		 * @param factory	factory for creating a weighted gene list
 		 */
 		public Builder(WeightedGeneListFactory factory) {

@@ -8,9 +8,19 @@ import net.minecraft.world.entity.LivingEntity;
 import javax.annotation.Nullable;
 import java.util.Collection;
 
+/**
+ * Common event handlers for chromosome breeding and genetic operations.
+ *
+ * @author liudongyu
+ */
 public final class CLCommonEvents {
 	/**
-	 * Called when two entities is breeding.
+	 * Called when two entities are breeding. Handles genetic crossover, breeding, mutation, and trait assignment for the offspring.
+	 *
+	 * @param parentA The first parent entity
+	 * @param parentB The second parent entity
+	 * @param child The offspring entity (can be null)
+	 * @return true if breeding was successful, false if child is null
 	 */
 	@SuppressWarnings("java:S1854")
 	public static boolean onEntityBreed(LivingEntity parentA, LivingEntity parentB, @Nullable LivingEntity child) {

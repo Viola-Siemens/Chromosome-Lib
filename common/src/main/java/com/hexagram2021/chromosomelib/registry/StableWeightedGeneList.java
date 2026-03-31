@@ -6,6 +6,8 @@ import net.minecraft.core.Holder;
 
 /**
  * This list simulates the fact that homozygotes are more common in nature for some species.
+ *
+ * @author liudongyu
  */
 public class StableWeightedGeneList extends SimpleWeightedGeneList {
 	/**
@@ -37,7 +39,15 @@ public class StableWeightedGeneList extends SimpleWeightedGeneList {
 		return new Builder();
 	}
 
+	/**
+	 * Builder for StableWeightedGeneList.
+	 *
+	 * @author liudongyu
+	 */
 	public static class Builder extends IWeightedGeneList.Builder {
+		/**
+		 * Possibility for stable gene selection (defaults to 0.25).
+		 */
 		private double possibilityOfStable = 0.25D;
 
 		@Override
@@ -45,6 +55,12 @@ public class StableWeightedGeneList extends SimpleWeightedGeneList {
 			return new StableWeightedGeneList(this.possibilityOfStable, this.shadowed.build());
 		}
 
+		/**
+		 * Sets the possibility of stable gene selection.
+		 *
+		 * @param possibilityOfStable The possibility value
+		 * @return This builder
+		 */
 		public Builder possibilityOfStable(double possibilityOfStable) {
 			this.possibilityOfStable = possibilityOfStable;
 			return this;

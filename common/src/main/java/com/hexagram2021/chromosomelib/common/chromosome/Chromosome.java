@@ -17,6 +17,12 @@ import java.util.Comparator;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * Represents a chromosome definition in the genetic system. <br/>
+ * Each chromosome contains multiple gene loci and determines specific traits of entities.
+ *
+ * @author liudongyu
+ */
 public class Chromosome {
 	/**
 	 * The necessary chromosome type of each chromosome.
@@ -33,19 +39,45 @@ public class Chromosome {
 	 */
 	private Int2ObjectMap<Holder<GeneLocus>> rightGeneLoci = Int2ObjectMaps.emptyMap();
 
+	/**
+	 * The index of this chromosome within entity's chromosome set.
+	 */
 	private final int index;
 
+	/**
+	 * The starting position difference of the homologous segment (leftIndex - rightIndex).
+	 */
 	private int homoSegmentStartDiff = 0;
+	/**
+	 * The count of homologous gene loci in the homologous segment.
+	 */
 	private int homoCount = 0;
 
+	/**
+	 * Constructs a chromosome with the specified index.
+	 *
+	 * @param index The index of this chromosome
+	 */
 	public Chromosome(int index) {
 		this.index = index;
 	}
 
+	/**
+	 * Gets the index of this chromosome.
+	 *
+	 * @return The chromosome index
+	 */
 	public int index() {
 		return this.index;
 	}
 
+	/**
+	 * Gets the index of a chromosome holder for a specific entity type.
+	 *
+	 * @param chromosome The chromosome holder
+	 * @param entityType The entity type
+	 * @return The chromosome index
+	 */
 	public static int index(Holder<Chromosome> chromosome, EntityType<?> entityType) {
 		if(entityType instanceof IChromosomeLibEntityType chromosomeLibEntityType) {
 			return chromosomeLibEntityType.chromosomelib$getChromosomeIndex(chromosome);
@@ -53,6 +85,12 @@ public class Chromosome {
 		return chromosome.value().index();
 	}
 
+	/**
+	 * Gets the gene loci map for the specified chromosome type (left or right).
+	 *
+	 * @param type The chromosome type
+	 * @return The gene loci map indexed by position
+	 */
 	public Int2ObjectMap<Holder<GeneLocus>> geneLoci(ChromosomeType type) {
 		return switch (type) {
 			case LEFT -> this.leftGeneLoci;
@@ -61,6 +99,8 @@ public class Chromosome {
 	}
 
 	/**
+	 * Maintain the homologous gene count and offset.
+	 *
 	 * @see com.hexagram2021.chromosomelib.registry.RegistryRelations#buildChromosome2GeneLocusRelations
 	 * @param leftGeneLoci	left gene loci
 	 * @param rightGeneLoci	right gene loci
@@ -89,6 +129,8 @@ public class Chromosome {
 	}
 
 	/**
+	 * Gets the offset of the homologous segment.
+	 *
 	 * @return leftIndex - rightIndex
 	 */
 	@ApiStatus.Internal

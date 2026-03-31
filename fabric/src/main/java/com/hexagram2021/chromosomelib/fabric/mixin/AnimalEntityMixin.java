@@ -11,6 +11,11 @@ import org.spongepowered.asm.mixin.injection.At;
 
 import javax.annotation.Nullable;
 
+/**
+ * Mixin to {@link Animal} for assigning genes and traits to child entity.
+ *
+ * @author liudongyu
+ */
 @SuppressWarnings("java:S100")
 @Mixin(Animal.class)
 public class AnimalEntityMixin {

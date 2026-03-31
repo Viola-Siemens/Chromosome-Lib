@@ -5,9 +5,20 @@ import com.hexagram2021.chromosomelib.platform.services.IPlatformHelper;
 
 import java.util.ServiceLoader;
 
-public class Services {
+/**
+ * Services class for loading platform-specific services.
+ *
+ * @author liudongyu
+ */
+public final class Services {
 	public static final IPlatformHelper PLATFORM = load(IPlatformHelper.class);
 
+	/**
+	 * Load a service.
+	 * @param clazz	the service class
+	 * @return the loaded service
+	 * @param <T>	the service type
+	 */
 	public static <T> T load(Class<T> clazz) {
 		final T loadedService = ServiceLoader.load(clazz, clazz.getClassLoader())
 				.findFirst()

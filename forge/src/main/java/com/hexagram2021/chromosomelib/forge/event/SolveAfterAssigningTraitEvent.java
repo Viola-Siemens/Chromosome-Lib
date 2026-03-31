@@ -10,10 +10,21 @@ import net.minecraftforge.event.entity.living.LivingEvent;
 import java.util.Map;
 import java.util.function.Predicate;
 
+/**
+ * Fired after assigning traits to a living entity.
+ *
+ * @author liudongyu
+ */
 public class SolveAfterAssigningTraitEvent extends LivingEvent {
 	private final Map<Holder<TraitType>, Holder<Trait>> map;
 	private final Predicate<Holder<Trait>> hasTrait;
 
+	/**
+	 * Constructor.
+	 * @param livingEntity	The living entity.
+	 * @param map			Traits to assign.
+	 * @param hasTrait		A predicate to check whether the trait is assigned to the living entity.
+	 */
 	public SolveAfterAssigningTraitEvent(LivingEntity livingEntity, Map<Holder<TraitType>, Holder<Trait>> map, Predicate<Holder<Trait>> hasTrait) {
 		super(livingEntity);
 		this.map = map;

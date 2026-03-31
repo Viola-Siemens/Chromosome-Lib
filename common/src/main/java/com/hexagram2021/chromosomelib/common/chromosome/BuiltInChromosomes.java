@@ -14,6 +14,8 @@ import static com.hexagram2021.chromosomelib.ChromosomeLib.MODID;
 
 /**
  * Built-in chromosomes for vanilla entities.
+ *
+ * @author liudongyu
  */
 public final class BuiltInChromosomes {
 	/**
@@ -33,15 +35,22 @@ public final class BuiltInChromosomes {
 		public static final Holder<Chromosome> AXOLOTL_11 = register("axolotl_11", 11);
 		public static final Holder<Chromosome> AXOLOTL_12 = register("axolotl_12", 12);
 		public static final Holder<Chromosome> AXOLOTL_13 = register("axolotl_13", 13);
+		/** Sex Chromosomes */
 		public static final Holder<Chromosome> AXOLOTL_XY = register("axolotl_xy", 14);
 
 		private Axolotl() {
 		}
 
+		/**
+		 * Initializes the axolotl chromosomes (lazy initialization).
+		 */
 		public static void init() {
 			// Lazy init
 		}
 
+		/**
+		 * Registers the chromosome-to-entity-type relations for axolotls.
+		 */
 		public static void registerRelations() {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.AXOLOTL, AXOLOTL_1);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.AXOLOTL, AXOLOTL_2);
@@ -86,10 +95,16 @@ public final class BuiltInChromosomes {
 		private Bee() {
 		}
 
+		/**
+		 * Initializes the bee chromosomes (lazy initialization).
+		 */
 		public static void init() {
 			// Lazy init
 		}
 
+		/**
+		 * Registers the chromosome-to-entity-type relations for bees.
+		 */
 		public static void registerRelations() {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.BEE, BEE_1);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.BEE, BEE_2);
@@ -137,10 +152,16 @@ public final class BuiltInChromosomes {
 		private Cat() {
 		}
 
+		/**
+		 * Initializes the cat chromosomes (lazy initialization).
+		 */
 		public static void init() {
 			// Lazy init
 		}
 
+		/**
+		 * Registers the chromosome-to-entity-type relations for cats.
+		 */
 		public static void registerRelations() {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.CAT, CAT_1);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.CAT, CAT_2);
@@ -213,10 +234,16 @@ public final class BuiltInChromosomes {
 		private Chicken() {
 		}
 
+		/**
+		 * Initializes the chicken chromosomes (lazy initialization).
+		 */
 		public static void init() {
 			// Lazy init
 		}
 
+		/**
+		 * Registers the chromosome-to-entity-type relations for chickens.
+		 */
 		public static void registerRelations() {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.CHICKEN, Chicken.CHICKEN_1);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.CHICKEN, Chicken.CHICKEN_2);
@@ -300,10 +327,16 @@ public final class BuiltInChromosomes {
 		private Cow() {
 		}
 
+		/**
+		 * Initializes the cow chromosomes (lazy initialization).
+		 */
 		public static void init() {
 			// Lazy init
 		}
 
+		/**
+		 * Registers the chromosome-to-entity-type relations for cows.
+		 */
 		public static void registerRelations() {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.COW, COW_1);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.COW, COW_2);
@@ -379,10 +412,16 @@ public final class BuiltInChromosomes {
 		private Donkey() {
 		}
 
+		/**
+		 * Initializes the donkey chromosomes (lazy initialization).
+		 */
 		public static void init() {
 			// Lazy init
 		}
 
+		/**
+		 * Registers the chromosome-to-entity-type relations for donkeys.
+		 */
 		public static void registerRelations() {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.DONKEY, DONKEY_1);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.DONKEY, DONKEY_2);
@@ -445,10 +484,16 @@ public final class BuiltInChromosomes {
 		private Fox() {
 		}
 
+		/**
+		 * Initializes the fox chromosomes (lazy initialization).
+		 */
 		public static void init() {
 			// Lazy init
 		}
 
+		/**
+		 * Registers the chromosome-to-entity-type relations for foxes.
+		 */
 		public static void registerRelations() {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.FOX, FOX_1);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.FOX, FOX_2);
@@ -493,10 +538,16 @@ public final class BuiltInChromosomes {
 		private Frog() {
 		}
 
+		/**
+		 * Initializes the frog chromosomes (lazy initialization).
+		 */
 		public static void init() {
 			// Lazy init
 		}
 
+		/**
+		 * Registers the chromosome-to-entity-type relations for frogs.
+		 */
 		public static void registerRelations() {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.FROG, FROG_1);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.FROG, FROG_2);
@@ -554,10 +605,16 @@ public final class BuiltInChromosomes {
 		private Goat() {
 		}
 
+		/**
+		 * Initializes the goat chromosomes (lazy initialization).
+		 */
 		public static void init() {
 			// Lazy init
 		}
 
+		/**
+		 * Registers the chromosome-to-entity-type relations for goats.
+		 */
 		public static void registerRelations() {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.GOAT, GOAT_1);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.GOAT, GOAT_2);
@@ -634,10 +691,16 @@ public final class BuiltInChromosomes {
 		private Horse() {
 		}
 
+		/**
+		 * Initializes the horse chromosomes (lazy initialization).
+		 */
 		public static void init() {
 			// Lazy init
 		}
 
+		/**
+		 * Registers the chromosome-to-entity-type relations for horses.
+		 */
 		public static void registerRelations() {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.HORSE, HORSE_1);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.HORSE, HORSE_2);
@@ -707,10 +770,16 @@ public final class BuiltInChromosomes {
 		private Human() {
 		}
 
+		/**
+		 * Initializes the human chromosomes (lazy initialization).
+		 */
 		public static void init() {
 			// Lazy init
 		}
 
+		/**
+		 * Registers the chromosome-to-entity-type relations for humans.
+		 */
 		public static void registerRelations() {
 			RegistryRelations.registerEntityTypeTag2Chromosome(CLEntityTypeTags.HUMANS, HUMAN_1);
 			RegistryRelations.registerEntityTypeTag2Chromosome(CLEntityTypeTags.HUMANS, HUMAN_2);
@@ -747,10 +816,16 @@ public final class BuiltInChromosomes {
 		private Mule() {
 		}
 
+		/**
+		 * Initializes the mule chromosomes (lazy initialization).
+		 */
 		public static void init() {
 			// Lazy init
 		}
 
+		/**
+		 * Registers the chromosome-to-entity-type relations for mules.
+		 */
 		public static void registerRelations() {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.MULE, Donkey.DONKEY_1);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.MULE, Donkey.DONKEY_2);
@@ -845,10 +920,16 @@ public final class BuiltInChromosomes {
 		private Ocelot() {
 		}
 
+		/**
+		 * Initializes the ocelot chromosomes (lazy initialization).
+		 */
 		public static void init() {
 			// Lazy init
 		}
 
+		/**
+		 * Registers the chromosome-to-entity-type relations for ocelots.
+		 */
 		public static void registerRelations() {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.OCELOT, OCELOT_1);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.OCELOT, OCELOT_2);
@@ -902,10 +983,16 @@ public final class BuiltInChromosomes {
 		private Panda() {
 		}
 
+		/**
+		 * Initializes the panda chromosomes (lazy initialization).
+		 */
 		public static void init() {
 			// Lazy init
 		}
 
+		/**
+		 * Registers the chromosome-to-entity-type relations for pandas.
+		 */
 		public static void registerRelations() {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.PANDA, PANDA_1);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.PANDA, PANDA_2);
@@ -972,10 +1059,16 @@ public final class BuiltInChromosomes {
 		private Parrot() {
 		}
 
+		/**
+		 * Initializes the parrot chromosomes (lazy initialization).
+		 */
 		public static void init() {
 			// Lazy init
 		}
 
+		/**
+		 * Registers the chromosome-to-entity-type relations for parrots.
+		 */
 		public static void registerRelations() {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.PARROT, PARROT_1);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.PARROT, PARROT_2);
@@ -1040,10 +1133,16 @@ public final class BuiltInChromosomes {
 		private Pig() {
 		}
 
+		/**
+		 * Initializes the pig chromosomes (lazy initialization).
+		 */
 		public static void init() {
 			// Lazy init
 		}
 
+		/**
+		 * Registers the chromosome-to-entity-type relations for pigs.
+		 */
 		public static void registerRelations() {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.PIG, PIG_1);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.PIG, PIG_2);
@@ -1114,10 +1213,16 @@ public final class BuiltInChromosomes {
 		private PolarBear() {
 		}
 
+		/**
+		 * Initializes the polar bear chromosomes (lazy initialization).
+		 */
 		public static void init() {
 			// Lazy init
 		}
 
+		/**
+		 * Registers the chromosome-to-entity-type relations for polar bears.
+		 */
 		public static void registerRelations() {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.POLAR_BEAR, POLAR_BEAR_1);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.POLAR_BEAR, POLAR_BEAR_2);
@@ -1193,10 +1298,16 @@ public final class BuiltInChromosomes {
 		private Rabbit() {
 		}
 
+		/**
+		 * Initializes the rabbit chromosomes (lazy initialization).
+		 */
 		public static void init() {
 			// Lazy init
 		}
 
+		/**
+		 * Registers the chromosome-to-entity-type relations for rabbits.
+		 */
 		public static void registerRelations() {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.RABBIT, RABBIT_1);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.RABBIT, RABBIT_2);
@@ -1262,10 +1373,16 @@ public final class BuiltInChromosomes {
 		private Sheep() {
 		}
 
+		/**
+		 * Initializes the sheep chromosomes (lazy initialization).
+		 */
 		public static void init() {
 			// Lazy init
 		}
 
+		/**
+		 * Registers the chromosome-to-entity-type relations for sheep.
+		 */
 		public static void registerRelations() {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.SHEEP, SHEEP_1);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.SHEEP, SHEEP_2);
@@ -1335,10 +1452,16 @@ public final class BuiltInChromosomes {
 		private Turtle() {
 		}
 
+		/**
+		 * Initializes the turtle chromosomes (lazy initialization).
+		 */
 		public static void init() {
 			// Lazy init
 		}
 
+		/**
+		 * Registers the chromosome-to-entity-type relations for turtles.
+		 */
 		public static void registerRelations() {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.TURTLE, TURTLE_1);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.TURTLE, TURTLE_2);
@@ -1377,7 +1500,12 @@ public final class BuiltInChromosomes {
 	}
 
 	/**
-	 * Lazy init
+	 * Initializes all built-in chromosomes and enqueues relation registration tasks to the main thread. <br/>
+	 * This method performs lazy initialization of chromosome definitions and schedules registry operations
+	 * to avoid modifying thread-unsafe containers from mod loading threads.
+	 *
+	 * @param enqueue Task consumer that submits runnables to the main thread for execution,
+	 *                preventing concurrent modification of thread-unsafe registries
 	 */
 	public static void init(Consumer<Runnable> enqueue) {
 		Axolotl.init();

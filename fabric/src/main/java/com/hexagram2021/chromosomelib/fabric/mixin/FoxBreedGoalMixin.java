@@ -12,6 +12,11 @@ import org.spongepowered.asm.mixin.injection.At;
 
 import javax.annotation.Nullable;
 
+/**
+ * Mixin to {@link Fox.FoxBreedGoal} for assigning genes and traits to child entity.
+ *
+ * @author liudongyu
+ */
 @SuppressWarnings("java:S100")
 @Mixin(Fox.FoxBreedGoal.class)
 public class FoxBreedGoalMixin {

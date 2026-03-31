@@ -1,4 +1,7 @@
 /**
+ * Mixins for injecting chromosome system functionality into vanilla Minecraft entities. <br/>
+ * Handles chromosome persistence, initialization, and breeding behavior integration.
+ *
  * @author Liu Dongyu
  */
 @FieldsAreNonnullByDefault

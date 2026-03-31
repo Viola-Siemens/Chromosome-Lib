@@ -7,8 +7,15 @@ import net.minecraft.world.entity.EntityType;
 
 import java.util.Collection;
 
+/**
+ * Fired when an entity with unpaired chromosomes is about to breed.
+ *
+ * @author liudongyu
+ */
 public interface UnpairedChromosomesToBreedSolver {
 	/**
+	 * Called when an entity with unpaired chromosomes is about to breed.
+	 *
 	 * @param entityType			the entity type with unpaired chromosomes
 	 * @param chromosomeInstances	the chromosome instances of this entity
 	 * @param random				random source

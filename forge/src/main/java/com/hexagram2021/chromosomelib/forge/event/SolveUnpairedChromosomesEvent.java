@@ -10,6 +10,11 @@ import net.minecraftforge.eventbus.api.Event;
 
 import java.util.Collection;
 
+/**
+ * Fired when an entity with unpaired chromosomes is about to breed.
+ *
+ * @author liudongyu
+ */
 @Cancelable
 public class SolveUnpairedChromosomesEvent extends Event {
 	private final EntityType<?> entityType;
@@ -17,6 +22,13 @@ public class SolveUnpairedChromosomesEvent extends Event {
 	private final RandomSource random;
 	private final ImmutableCollection.Builder<ChromosomeInstance> builder;
 
+	/**
+	 * Constructor.
+	 * @param entityType			The entity type
+	 * @param chromosomeInstances	Chromosome instances
+	 * @param random				Random source
+	 * @param builder				New chromosome instances builder
+	 */
 	public SolveUnpairedChromosomesEvent(EntityType<?> entityType, Collection<ChromosomeInstance> chromosomeInstances,
 										 RandomSource random, ImmutableCollection.Builder<ChromosomeInstance> builder) {
 		this.entityType = entityType;

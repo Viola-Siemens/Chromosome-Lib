@@ -17,6 +17,11 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+/**
+ * Mixin to {@link EntityType} for holding chromosome and trait types. <br/>
+ *
+ * @author liudongyu
+ */
 @SuppressWarnings({"java:S100", "java:S116", "NotNullFieldNotInitialized"})
 @Mixin(EntityType.class)
 public class EntityTypeMixin implements IChromosomeLibEntityType {

@@ -6,6 +6,8 @@ import org.jetbrains.annotations.ApiStatus;
 
 /**
  * Abstract trait type.
+ *
+ * @author liudongyu
  */
 public abstract class AbstractTraitType implements TraitType {
 	/**

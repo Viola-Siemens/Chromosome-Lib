@@ -8,8 +8,15 @@ import net.minecraft.core.Holder;
 
 import java.util.Collection;
 
+/**
+ * Utility class for mapping chromosome instances to gene expressions.
+ *
+ * @author liudongyu
+ */
 public final class Mappers {
 	/**
+	 * Convert chromosome instances to gene expressions.
+	 *
 	 * @param chromosomeInstances	chromosomes to be converted
 	 * @return a map of genes to weights from the given chromosomes
 	 */

@@ -5,6 +5,11 @@ import com.hexagram2021.chromosomelib.event.UnpairedChromosomesToBreedSolver;
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
 
+/**
+ * Fabric events for ChromosomeLib.
+ *
+ * @author liudongyu
+ */
 public final class CLFabricEvents {
 	/**
 	 * Called when two entities is breeding, finding out that one of them has unpaired chromosomes. Do NOT modify the builder if you return {@code false}.

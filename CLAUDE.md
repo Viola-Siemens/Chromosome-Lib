@@ -1,48 +1,48 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+本文件为 Claude Code (claude.ai/code) 提供在此代码仓库中工作的指导喵~
 
 ## 项目概述
 
-Chromosome Lib 是一个为 Minecraft 添加染色体和基因系统的跨版本、跨加载器库模组。
+Chromosome Lib 是一个为 Minecraft 添加染色体和基因系统的跨版本、跨加载器库模组喵~
 
 **重要特性：**
-- **多加载器架构**：支持 Forge 和 Fabric 两个主流模组加载器
-- **跨版本兼容**：当前支持 Minecraft 1.20.x 系列，未来将支持更多版本
-- **模块化设计**：核心逻辑与平台实现完全分离
+- **多加载器架构**：支持 Forge 和 Fabric 两个主流模组加载器喵~
+- **跨版本兼容**：当前支持 Minecraft 1.20.x 系列，未来将支持更多版本喵~
+- **模块化设计**：核心逻辑与平台实现完全分离喵~
 
 ## 构建与测试命令
 
 ### 构建项目
 
 ```bash
-# 构建所有模块
+# 构建所有模块喵~
 ./gradlew build
 
-# 构建特定加载器
+# 构建特定加载器喵~
 ./gradlew :fabric:build
 ./gradlew :forge:build
 
-# 仅构建 common 模块
+# 仅构建 common 模块喵~
 ./gradlew :common:build
 
-# 清理构建产物
+# 清理构建产物喵~
 ./gradlew clean
 ```
 
 ### 运行测试
 
 ```bash
-# 运行所有测试
+# 运行所有测试喵~
 ./gradlew test
 
-# 仅运行 Fabric 模块测试
+# 仅运行 Fabric 模块测试喵~
 ./gradlew :fabric:test
 
-# 运行单个测试类
+# 运行单个测试类喵~
 ./gradlew :fabric:test --tests "com.hexagram2021.chromosomelib.test.fabric.SheepTest"
 
-# 运行单个测试方法
+# 运行单个测试方法喵~
 ./gradlew :fabric:test --tests "com.hexagram2021.chromosomelib.test.fabric.SheepTest.testSheepBreedSegregationRatio1"
 ```
 
@@ -51,7 +51,7 @@ Chromosome Lib 是一个为 Minecraft 添加染色体和基因系统的跨版本
 - 测试使用概率模型验证遗传规律（如孟德尔分离比 3:1）
 - **即使代码完全正确，测试仍有约 1.25% 的概率失败**（统计学置信区间导致）
 - 如果测试失败，重新运行一次通常会通过
-- 未来计划实现真正的单元测试以替代当前的概率测试
+- 未来计划实现真正的单元测试以替代当前的概率测试喵~
 
 ### 运行游戏客户端/服务器
 
@@ -90,10 +90,10 @@ Chromosome-Lib/
 #### Common 模块（`common/`）
 
 **职责：**
-- 实现所有核心业务逻辑（染色体、基因、性状系统）
-- 定义平台无关的事件接口
-- 提供公共 API 供其他模组使用
-- 包含 Mixin 修改原版行为（平台通用部分）
+- 实现所有核心业务逻辑（染色体、基因、性状系统）喵~
+- 定义平台无关的事件接口喵~
+- 提供公共 API 供其他模组使用喵~
+- 包含 Mixin 修改原版行为（平台通用部分）喵~
 
 **关键包结构：**
 - `common.chromosome` - 染色体系统核心
@@ -101,22 +101,23 @@ Chromosome-Lib/
 - `common.gene_locus` - 基因座位
 - `common.trait` - 性状类型
 - `common.util` - 工具类（繁殖算法、日志等）
-- `event/` - 平台无关事件定义
-- `platform.services/` - 平台抽象接口（SPI）
+- `event` - 事件定义，各平台实现后，可供下游模组使用
+- `platform.services` - 平台抽象接口（SPI）
+- `registry` - 注册项
 
 **开发规则：**
-- Common 代码不得依赖任何特定加载器 API
-- 不得直接访问 Fabric API 或 Forge API
-- 需要平台特定功能时，通过 `platform.services` 接口抽象
-- Common 模块作为依赖被 Fabric 和 Forge 模块引用
+- Common 代码不得依赖任何特定加载器 API 喵~
+- 不得直接访问 Fabric API 或 Forge API 喵~
+- 需要平台特定功能时，通过 `platform.services` 接口抽象喵~
+- Common 模块作为依赖被 Fabric 和 Forge 模块引用喵~
 
 #### Fabric 模块（`fabric/`）
 
 **职责：**
-- 实现 Common 模块的平台接口（`FabricPlatformHelper`）
-- 桥接 Common 事件到 Fabric 事件系统
-- Fabric 特定的 Mixin（如果需要）
-- 集成测试实现
+- 实现 Common 模块的平台接口（`FabricPlatformHelper`）喵~
+- 桥接 Common 事件到 Fabric 事件系统喵~
+- Fabric 特定的 Mixin（如果需要）喵~
+- 集成测试实现喵~
 
 **关键文件：**
 - `ChromosomeLibFabric.java` - Fabric 模组入口
@@ -127,9 +128,9 @@ Chromosome-Lib/
 #### Forge 模块（`forge/`）
 
 **职责：**
-- 实现 Common 模块的平台接口（`ForgePlatformHelper`）
-- 桥接 Common 事件到 Forge 事件系统（`SolveAfterAssigningTraitEvent`, `SolveUnpairedChromosomesEvent`）
-- Forge 特定的 Mixin（如果需要）
+- 实现 Common 模块的平台接口（`ForgePlatformHelper`）喵~
+- 桥接 Common 事件到 Forge 事件系统（`SolveAfterAssigningTraitEvent`, `SolveUnpairedChromosomesEvent`）喵~
+- Forge 特定的 Mixin（如果需要）喵~
 
 **关键文件：**
 - `ChromosomeLibForge.java` - Forge 模组入口
@@ -201,7 +202,7 @@ public class ChromosomeInstance {
 
 ### 添加新的染色体/基因
 
-1. 在 `common/src/.../BuiltInChromosomes.java` 中注册新染色体
+1. 在 `common/src/main/java/com/hexagram2021/chromosomelib/common/chromosome/BuiltInChromosomes.java` 中注册内置染色体
 2. 在适当的包中定义基因和性状
 3. 确保拓扑排序正确（基因依赖关系）
 4. 在两个平台模块中都测试
@@ -227,12 +228,13 @@ public class ChromosomeInstance {
 
 ## 版本兼容性说明
 
-- 当前版本支持 Minecraft 1.20 - 1.20.1（`[1.20, 1.20.2)`）
-- 添加新版本支持时，需要同时更新 Common、Fabric 和 Forge 三个模块
-- 跨版本开发应优先考虑使用稳定的 Minecraft API（如 Registry、Entity 等）
+- 在 gradle.properties 中指定兼容的 Minecraft 版本范围（如支持 Minecraft 1.20 - 1.20.1 则填写 `[1.20, 1.20.2)`）；
+- 添加新版本支持时，通常需要同时更新 Common、Fabric 和 Forge 三个模块，部分情况只需要更新 Common 模块；
+- 跨版本开发应优先考虑使用稳定的 Minecraft API（如 Registry、Entity 等）。
 
 ## 相关文档
 
+- 产品需求文档：`docs/v0`、`docs/v1` 等，按迭代数划分
 - 架构图：`docs/Application Architecture Diagram.png`
 - 实体关系图：`docs/ER.png`
 - 染色体/基因概念图：`docs/Chromosome.png`、`docs/Gene.png`、`docs/Gene Locus.png`

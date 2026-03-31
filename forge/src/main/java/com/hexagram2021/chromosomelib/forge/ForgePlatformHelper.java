@@ -32,6 +32,11 @@ import java.util.Map;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
+/**
+ * Forge implementation of {@link IPlatformHelper}.
+ *
+ * @author liudongyu
+ */
 @ApiStatus.Internal
 public class ForgePlatformHelper implements IPlatformHelper {
 	private static final Map<String, DeferredRegister<Chromosome>> CHROMOSOME_REGISTERS = Maps.newConcurrentMap();

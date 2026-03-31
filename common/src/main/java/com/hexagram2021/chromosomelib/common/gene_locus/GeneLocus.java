@@ -11,6 +11,12 @@ import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.Nullable;
 import java.util.Map;
 
+/**
+ * Represents a gene locus (position) on a chromosome. <br/>
+ * A gene locus can be left-only, right-only, or homologous (present on both sides).
+ *
+ * @author liudongyu
+ */
 public abstract class GeneLocus {
 	/**
 	 * The gene frequency of each locus.
@@ -44,7 +50,10 @@ public abstract class GeneLocus {
 	}
 
 	/**
-	 * @param chromosomeType	left or right.
+	 * Gets the index of this gene locus on the specified chromosome type.
+	 *
+	 * @param chromosomeType left or right.
+	 * @return The index of this locus, or -1 if not present on this chromosome type
 	 */
 	public abstract int index(ChromosomeType chromosomeType);
 
@@ -93,6 +102,11 @@ public abstract class GeneLocus {
 		return new HomologousGeneLocus(leftIndex, rightIndex, possibilityOfMutation, possibilityOfCrossingOver);
 	}
 
+	/**
+	 * Sets the gene frequency map for all gene loci.
+	 *
+	 * @param geneFrequency The gene frequency map
+	 */
 	@ApiStatus.Internal
 	public static void setGeneFrequency(Map<Holder<GeneLocus>, IWeightedGeneList> geneFrequency) {
 		GeneLocus.geneFrequency = geneFrequency;
@@ -101,12 +115,18 @@ public abstract class GeneLocus {
 	/**
 	 * Get a random gene from the gene locus.
 	 * @param geneLocus	the gene locus.
+	 * @param context The weighted gene list context for random selection
 	 * @return a random gene from the gene locus.
 	 */
 	public static Holder<Gene> getRandomGene(Holder<GeneLocus> geneLocus, IWeightedGeneList.Context context) {
 		return geneFrequency.get(geneLocus).getRandomGene(context);
 	}
 
+	/**
+	 * Represents a gene locus only present on the left chromosome (e.g., X or Z sex chromosome).
+	 *
+	 * @author liudongyu
+	 */
 	public static class LeftGeneLocus extends GeneLocus {
 		/**
 		 * The index of this locus in the chromosome.
@@ -114,6 +134,13 @@ public abstract class GeneLocus {
 		 */
 		private final int index;
 
+		/**
+		 * Constructs a left-only gene locus.
+		 *
+		 * @param index The index of this locus in the left chromosome
+		 * @param possibilityOfMutation The possibility of this locus to mutate
+		 * @param possibilityOfCrossingOver The possibility of this locus to cross over
+		 */
 		public LeftGeneLocus(int index, double possibilityOfMutation, double possibilityOfCrossingOver) {
 			super(possibilityOfMutation, possibilityOfCrossingOver);
 			if(index <= 0 || index > 0xffffff) {
@@ -128,6 +155,11 @@ public abstract class GeneLocus {
 		}
 	}
 
+	/**
+	 * Represents a gene locus only present on the right chromosome (e.g., Y or W sex chromosome).
+	 *
+	 * @author liudongyu
+	 */
 	public static class RightGeneLocus extends GeneLocus {
 		/**
 		 * The index of this locus in the chromosome.
@@ -135,6 +167,13 @@ public abstract class GeneLocus {
 		 */
 		private final int index;
 
+		/**
+		 * Constructs a right-only gene locus.
+		 *
+		 * @param index The index of this locus in the right chromosome
+		 * @param possibilityOfMutation The possibility of this locus to mutate
+		 * @param possibilityOfCrossingOver The possibility of this locus to cross over
+		 */
 		public RightGeneLocus(int index, double possibilityOfMutation, double possibilityOfCrossingOver) {
 			super(possibilityOfMutation, possibilityOfCrossingOver);
 			if(index <= 0 || index > 0xffffff) {
@@ -149,6 +188,12 @@ public abstract class GeneLocus {
 		}
 	}
 
+	/**
+	 * Represents a gene locus present on both chromosomes (homologous). <br/>
+	 * Can be at the same position (autosomes) or different positions (homologous segments of sex chromosomes).
+	 *
+	 * @author liudongyu
+	 */
 	public static class HomologousGeneLocus extends GeneLocus {
 		/**
 		 * The left index of this locus in the chromosome.
@@ -162,10 +207,25 @@ public abstract class GeneLocus {
 		 */
 		private final int rightIndex;
 
+		/**
+		 * Constructs a homologous gene locus at the same position on both chromosomes.
+		 *
+		 * @param index The index of this locus on both chromosomes
+		 * @param possibilityOfMutation The possibility of this locus to mutate
+		 * @param possibilityOfCrossingOver The possibility of this locus to cross over
+		 */
 		public HomologousGeneLocus(int index, double possibilityOfMutation, double possibilityOfCrossingOver) {
 			this(index, index, possibilityOfMutation, possibilityOfCrossingOver);
 		}
 
+		/**
+		 * Constructs a homologous gene locus at different positions on left and right chromosomes.
+		 *
+		 * @param leftIndex The index of this locus on the left chromosome
+		 * @param rightIndex The index of this locus on the right chromosome
+		 * @param possibilityOfMutation The possibility of this locus to mutate
+		 * @param possibilityOfCrossingOver The possibility of this locus to cross over
+		 */
 		public HomologousGeneLocus(int leftIndex, int rightIndex, double possibilityOfMutation, double possibilityOfCrossingOver) {
 			super(possibilityOfMutation, possibilityOfCrossingOver);
 			if(leftIndex <= 0 || leftIndex > 0xffffff) {
@@ -186,10 +246,20 @@ public abstract class GeneLocus {
 			};
 		}
 
+		/**
+		 * Gets the left index of this locus.
+		 *
+		 * @return The left chromosome index
+		 */
 		public int leftIndex() {
 			return this.leftIndex;
 		}
 
+		/**
+		 * Gets the right index of this locus.
+		 *
+		 * @return The right chromosome index
+		 */
 		public int rightIndex() {
 			return this.rightIndex;
 		}

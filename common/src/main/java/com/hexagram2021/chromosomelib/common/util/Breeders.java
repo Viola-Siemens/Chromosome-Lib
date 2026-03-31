@@ -20,6 +20,8 @@ import java.util.Map;
 
 /**
  * Utility class for entity breeding.
+ *
+ * @author liudongyu
  */
 public final class Breeders {
 	/**

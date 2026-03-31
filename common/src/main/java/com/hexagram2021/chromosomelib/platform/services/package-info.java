@@ -1,4 +1,7 @@
 /**
+ * Service interfaces for platform-specific functionality. <br/>
+ * Implemented by Forge and Fabric modules to provide loader-specific features.
+ *
  * @author Liu Dongyu
  */
 @FieldsAreNonnullByDefault

@@ -9,10 +9,14 @@ import java.util.Map;
 import java.util.function.Predicate;
 
 /**
- * Called after assigning traits to a living entity.
+ * Fired after assigning traits to a living entity.
+ *
+ * @author liudongyu
  */
 public interface AfterAssigningTraitSolver {
 	/**
+	 * Called after assigning traits to a living entity.
+	 *
 	 * @param livingEntity	the living entity
 	 * @param map			the trait map
 	 * @param hasTrait		whether the living entity has the trait

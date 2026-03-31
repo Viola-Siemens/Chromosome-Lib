@@ -45,6 +45,8 @@ import java.util.function.ToIntFunction;
 
 /**
  * Commands for showing chromosome information of entities.
+ *
+ * @author liudongyu
  */
 @SuppressWarnings("unchecked")
 @ApiStatus.Internal
@@ -57,6 +59,8 @@ public final class ChromosomeLibCommand {
 
 	/**
 	 * Register commands.
+	 *
+	 * @return command builder
 	 */
 	public static LiteralArgumentBuilder<CommandSourceStack> register() {
 		return Commands.literal("chromosomelib").requires(stack -> stack.hasPermission(2)).then(
@@ -163,7 +167,7 @@ public final class ChromosomeLibCommand {
 		return Command.SINGLE_SUCCESS;
 	}
 
-	public static final Dynamic2CommandExceptionType GENE_LOCUS_INDEX_MISMATCHED = new Dynamic2CommandExceptionType(
+	private static final Dynamic2CommandExceptionType GENE_LOCUS_INDEX_MISMATCHED = new Dynamic2CommandExceptionType(
 			(expected, found) -> Component.literal("Gene Locus index mismatched. Expected %d, found %d.".formatted((int)expected, (int)found))
 	);
 

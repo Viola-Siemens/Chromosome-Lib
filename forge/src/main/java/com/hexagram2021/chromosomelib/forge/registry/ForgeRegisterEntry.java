@@ -9,10 +9,19 @@ import net.minecraftforge.registries.RegistryObject;
 
 import java.util.stream.Stream;
 
+/**
+ * Forge implementation of {@link AbstractRegisterEntry}.
+ * @param <T>	the type of the entry
+ */
 @SuppressWarnings("java:S2160")
 public class ForgeRegisterEntry<T> extends AbstractRegisterEntry<T> {
 	private final RegistryObject<T> registryObject;
 
+	/**
+	 * Create a new ForgeRegisterEntry.
+	 * @param registryObject	the registry object
+	 * @param key				the key of the entry
+	 */
 	public ForgeRegisterEntry(RegistryObject<T> registryObject, ResourceKey<T> key) {
 		super(key);
 		this.registryObject = registryObject;

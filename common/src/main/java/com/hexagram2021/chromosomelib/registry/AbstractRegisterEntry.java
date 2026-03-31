@@ -17,6 +17,7 @@ import java.util.stream.Stream;
 /**
  * Abstract register entry.
  * @param <T>	the type of the entry
+ * @author liudongyu
  */
 @SuppressWarnings({"unused", "java:S3038"})
 public abstract class AbstractRegisterEntry<T> implements Holder<T>, Supplier<T> {
@@ -190,7 +191,7 @@ public abstract class AbstractRegisterEntry<T> implements Holder<T>, Supplier<T>
 		return this.key;
 	}
 
-	private static Comparator<ResourceKey<?>> resourceKeyComparator = (a, b) -> {
+	private static final Comparator<ResourceKey<?>> RESOURCE_KEY_COMPARATOR = (a, b) -> {
 		int regDiff = a.registry().compareTo(b.registry());
 		if(regDiff == 0) {
 			return a.location().compareTo(b.location());
@@ -242,19 +243,19 @@ public abstract class AbstractRegisterEntry<T> implements Holder<T>, Supplier<T>
 	public static <T> int compare(Holder<T> a, Holder<T> b) {
 		if(a instanceof AbstractRegisterEntry<T> registerEntryA) {
 			if(b instanceof AbstractRegisterEntry<T> registerEntryB) {
-				return resourceKeyComparator.compare(registerEntryA.key(), registerEntryB.key());
+				return RESOURCE_KEY_COMPARATOR.compare(registerEntryA.key(), registerEntryB.key());
 			}
 			if(b instanceof Holder.Reference<T> referenceB) {
-				return resourceKeyComparator.compare(registerEntryA.key(), referenceB.key());
+				return RESOURCE_KEY_COMPARATOR.compare(registerEntryA.key(), referenceB.key());
 			}
 			return 1;
 		}
 		if(a instanceof Holder.Reference<T> referenceA) {
 			if(b instanceof AbstractRegisterEntry<T> registerEntryB) {
-				return resourceKeyComparator.compare(referenceA.key(), registerEntryB.key());
+				return RESOURCE_KEY_COMPARATOR.compare(referenceA.key(), registerEntryB.key());
 			}
 			if(b instanceof Holder.Reference<T> referenceB) {
-				return resourceKeyComparator.compare(referenceA.key(), referenceB.key());
+				return RESOURCE_KEY_COMPARATOR.compare(referenceA.key(), referenceB.key());
 			}
 			return 1;
 		}
