@@ -2,7 +2,7 @@
 
 [![CurseForge](https://img.shields.io/curseforge/dt/chromosomelib?logo=curseforge&label=CurseForge)](https://www.curseforge.com/minecraft/mc-mods/chromosome-lib)
 [![Modrinth](https://img.shields.io/modrinth/dt/chromosome-lib?logo=modrinth&label=Modrinth)](https://modrinth.com/mod/chromosome-lib)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![License: LGPL v2.1](https://img.shields.io/badge/License-LGPL%20v2.1-yellow.svg)](LICENSE)
 [![Minecraft](https://img.shields.io/badge/Minecraft-1.20.1-brightgreen)](https://minecraft.net)
 [![Forge](https://img.shields.io/badge/Forge-47.2.0-red)](https://minecraftforge.net)
 [![Fabric](https://img.shields.io/badge/Fabric-0.16.10-blue)](https://fabricmc.net)
@@ -157,7 +157,7 @@ Planned features for upcoming versions:
 
 ## License
 
-[MIT License](LICENSE) — Copyright (c) Liu Dongyu
+[LGPL v2.1](LICENSE) — Copyright (c) Liu Dongyu
 
 ## Links
 
