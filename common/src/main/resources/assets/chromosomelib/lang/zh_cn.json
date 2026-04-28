@@ -1,0 +1,9 @@
+{
+  "language": "Simplified Chinese",
+  "language.code": "zh_cn",
+  "language.region": "China",
+
+  "jade.chromosomelib.biological_sex.male": "雄性",
+  "jade.chromosomelib.biological_sex.female": "雌性",
+  "config.jade.plugin_chromosomelib.jade/biological_sex": "生理性别"
+}

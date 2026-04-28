@@ -1,0 +1,9 @@
+{
+  "language": "English",
+  "language.code": "en_us",
+  "language.region": "United States",
+
+  "jade.chromosomelib.biological_sex.male": "Male",
+  "jade.chromosomelib.biological_sex.female": "Female",
+  "config.jade.plugin_chromosomelib.jade/biological_sex": "Biological Sex"
+}
