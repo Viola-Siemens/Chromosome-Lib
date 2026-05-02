@@ -7,10 +7,7 @@ import com.hexagram2021.chromosomelib.common.chromosome.ChromosomeType;
 import com.hexagram2021.chromosomelib.common.gene_locus.GeneLocusInstance;
 import com.hexagram2021.chromosomelib.common.util.Breeders;
 import com.hexagram2021.chromosomelib.common.util.CLLogger;
-import com.hexagram2021.chromosomelib.registry.RegistryRelations;
 import com.hexagram2021.chromosomelib.test.fabric.dummy.DummyChromosomeCarrier;
-import net.minecraft.SharedConstants;
-import net.minecraft.server.Bootstrap;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
 import org.junit.jupiter.api.Assertions;
@@ -26,10 +23,7 @@ class SheepTest {
 
 	@BeforeAll
 	static void bootstrap() {
-		SharedConstants.tryDetectVersion();
-		Bootstrap.bootStrap();
-		SheepColorDesigner.init();
-		RegistryRelations.freezeAndBuild();
+		TestBootstrap.init();
 	}
 
 	@Test

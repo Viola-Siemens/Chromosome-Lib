@@ -3,6 +3,7 @@ package com.hexagram2021.chromosomelib.common.chromosome;
 import com.hexagram2021.chromosomelib.platform.Services;
 import com.hexagram2021.chromosomelib.registry.CLEntityTypeTags;
 import com.hexagram2021.chromosomelib.registry.RegistryRelations;
+import com.hexagram2021.chromosomelib.common.sex.SexDetermination;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
@@ -67,7 +68,8 @@ public final class BuiltInChromosomes {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.AXOLOTL, AXOLOTL_13);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.AXOLOTL, AXOLOTL_XY);
 
-			RegistryRelations.registerNecessaryChromosomeTypes(AXOLOTL_XY, ChromosomeType.LEFT);
+			RegistryRelations.registerSexChromosome(AXOLOTL_XY, SexDetermination.XY);
+			RegistryRelations.registerEntityTypeSexChromosome(EntityType.AXOLOTL, AXOLOTL_XY);
 		}
 	}
 
@@ -183,7 +185,8 @@ public final class BuiltInChromosomes {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.CAT, CAT_18);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.CAT, CAT_XY);
 
-			RegistryRelations.registerNecessaryChromosomeTypes(CAT_XY, ChromosomeType.LEFT);
+			RegistryRelations.registerSexChromosome(CAT_XY, SexDetermination.XY);
+			RegistryRelations.registerEntityTypeSexChromosome(EntityType.CAT, CAT_XY);
 		}
 	}
 
@@ -285,7 +288,8 @@ public final class BuiltInChromosomes {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.CHICKEN, Chicken.CHICKEN_38);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.CHICKEN, Chicken.CHICKEN_ZW);
 
-			RegistryRelations.registerNecessaryChromosomeTypes(CHICKEN_ZW, ChromosomeType.LEFT);
+			RegistryRelations.registerSexChromosome(CHICKEN_ZW, SexDetermination.ZW);
+			RegistryRelations.registerEntityTypeSexChromosome(EntityType.CHICKEN, CHICKEN_ZW);
 		}
 	}
 
@@ -369,7 +373,8 @@ public final class BuiltInChromosomes {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.COW, COW_29);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.COW, COW_XY);
 
-			RegistryRelations.registerNecessaryChromosomeTypes(COW_XY, ChromosomeType.LEFT);
+			RegistryRelations.registerSexChromosome(COW_XY, SexDetermination.XY);
+			RegistryRelations.registerEntityTypeSexChromosome(EntityType.COW, COW_XY);
 		}
 	}
 
@@ -455,7 +460,8 @@ public final class BuiltInChromosomes {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.DONKEY, DONKEY_30);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.DONKEY, DONKEY_XY);
 
-			RegistryRelations.registerNecessaryChromosomeTypes(DONKEY_XY, ChromosomeType.LEFT);
+			RegistryRelations.registerSexChromosome(DONKEY_XY, SexDetermination.XY);
+			RegistryRelations.registerEntityTypeSexChromosome(EntityType.DONKEY, DONKEY_XY);
 		}
 	}
 
@@ -513,7 +519,8 @@ public final class BuiltInChromosomes {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.FOX, FOX_16);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.FOX, FOX_XY);
 
-			RegistryRelations.registerNecessaryChromosomeTypes(FOX_XY, ChromosomeType.LEFT);
+			RegistryRelations.registerSexChromosome(FOX_XY, SexDetermination.XY);
+			RegistryRelations.registerEntityTypeSexChromosome(EntityType.FOX, FOX_XY);
 		}
 	}
 
@@ -563,7 +570,8 @@ public final class BuiltInChromosomes {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.FROG, FROG_12);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.FROG, FROG_XY);
 
-			RegistryRelations.registerNecessaryChromosomeTypes(FROG_XY, ChromosomeType.LEFT);
+			RegistryRelations.registerSexChromosome(FROG_XY, SexDetermination.XY);
+			RegistryRelations.registerEntityTypeSexChromosome(EntityType.FROG, FROG_XY);
 		}
 	}
 
@@ -647,7 +655,8 @@ public final class BuiltInChromosomes {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.GOAT, GOAT_29);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.GOAT, GOAT_XY);
 
-			RegistryRelations.registerNecessaryChromosomeTypes(GOAT_XY, ChromosomeType.LEFT);
+			RegistryRelations.registerSexChromosome(GOAT_XY, SexDetermination.XY);
+			RegistryRelations.registerEntityTypeSexChromosome(EntityType.GOAT, GOAT_XY);
 		}
 	}
 
@@ -735,7 +744,8 @@ public final class BuiltInChromosomes {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.HORSE, HORSE_31);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.HORSE, HORSE_XY);
 
-			RegistryRelations.registerNecessaryChromosomeTypes(HORSE_XY, ChromosomeType.LEFT);
+			RegistryRelations.registerSexChromosome(HORSE_XY, SexDetermination.XY);
+			RegistryRelations.registerEntityTypeSexChromosome(EntityType.HORSE, HORSE_XY);
 		}
 	}
 
@@ -805,7 +815,8 @@ public final class BuiltInChromosomes {
 			RegistryRelations.registerEntityTypeTag2Chromosome(CLEntityTypeTags.HUMANS, HUMAN_22);
 			RegistryRelations.registerEntityTypeTag2Chromosome(CLEntityTypeTags.HUMANS, HUMAN_XY);
 
-			RegistryRelations.registerNecessaryChromosomeTypes(HUMAN_XY, ChromosomeType.LEFT);
+			RegistryRelations.registerSexChromosome(HUMAN_XY, SexDetermination.XY);
+			RegistryRelations.registerEntityTypeTagSexChromosome(CLEntityTypeTags.HUMANS, HUMAN_XY);
 		}
 	}
 
@@ -950,7 +961,8 @@ public final class BuiltInChromosomes {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.OCELOT, OCELOT_17);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.OCELOT, OCELOT_XY);
 
-			RegistryRelations.registerNecessaryChromosomeTypes(OCELOT_XY, ChromosomeType.LEFT);
+			RegistryRelations.registerSexChromosome(OCELOT_XY, SexDetermination.XY);
+			RegistryRelations.registerEntityTypeSexChromosome(EntityType.OCELOT, OCELOT_XY);
 		}
 	}
 
@@ -1016,7 +1028,8 @@ public final class BuiltInChromosomes {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.PANDA, PANDA_20);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.PANDA, PANDA_XY);
 
-			RegistryRelations.registerNecessaryChromosomeTypes(PANDA_XY, ChromosomeType.LEFT);
+			RegistryRelations.registerSexChromosome(PANDA_XY, SexDetermination.XY);
+			RegistryRelations.registerEntityTypeSexChromosome(EntityType.PANDA, PANDA_XY);
 		}
 	}
 
@@ -1102,7 +1115,8 @@ public final class BuiltInChromosomes {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.PARROT, PARROT_30);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.PARROT, PARROT_ZW);
 
-			RegistryRelations.registerNecessaryChromosomeTypes(PARROT_ZW, ChromosomeType.LEFT);
+			RegistryRelations.registerSexChromosome(PARROT_ZW, SexDetermination.ZW);
+			RegistryRelations.registerEntityTypeSexChromosome(EntityType.PARROT, PARROT_ZW);
 		}
 	}
 
@@ -1164,7 +1178,8 @@ public final class BuiltInChromosomes {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.PIG, PIG_18);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.PIG, PIG_XY);
 
-			RegistryRelations.registerNecessaryChromosomeTypes(PIG_XY, ChromosomeType.LEFT);
+			RegistryRelations.registerSexChromosome(PIG_XY, SexDetermination.XY);
+			RegistryRelations.registerEntityTypeSexChromosome(EntityType.PIG, PIG_XY);
 		}
 	}
 
@@ -1262,7 +1277,8 @@ public final class BuiltInChromosomes {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.POLAR_BEAR, POLAR_BEAR_36);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.POLAR_BEAR, POLAR_BEAR_XY);
 
-			RegistryRelations.registerNecessaryChromosomeTypes(POLAR_BEAR_XY, ChromosomeType.LEFT);
+			RegistryRelations.registerSexChromosome(POLAR_BEAR_XY, SexDetermination.XY);
+			RegistryRelations.registerEntityTypeSexChromosome(EntityType.POLAR_BEAR, POLAR_BEAR_XY);
 		}
 	}
 
@@ -1334,7 +1350,8 @@ public final class BuiltInChromosomes {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.RABBIT, RABBIT_23);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.RABBIT, RABBIT_XY);
 
-			RegistryRelations.registerNecessaryChromosomeTypes(RABBIT_XY, ChromosomeType.LEFT);
+			RegistryRelations.registerSexChromosome(RABBIT_XY, SexDetermination.XY);
+			RegistryRelations.registerEntityTypeSexChromosome(EntityType.RABBIT, RABBIT_XY);
 		}
 	}
 
@@ -1412,7 +1429,8 @@ public final class BuiltInChromosomes {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.SHEEP, SHEEP_26);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.SHEEP, SHEEP_XY);
 
-			RegistryRelations.registerNecessaryChromosomeTypes(SHEEP_XY, ChromosomeType.LEFT);
+			RegistryRelations.registerSexChromosome(SHEEP_XY, SexDetermination.XY);
+			RegistryRelations.registerEntityTypeSexChromosome(EntityType.SHEEP, SHEEP_XY);
 		}
 	}
 
@@ -1492,7 +1510,8 @@ public final class BuiltInChromosomes {
 			RegistryRelations.registerEntityType2Chromosome(EntityType.TURTLE, TURTLE_27);
 			RegistryRelations.registerEntityType2Chromosome(EntityType.TURTLE, TURTLE_XY);
 
-			RegistryRelations.registerNecessaryChromosomeTypes(TURTLE_XY, ChromosomeType.LEFT);
+			RegistryRelations.registerSexChromosome(TURTLE_XY, SexDetermination.XY);
+			RegistryRelations.registerEntityTypeSexChromosome(EntityType.TURTLE, TURTLE_XY);
 		}
 	}
 

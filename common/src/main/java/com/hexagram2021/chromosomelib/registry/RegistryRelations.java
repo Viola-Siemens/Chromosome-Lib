@@ -6,6 +6,7 @@ import com.google.common.graph.ImmutableGraph;
 import com.hexagram2021.chromosomelib.common.chromosome.Chromosome;
 import com.hexagram2021.chromosomelib.common.chromosome.ChromosomeType;
 import com.hexagram2021.chromosomelib.common.entity.type.IChromosomeLibEntityType;
+import com.hexagram2021.chromosomelib.common.sex.SexDetermination;
 import com.hexagram2021.chromosomelib.common.gene.Gene;
 import com.hexagram2021.chromosomelib.common.gene_locus.GeneLocus;
 import com.hexagram2021.chromosomelib.common.trait.Trait;
@@ -27,6 +28,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import org.jetbrains.annotations.ApiStatus;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -91,6 +93,19 @@ public final class RegistryRelations {
 	 * Map builder for necessary chromosome types.
 	 */
 	private static final ImmutableMap.Builder<Holder<Chromosome>, ChromosomeType> necessaryChromosomeTypes = ImmutableMap.builder();
+
+	/**
+	 * Map from entity type to its sex chromosome.
+	 */
+	private static final Map<EntityType<?>, Holder<Chromosome>> entityTypeSexChromosomes = Maps.newIdentityHashMap();
+	/**
+	 * Map from entity type tag to its sex chromosome (resolved during freezeAndBuild).
+	 */
+	private static final Map<TagKey<EntityType<?>>, Holder<Chromosome>> entityTypeTagSexChromosomes = Maps.newHashMap();
+	/**
+	 * Map from sex chromosome to its sex determination system.
+	 */
+	private static final Map<Holder<Chromosome>, SexDetermination> sexDeterminations = Maps.newIdentityHashMap();
 
 	/**
 	 * Counter for entity type to chromosome registrations.
@@ -286,7 +301,11 @@ public final class RegistryRelations {
 	 *
 	 * @param chromosome		the chromosome
 	 * @param chromosomeType	the necessary chromosome type
+	 * @deprecated For sex chromosomes, use {@link #registerSexChromosome} and
+	 *             {@link #registerEntityTypeSexChromosome} instead.
+	 *             This method remains valid for forcing non-sex chromosomes to a fixed type.
 	 */
+	@Deprecated
 	public static void registerNecessaryChromosomeTypes(Holder<Chromosome> chromosome, ChromosomeType chromosomeType) {
 		if(isFrozen) {
 			throw new IllegalStateException("Relations registry is already frozen!");
@@ -296,6 +315,71 @@ public final class RegistryRelations {
 		} catch (ConcurrentModificationException | IndexOutOfBoundsException e) {
 			throw new RegistryConcurrentModificationException(RegistryRelations.class.getName(), "necessaryChromosomeTypes", "Map", e);
 		}
+	}
+
+	/**
+	 * Registers a sex chromosome and its determination system.
+	 * Must be called before {@link #freezeAndBuild()}.
+	 *
+	 * @param chromosome the sex chromosome holder
+	 * @param system     the sex determination system (XY or ZW)
+	 */
+	public static void registerSexChromosome(Holder<Chromosome> chromosome, SexDetermination system) {
+		if(isFrozen) {
+			throw new IllegalStateException("Relations registry is already frozen!");
+		}
+		sexDeterminations.put(chromosome, system);
+	}
+
+	/**
+	 * Associates an entity type with its sex chromosome.
+	 * Must be called before {@link #freezeAndBuild()}.
+	 *
+	 * @param entityType the entity type
+	 * @param chromosome the sex chromosome holder for this entity type
+	 */
+	public static void registerEntityTypeSexChromosome(EntityType<?> entityType, Holder<Chromosome> chromosome) {
+		if(isFrozen) {
+			throw new IllegalStateException("Relations registry is already frozen!");
+		}
+		entityTypeSexChromosomes.put(entityType, chromosome);
+	}
+
+	/**
+	 * Associates an entity type tag with its sex chromosome.
+	 * The tag is resolved to individual entity types during {@link #freezeAndBuild()}.
+	 * Use this for species shared across multiple entity types (e.g. humans).
+	 *
+	 * @param entityTypeTag the entity type tag
+	 * @param chromosome    the sex chromosome holder for all entity types in the tag
+	 */
+	public static void registerEntityTypeTagSexChromosome(TagKey<EntityType<?>> entityTypeTag, Holder<Chromosome> chromosome) {
+		if(isFrozen) {
+			throw new IllegalStateException("Relations registry is already frozen!");
+		}
+		entityTypeTagSexChromosomes.put(entityTypeTag, chromosome);
+	}
+
+	/**
+	 * Returns the sex chromosome registered for the given entity type, or {@code null} if none.
+	 *
+	 * @param entityType the entity type to query
+	 * @return the sex chromosome holder, or {@code null}
+	 */
+	@Nullable
+	public static Holder<Chromosome> getSexChromosome(EntityType<?> entityType) {
+		return entityTypeSexChromosomes.get(entityType);
+	}
+
+	/**
+	 * Returns the sex determination system registered for the given chromosome, or {@code null} if none.
+	 *
+	 * @param chromosome the chromosome holder to query
+	 * @return the sex determination system, or {@code null}
+	 */
+	@Nullable
+	public static SexDetermination getSexDetermination(Holder<Chromosome> chromosome) {
+		return sexDeterminations.get(chromosome);
 	}
 
 	/**
@@ -322,6 +406,8 @@ public final class RegistryRelations {
 		checkGeneFrequencyLists(geneLocusRegistry);
 
 		Chromosome.setNecessaryChromosomeTypes(necessaryChromosomeTypes.build());
+
+		buildTaggedEntityTypeSexChromosomes(entityTypeRegistry);
 
 		buildTraitType2TraitsReversedRelations(traitRegistry);
 
@@ -425,6 +511,18 @@ public final class RegistryRelations {
 			chromosome.maintain(Int2ObjectMaps.unmodifiable(leftGeneLocusMap), Int2ObjectMaps.unmodifiable(rightGeneLocusMap));
 		});
 		CLLogger.info("Registered {} Chromosome to GeneLocus relations from {} Chromosomes.", countChromosome2GeneLocus, chromosome2GeneLocusMap.size());
+	}
+
+	private static void buildTaggedEntityTypeSexChromosomes(Registry<EntityType<?>> entityTypeRegistry) {
+		entityTypeTagSexChromosomes.forEach((tag, chromosome) ->
+				BuiltInRegistries.ENTITY_TYPE.getTag(tag).ifPresent(entries ->
+						entries.forEach(holder -> holder.unwrapKey().ifPresent(entityTypeKey -> {
+							EntityType<?> entityType = entityTypeRegistry.get(entityTypeKey);
+							if(entityType != null) {
+								entityTypeSexChromosomes.put(entityType, chromosome);
+							}
+						}))));
+		entityTypeTagSexChromosomes.clear();
 	}
 
 	private static void buildEntityType2ChromosomeRelations(Registry<EntityType<?>> entityTypeRegistry) {

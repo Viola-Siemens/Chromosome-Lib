@@ -5,13 +5,16 @@ import com.hexagram2021.chromosomelib.common.chromosome.ChromosomeInstance;
 import com.hexagram2021.chromosomelib.common.chromosome.ChromosomeType;
 import com.hexagram2021.chromosomelib.common.entity.type.IChromosomeLibEntityType;
 import com.hexagram2021.chromosomelib.common.gene.Gene;
+import com.hexagram2021.chromosomelib.common.sex.SexDetermination;
 import com.hexagram2021.chromosomelib.common.trait.Trait;
 import com.hexagram2021.chromosomelib.registry.IWeightedGeneList;
+import com.hexagram2021.chromosomelib.registry.RegistryRelations;
 import net.minecraft.core.Holder;
 import org.jetbrains.annotations.ApiStatus;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.ToIntFunction;
 
 /**
@@ -61,17 +64,52 @@ public interface IChromosomeCarrier {
 		return entityType.chromosomelib$getChromosomes().values().stream()
 				.<ChromosomeInstance>mapMulti((chromosome, consumer) -> {
 					int ploidy = this.chromosomelib$getPloidy();
-					ChromosomeInstance instance = null;
-					for(int i = 0; i < ploidy; ++i) {
-						//TODO: Only male and female can breed? Now we regard it as bimaternal reproduction.
-						ChromosomeType type = Chromosome.getNecessaryChromosomeType(chromosome);
-						if(type == null) {
-							type = context.random().nextBoolean() ? ChromosomeType.LEFT : ChromosomeType.RIGHT;
+					SexDetermination sexSystem = RegistryRelations.getSexDetermination(chromosome);
+					if(sexSystem != null) {
+						// Sex chromosome: randomly assign sex at 50:50 ratio
+						generateSexChromosomeInstances(chromosome, ploidy, context, consumer);
+					} else {
+						// Normal chromosome: generate by ploidy, type fixed or random
+						ChromosomeInstance last = null;
+						for(int i = 0; i < ploidy; ++i) {
+							ChromosomeType type = Chromosome.getNecessaryChromosomeType(chromosome);
+							if(type == null) {
+								type = context.random().nextBoolean() ? ChromosomeType.LEFT : ChromosomeType.RIGHT;
+							}
+							last = ChromosomeInstance.of(chromosome, type, context.withLast(last));
+							consumer.accept(last);
 						}
-						instance = ChromosomeInstance.of(chromosome, type, context.withLast(instance));
-						consumer.accept(instance);
 					}
 				}).toList();
+	}
+
+	/**
+	 * Generates sex chromosome instances for the XY / ZW determination system.
+	 * For ploidy = 2: randomly produces LEFT+LEFT (50%) or LEFT+RIGHT (50%).
+	 * For ploidy = 1: produces a single LEFT instance (rare edge case).
+	 *
+	 * @param chromosome	sex chromosome
+	 * @param ploidy		ploidy
+	 * @param context		context
+	 * @param consumer		add chromosome instances by  {@link Consumer#accept}
+	 */
+	private static void generateSexChromosomeInstances(Holder<Chromosome> chromosome,
+													   int ploidy, IWeightedGeneList.Context context,
+													   Consumer<ChromosomeInstance> consumer) {
+		// ploidy = 1: only one LEFT chromosome (edge case, normal species won't reach here)
+		if(ploidy == 1) {
+			consumer.accept(ChromosomeInstance.of(chromosome, ChromosomeType.LEFT, context));
+			return;
+		}
+		// Diploid: 50% LEFT+LEFT, 50% LEFT+RIGHT
+		boolean rightType = context.random().nextBoolean();
+		ChromosomeInstance left = ChromosomeInstance.of(chromosome, ChromosomeType.LEFT, context);
+		ChromosomeInstance right = ChromosomeInstance.of(
+				chromosome,
+				rightType ? ChromosomeType.RIGHT : ChromosomeType.LEFT,
+				context.withLast(left));
+		consumer.accept(left);
+		consumer.accept(right);
 	}
 
 	/**
